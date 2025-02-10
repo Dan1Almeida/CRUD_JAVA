@@ -1,0 +1,20 @@
+package br.com.dnl.AppContatos.service;
+
+import org.springframework.stereotype.Service;
+
+import br.com.dnl.AppContatos.repository.ContatosRepository;
+
+@Service
+public class ContatosService {
+	
+	@AutoWired
+	private ContatosRepository contatoRepository;
+	
+	
+	/*
+	@AutoWired
+	private PessoasRepository pessoaRepository
+	*/
+	
+	
+}

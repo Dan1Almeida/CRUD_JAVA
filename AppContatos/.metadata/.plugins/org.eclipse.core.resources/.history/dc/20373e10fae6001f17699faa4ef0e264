@@ -1,0 +1,9 @@
+package br.com.dnl.AppContatos.repository;
+
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class PessoasRepository {
+	
+	
+}

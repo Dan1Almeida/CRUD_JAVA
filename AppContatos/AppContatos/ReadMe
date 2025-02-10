@@ -1,0 +1,30 @@
+AppContatos 
+
+iniciado: 09 Fev. 2025 // Previsão de entrega: 18 Fev. 2025
+
+1.0 - Gerado em https://start.spring.io/ 
+
+Tecnologias:
+Project: Maven | Language: Java | Spring Boot: 3.4.2 | Packaging: Jar | Java: 21
+
+Metadada:
+Group: br.com.dnl | Artifact e Name: AppContatos | Package name: br.com.dnl.AppContatos
+
+Dependências:
+
+Spring Web | Spring Data JPA | H2 Database 
+
+Outras dependências: 
+	    
+	<dependency>
+		<groupId>com.fasterxml.jackson.core</groupId>
+		<artifactId>jackson-databind</artifactId>
+	</dependency>
+		
+	<dependency>
+		<groupId>org.springdoc</groupId>
+		<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+		<version>2.2.0</version>
+	</dependency>
+	
+2.0 - 
