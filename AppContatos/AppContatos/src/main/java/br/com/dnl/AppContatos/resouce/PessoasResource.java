@@ -27,61 +27,63 @@ public class PessoasResource {
 	@Autowired
 	PessoasService pessoaService;
 	
+	// ----- SALVAR -----
+	
 	@PostMapping //POST http://localhost:8080/api/pessoas
 	public ResponseEntity<Pessoas> save(@RequestBody Pessoas pessoa) {
 		Pessoas newPessoa = pessoaService.save(pessoa);
 		
 		if(newPessoa == null) {
-			return ResponseEntity.badRequest().build(); //dê status code 400
+			return ResponseEntity.badRequest().build();
 		}
 		else {
-			return ResponseEntity.ok(newPessoa); //dê status code 200 e retorna objeto
+			return ResponseEntity.ok(newPessoa); 
 		}
 	}
 	
 	
-	// --------- ENCONTRAR POR ID
+	// ----- ENCONTRAR POR ID -----
 	
 	@GetMapping("/{id}") // GET http://localhost:8080/api/pessoas/{id}
 		public ResponseEntity<Optional<Pessoas>> findById(@PathVariable Long id){
 			Optional<Pessoas> pessoa = pessoaService.findById(id);
 			if(pessoa.isEmpty()) { 
-				return ResponseEntity.notFound().build(); //404
+				return ResponseEntity.notFound().build(); 
 			}else {
-				return ResponseEntity.ok(pessoa); //200
+				return ResponseEntity.ok(pessoa);
 			}
 	}
 	
-	// -------- LISTAGEM
+	// ----- LISTAGEM -----
 	
 	@GetMapping //GET http://localhost:8080/api/pessoas
 		public ResponseEntity<List<Pessoas>> findAll(){
-			List<Pessoas> produtos = pessoaService.findAll();
-			if(produtos == null)
+			List<Pessoas> pessoa = pessoaService.findAll();
+			if(pessoa == null)
 				return ResponseEntity.badRequest().build();
-			if(produtos.size() == 0)
+			if(pessoa.size() == 0)
 				return ResponseEntity.notFound().build();
-			return ResponseEntity.ok(produtos);
+			return ResponseEntity.ok(pessoa);
 	}
 	
-	// --------- UPDATE
+	// ----- ATUALIZAR -----
 	
 	@PutMapping("/{id}") //PUT http://localhost:8080/api/pessoas/{id}
 		public ResponseEntity<Pessoas> update(@PathVariable Long id, @RequestBody Pessoas pessoa){
 			Pessoas updPessoa = pessoaService.update(id, pessoa);
 			if(updPessoa == null) {
-				return ResponseEntity.badRequest().build(); //dê status code 400
+				return ResponseEntity.badRequest().build();
 			}else {
-				return ResponseEntity.ok(updPessoa); //dê status code 200 e retorna objeto
+				return ResponseEntity.ok(updPessoa); 
 			}
 	}
 	
-	// --------- DELETAR
+	// ----- DELETAR -----
 	
 	@DeleteMapping("/{id}") //DELETE http://localhost:8080/api/pessoas/{id}
 		public ResponseEntity<?> delete(@PathVariable Long id){
 			pessoaService.delete(id);
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT); //204
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 	
 	

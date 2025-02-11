@@ -16,30 +16,32 @@ import jakarta.persistence.Table;
 @Table(name = "tb_pessoas")
 public class Pessoas {
 	
+	// ----- ATRUBUTOS -----
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY) //Auto-Incremento
+	@GeneratedValue(strategy = GenerationType.IDENTITY) 
 	private Long id;
 	
-	@Column(nullable = false, length = 2) //Not Null
+	@Column(nullable = false, length = 2) 
 	private String nome;
 	
-	@Column(nullable = false) //Not Null
+	@Column(nullable = false) 
 	private String endereco;
 	
-	@Column(nullable = false) //Not Null
+	@Column(nullable = false) 
 	private String cep;
 	
-	@Column(nullable = false) //Not Null
+	@Column(nullable = false) 
 	private String cidade;
 	
-	@Column(nullable = false) //Not Null
+	@Column(nullable = false)
 	private String uf;
 	
 	@OneToMany(mappedBy = "pessoa")
 	@JsonManagedReference
 	private List<Contatos> contato;
 	
-	// ------- ENTIDADE
+	// ----- ENTIDADES -----
 	
 	public Pessoas() { }
 	
@@ -53,7 +55,7 @@ public class Pessoas {
 		
 	}
 	
-	//----- Get e Setters ----- 
+	// ----- Get e Setters ----- 
 
 	public Long getId() {
 		return id;
@@ -62,6 +64,7 @@ public class Pessoas {
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
 
 	public String getNome() {
 		return nome;
@@ -70,6 +73,7 @@ public class Pessoas {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+	
 
 	public String getEndereco() {
 		return endereco;
@@ -78,6 +82,7 @@ public class Pessoas {
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
 	}
+	
 
 	public String getCep() {
 		return cep;
@@ -86,6 +91,7 @@ public class Pessoas {
 	public void setCep(String cep) {
 		this.cep = cep;
 	}
+	
 
 	public String getCidade() {
 		return cidade;
@@ -94,6 +100,7 @@ public class Pessoas {
 	public void setCidade(String cidade) {
 		this.cidade = cidade;
 	}
+	
 
 	public String getUf() {
 		return uf;
@@ -102,6 +109,7 @@ public class Pessoas {
 	public void setUf(String uf) {
 		this.uf = uf;
 	}
+	
 	
 	public List<Contatos> getContato() {
 		return contato;

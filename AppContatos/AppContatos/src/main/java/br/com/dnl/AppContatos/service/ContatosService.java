@@ -23,8 +23,8 @@ public class ContatosService {
 	private PessoasRepository pessoaRepository;
 
 	
-	
-		public Contatos save(Contatos contato) {		
+	// ----- SALVAR CONTATO -----
+	public Contatos save(Contatos contato) {		
 		
 		if(contato.getPessoa().getId() != null) {
 			
@@ -42,20 +42,27 @@ public class ContatosService {
 		}		
 	}
 
-	
-	
-	// ------- ENCONTRAR PELO ID
+	// ----- ENCONTRAR PELO ID -----
 	public Optional<Contatos> findById(Long id){
 		return contatoRepository.findById(id);
 	}
 	
-	// ---------- LISTAGEM
+	// ----- LISTAR -----
 	public List<Contatos> findAll(){
 		return contatoRepository.findAll();
 	}
 	
-	public Contatos update(Contatos contato) {
-		Optional<Contatos> findContato = contatoRepository.findById(contato.getId());
+	// ------ CONTATOS POR PESSOA -----
+    public List<Contatos> listarContatosPorPessoa(Long idPessoa) {
+        return contatoRepository.findByPessoaId(idPessoa);
+    }
+	
+	
+	// ----- ATUALIZAR CONTATO -----
+	public Contatos update(Long id,Contatos contato) {
+		
+		Optional<Contatos> findContato = contatoRepository.findById(id);
+		
 		if(findContato.isPresent()) {
 
 			Contatos updContato = findContato.get();

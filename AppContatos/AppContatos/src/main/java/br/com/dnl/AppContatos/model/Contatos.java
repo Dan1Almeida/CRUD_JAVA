@@ -19,6 +19,8 @@ import jakarta.persistence.Table;
 @Table (name = "tb_contatos")
 public class Contatos {
 	
+	// ----- ATRIBUTOS -----
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -36,7 +38,7 @@ public class Contatos {
 	private Pessoas pessoa;
 
 
-	// ------ ENTIDADE
+	// ----- ENTIDADE -----
 	
 	public Contatos() {}
 	
@@ -48,7 +50,7 @@ public class Contatos {
 	}
 	
 	
-	// ------- GET e SET
+	// ----- GET e SET -----
 
 	public Long getId() {
 		return id;

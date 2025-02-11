@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.dnl.AppContatos.model.Contatos;
 import br.com.dnl.AppContatos.service.ContatosService;
-import io.swagger.v3.oas.annotations.Operation;
+
 
 @RestController
 @RequestMapping("/api/contatos")
@@ -27,8 +27,7 @@ public class ContatosResource {
 	private ContatosService contatoService;
 	
 	
-	@PostMapping //POST http://localhost:8080/api/estoque
-	@Operation(summary = "Este endpoint é para gravar um registro de estoque e tem que ter o produto!")
+	@PostMapping //POST http://localhost:8080/api/contatos
 	public ResponseEntity<Contatos> save(@RequestBody Contatos contato){
 		Contatos newContato = contatoService.save(contato);
 		if(newContato == null)
@@ -38,7 +37,7 @@ public class ContatosResource {
 	
 	// ------- ENCONTRAR PELO ID
 	
-	@GetMapping("/{id}")
+	@GetMapping("/{id}") // GET http://localhost:8080/api/contatos/1
 	public ResponseEntity<Optional<Contatos>> findById(@PathVariable Long id){
 		Optional<Contatos> findContato = contatoService.findById(id);
 		if(findContato == null)
@@ -48,7 +47,7 @@ public class ContatosResource {
 	
 	
 	// ------- LISTAR CONTATOS
-	@GetMapping
+	@GetMapping // GET http://localhost:8080/api/contatos
 	public ResponseEntity<List<Contatos>> findAll(){
 		List<Contatos> findContato = contatoService.findAll();
 		if(findContato == null)
@@ -56,20 +55,33 @@ public class ContatosResource {
 		return ResponseEntity.ok(findContato); //200
 		}
 	
+	// --------- LISTAR CONTATOS POR PESSOA
+	@GetMapping("/pessoas/{idPessoa}") // GET http://localhost:8080/api/contatos/pessoa/1
+    public ResponseEntity<List<Contatos>> listarContatos(@PathVariable Long idPessoa) {
+        List<Contatos> contato = contatoService.listarContatosPorPessoa(idPessoa);
+        
+        if (contato.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.ok(contato);
+    }
+	
+	
 	// ------ ATUALIZAR
 	
-	@PutMapping
-	public ResponseEntity<Contatos> update(@RequestBody Contatos contato){
-		Contatos updContato = contatoService.update(contato);
+	@PutMapping("/{id}") // PUT http://localhost:8080/api/contatos/
+	public ResponseEntity<Contatos> update(@PathVariable Long id, @RequestBody Contatos contato){
+		Contatos updContato = contatoService.update(id, contato);
 		if(updContato == null)
-			return ResponseEntity.badRequest().build(); //400
-		return ResponseEntity.ok(updContato); //200
+			return ResponseEntity.badRequest().build();
+		return ResponseEntity.ok(updContato);
 	}
 	
 	
 	// ----- DELETAR
 	
-	@DeleteMapping("/{id}")
+	@DeleteMapping("/{id}") // DELETE http://localhost:8080/api/contatos/1
 	public ResponseEntity<?> delete(@PathVariable Long id){
 		contatoService.delete(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);//204

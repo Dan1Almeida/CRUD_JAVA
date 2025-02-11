@@ -16,7 +16,8 @@ public class PessoasService {
 	private PessoasRepository pessoaRepository;
 	
 	
-	// ---------CRIAR
+	// ----- SALVAR -----
+	
 	public Pessoas save(Pessoas pessoa) {
 		if(pessoa.getNome() == null || pessoa.getNome().length() >= 2) {
 			System.out.println("Nome inserido de forma incorreta");
@@ -47,19 +48,19 @@ public class PessoasService {
 		}	
 	}
 	
-	// --------- BUSCAR POR ID
+	// ----- ENCONTRAR POR ID -----
 	public Optional<Pessoas> findById(Long id){
 		return pessoaRepository.findById(id); 
 	}
 	
 	
-	// ---------- BUSCAR TODOS	
+	// ----- LISTAGEM -----
 	public List<Pessoas> findAll(){
 		return pessoaRepository.findAll();
 	}
 	
 	
-	// --------- UPDATE
+	// ----- ATUALIZAR -----
 	public Pessoas update(Long id, Pessoas pessoa) {
 
 		Optional<Pessoas> findPessoa = pessoaRepository.findById(id);
@@ -76,7 +77,7 @@ public class PessoasService {
 		return pessoaRepository.save(pessoa); //INSERT		
 		}
 	
-	// --------- DELETE	
+	// ----- DELETAR -----	
 	public void delete(Long id) {
 		pessoaRepository.deleteById(id);
 	}
