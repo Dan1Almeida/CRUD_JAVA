@@ -53,12 +53,10 @@ public class PessoasService {
 		return pessoaRepository.findById(id); 
 	}
 	
-	
 	// ----- LISTAGEM -----
 	public List<Pessoas> findAll(){
 		return pessoaRepository.findAll();
 	}
-	
 	
 	// ----- ATUALIZAR -----
 	public Pessoas update(Long id, Pessoas pessoa) {
@@ -72,10 +70,10 @@ public class PessoasService {
 			updPessoa.setCep(pessoa.getCep());
 			updPessoa.setCidade(pessoa.getCidade());
 			updPessoa.setUf(pessoa.getUf());
-			return pessoaRepository.save(updPessoa); //UPDATE
+			return pessoaRepository.save(updPessoa); 
 		}
-		return pessoaRepository.save(pessoa); //INSERT		
-		}
+		return pessoaRepository.save(pessoa); 		
+	}
 	
 	// ----- DELETAR -----	
 	public void delete(Long id) {

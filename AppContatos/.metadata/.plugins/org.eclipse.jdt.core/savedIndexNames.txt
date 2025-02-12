@@ -10,7 +10,6 @@ INDEX VERSION 1.134+C:\Users\danie\OneDrive\Área de Trabalho\TesteCrud\AppConta
 3877530823.index
 643940018.index
 1229535882.index
-1287882659.index
 2195062169.index
 2296253587.index
 206850821.index

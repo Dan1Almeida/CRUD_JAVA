@@ -2,6 +2,7 @@ package br.com.dnl.AppContatos.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import br.com.dnl.AppContatos.Enum.OrderTipo;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,8 +27,8 @@ public class Contatos {
 	private Long id;
 	
 	@Column(nullable = false)
-	private String tipo;
-	
+	private Integer orderTipo;
+		
 	@Column(nullable = false)
 	private String contato;
 	
@@ -42,9 +43,9 @@ public class Contatos {
 	
 	public Contatos() {}
 	
-	public Contatos(Long id, String tipo, String contato, Pessoas pessoa) {
+	public Contatos(Long id, OrderTipo orderTipo, String contato, Pessoas pessoa) {
 		this.id = id;
-		this.tipo = tipo;
+		setOrderTipo(orderTipo);
 		this.contato = contato;
 		this.pessoa = pessoa;
 	}
@@ -60,12 +61,12 @@ public class Contatos {
 		this.id = id;
 	}
 
-	public String getTipo() {
-		return tipo;
+	public OrderTipo getOrderTipo() {
+		return OrderTipo.valueOf(orderTipo);
 	}
 
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
+	public void setOrderTipo(OrderTipo orderTipo) {
+		this.orderTipo = orderTipo.getTipo();
 	}
 
 	public String getContato() {

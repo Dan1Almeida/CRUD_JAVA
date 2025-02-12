@@ -17,9 +17,9 @@ public class OpenApiConfig {
                 .components(new Components().addSecuritySchemes("basicScheme",
                         new SecurityScheme().type(SecurityScheme.Type.HTTP).scheme("basic")))
                 .info(new Info()
-                        .title("Título API")
-                        .description("Descrição API")
-                        .contact(new Contact().name("Nome").email("Email").url("URL"))
+                        .title("AppContatos")
+                        .description("API utilizado para gravar uma pessoa com atributos e contatos")
+                        .contact(new Contact().name("Daniel Silva de Almeida").email("daniel.dnlsilva7@gmail.com").url("URL"))
                         .version("Versão API"));
     }
 }

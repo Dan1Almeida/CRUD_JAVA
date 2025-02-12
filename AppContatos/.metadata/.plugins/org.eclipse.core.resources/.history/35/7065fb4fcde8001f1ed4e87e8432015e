@@ -1,0 +1,10 @@
+package br.com.dnl.AppContatos.Enum;
+
+public enum OrderTipo {
+	telefone_residencial,
+	celular,
+	whatsapp,
+	email_pessoal,
+	email_profissional;
+	
+}

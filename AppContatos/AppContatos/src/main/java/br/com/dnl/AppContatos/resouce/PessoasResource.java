@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.dnl.AppContatos.model.Pessoas;
 import br.com.dnl.AppContatos.service.PessoasService;
+import io.swagger.v3.oas.annotations.Operation;
 
 
 @RestController
@@ -30,6 +31,7 @@ public class PessoasResource {
 	// ----- SALVAR -----
 	
 	@PostMapping //POST http://localhost:8080/api/pessoas
+	@Operation(summary = "Gravar uma nova pessoa")
 	public ResponseEntity<Pessoas> save(@RequestBody Pessoas pessoa) {
 		Pessoas newPessoa = pessoaService.save(pessoa);
 		
@@ -41,10 +43,10 @@ public class PessoasResource {
 		}
 	}
 	
-	
 	// ----- ENCONTRAR POR ID -----
 	
 	@GetMapping("/{id}") // GET http://localhost:8080/api/pessoas/{id}
+	@Operation(summary = "Encontrar uma pessoa por ID")
 		public ResponseEntity<Optional<Pessoas>> findById(@PathVariable Long id){
 			Optional<Pessoas> pessoa = pessoaService.findById(id);
 			if(pessoa.isEmpty()) { 
@@ -57,6 +59,7 @@ public class PessoasResource {
 	// ----- LISTAGEM -----
 	
 	@GetMapping //GET http://localhost:8080/api/pessoas
+	@Operation(summary = "Listar pessoas cadastradas")
 		public ResponseEntity<List<Pessoas>> findAll(){
 			List<Pessoas> pessoa = pessoaService.findAll();
 			if(pessoa == null)
@@ -69,6 +72,7 @@ public class PessoasResource {
 	// ----- ATUALIZAR -----
 	
 	@PutMapping("/{id}") //PUT http://localhost:8080/api/pessoas/{id}
+	@Operation(summary = "Atualizar atributo de uma pessoa")
 		public ResponseEntity<Pessoas> update(@PathVariable Long id, @RequestBody Pessoas pessoa){
 			Pessoas updPessoa = pessoaService.update(id, pessoa);
 			if(updPessoa == null) {
@@ -81,10 +85,9 @@ public class PessoasResource {
 	// ----- DELETAR -----
 	
 	@DeleteMapping("/{id}") //DELETE http://localhost:8080/api/pessoas/{id}
+	@Operation(summary = "Deletar uma pessoa por ID")
 		public ResponseEntity<?> delete(@PathVariable Long id){
 			pessoaService.delete(id);
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
-	
-	
 }
