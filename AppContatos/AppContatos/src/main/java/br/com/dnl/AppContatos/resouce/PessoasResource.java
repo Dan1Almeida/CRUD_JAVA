@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.dnl.AppContatos.Dto.MalaDiretaDto;
 import br.com.dnl.AppContatos.model.Pessoas;
 import br.com.dnl.AppContatos.service.PessoasService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -90,4 +91,17 @@ public class PessoasResource {
 			pessoaService.delete(id);
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
+	
+	// ----- MALA DIRETA ----- 
+    @GetMapping("/maladireta/{id}")
+    public ResponseEntity<MalaDiretaDto> buscarMalaDireta(@PathVariable Long id) {
+        return ResponseEntity.ok(pessoaService.buscarPorId(id));
+    }
+    
+    // ----- LISTAGEM MALA DIRETA -----
+    @GetMapping("/maladireta")
+    public ResponseEntity<List<MalaDiretaDto>> listarMalaDireta() {
+        return ResponseEntity.ok(pessoaService.listarTodos());
+    }
+    
 }

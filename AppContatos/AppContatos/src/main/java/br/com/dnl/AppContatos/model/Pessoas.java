@@ -46,14 +46,14 @@ public class Pessoas {
 	
 	public Pessoas() { }
 	
-	public Pessoas(Long id, String nome, String endereco, String cep, String cidade, String uf ) {
+	public Pessoas(Long id, String nome, String endereco, String cep, String cidade, String uf, List<Contatos> contato ) {
 		this.id = id;
 		this.nome = nome;
 		this.endereco = endereco;
 		this.cep = cep;
 		this.cidade = cidade;
 		this.uf = uf;
-		
+		this.contato = contato;
 	}
 	
 	// ----- Get e Setters ----- 
@@ -122,19 +122,16 @@ public class Pessoas {
 	
 	
 	// ----- toString -----
+
 	
-
-
 	@Override
 	public String toString() {
-		String retorno = "[" +
+		String override = "[" +
 						"Nome:" + 		this.nome + 		"," +
 						"Endereço:" + 	this.endereco + 	"," +
 						"CEP:" + 		this.cep + 			"," +
 						"Cidade:" + 	this.cidade + 		"," +
 						"UF:" + 		this.uf + 			"]" ;
-		return retorno;
-	}
-
-	
+		return override;
+	}	
 }

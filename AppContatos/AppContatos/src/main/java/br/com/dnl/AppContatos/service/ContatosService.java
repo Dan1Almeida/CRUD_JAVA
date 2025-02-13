@@ -15,13 +15,10 @@ import br.com.dnl.AppContatos.repository.PessoasRepository;
 public class ContatosService {
 	
 	@Autowired
-	private ContatosRepository contatoRepository;
-	
-	
+	private ContatosRepository contatoRepository;	
 
 	@Autowired
 	private PessoasRepository pessoaRepository;
-
 	
 	// ----- SALVAR CONTATO -----
 	public Contatos save(Contatos contato) {		
@@ -66,7 +63,6 @@ public class ContatosService {
 		if(findContato.isPresent()) {
 
 			Contatos updContato = findContato.get();
-			updContato.setOrderTipo(contato.getOrderTipo());
 			updContato.setContato(contato.getContato());
 
 			return contatoRepository.save(updContato);

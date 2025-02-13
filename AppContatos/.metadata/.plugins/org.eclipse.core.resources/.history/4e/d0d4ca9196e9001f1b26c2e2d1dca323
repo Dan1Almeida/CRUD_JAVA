@@ -1,0 +1,17 @@
+package br.com.dnl.AppContatos.Dto;
+
+import br.com.dnl.AppContatos.model.Pessoas;
+
+public MalaDiretaDTO(Pessoa pessoa) {
+    this(
+        pessoa.getId(),
+        pessoa.getNome(),
+        String.format("%s – CEP: %s – %s/%s",
+                      pessoa.getEndereco(),
+                      pessoa.getNumero(),
+                      pessoa.getCep(),
+                      pessoa.getCidade(),
+                      pessoa.getUf())
+    );
+}
+

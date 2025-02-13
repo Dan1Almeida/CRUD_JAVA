@@ -13,9 +13,6 @@ import jakarta.persistence.ManyToOne;
 
 import jakarta.persistence.Table;
 
-
-
-
 @Entity
 @Table (name = "tb_contatos")
 public class Contatos {
@@ -84,13 +81,5 @@ public class Contatos {
 	public void setPessoa(Pessoas pessoa) {
 		this.pessoa = pessoa;
 	}
-	
 		
-	
-	/* @Override
-	public String toString() {
-		
-	}
-	*/
-	
 }
