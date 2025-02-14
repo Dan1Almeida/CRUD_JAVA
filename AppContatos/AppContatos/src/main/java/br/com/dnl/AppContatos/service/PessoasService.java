@@ -4,13 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import br.com.dnl.AppContatos.Dto.MalaDiretaDto;
 import br.com.dnl.AppContatos.model.Pessoas;
 import br.com.dnl.AppContatos.repository.PessoasRepository;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
 @Service
 public class PessoasService {
@@ -21,8 +20,9 @@ public class PessoasService {
 	
 	// ----- SALVAR -----
 	
+	@ApiResponse()
 	public Pessoas save(Pessoas pessoa) {
-		if(pessoa.getNome() == null || pessoa.getNome().length() >= 2) {
+		if(pessoa.getNome() == null || pessoa.getNome().length() >= 100) {
 			System.out.println("Nome inserido de forma incorreta");
 			return null;
 		}
@@ -86,11 +86,15 @@ public class PessoasService {
 	
 	// ----- MALA DIRETA -----
 	
-    public MalaDiretaDto buscarPorId(Long id) {
-        Pessoas pessoa = pessoaRepository.findById(id)
-            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Pessoa não encontrada"));
-        return new MalaDiretaDto(pessoa);
-    }
+	public MalaDiretaDto buscarPorId(Long id) {
+	    Optional<Pessoas> pessoa = pessoaRepository.findById(id);
+
+	    if (pessoa.isEmpty()) {
+	        return null; 
+	    }
+
+	    return new MalaDiretaDto(pessoa.get());
+	}
     
     // ----- LISTAGEM MALA DIRETA -----
     public List<MalaDiretaDto> listarTodos() {

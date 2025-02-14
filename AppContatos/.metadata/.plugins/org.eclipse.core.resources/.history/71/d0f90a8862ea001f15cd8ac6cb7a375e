@@ -1,0 +1,8 @@
+package br.com.dnl.AppContatos.Dto;
+
+import java.util.List;
+
+public class EntityDto {
+	PessoasDto dto = new PessoasDto();
+	dto.
+}

@@ -1,0 +1,36 @@
+package br.com.dnl.AppContatos.Dto;
+
+public class ContatosDto {
+
+    private Long id;
+    private Integer orderTipo;
+    private String contato;
+    private Long pessoaId;
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public Integer getOrderTipo() {
+		return orderTipo;
+	}
+	public void setOrderTipo(Integer orderTipo) {
+		this.orderTipo = orderTipo;
+	}
+	public String getContato() {
+		return contato;
+	}
+	public void setContato(String contato) {
+		this.contato = contato;
+	}
+	public Long getPessoaId() {
+		return pessoaId;
+	}
+	public void setPessoaId(Long pessoaId) {
+		this.pessoaId = pessoaId;
+	} 
+
+    
+
+}

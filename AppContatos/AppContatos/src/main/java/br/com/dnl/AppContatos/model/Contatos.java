@@ -3,6 +3,7 @@ package br.com.dnl.AppContatos.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import br.com.dnl.AppContatos.Enum.OrderTipo;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,9 +25,11 @@ public class Contatos {
 	private Long id;
 	
 	@Column(nullable = false)
+	@Schema(description = "Tipo do contato (Ex: telefone_residencial, celular, etc.)", example = "1")
 	private Integer orderTipo;
 		
 	@Column(nullable = false)
+    @Schema(description = "Contato", example = "(11) 99999-9999")
 	private String contato;
 	
 	

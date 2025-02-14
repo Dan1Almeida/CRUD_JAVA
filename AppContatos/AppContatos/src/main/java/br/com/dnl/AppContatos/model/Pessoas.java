@@ -2,8 +2,10 @@ package br.com.dnl.AppContatos.model;
 
 import java.util.List;
 
+
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -23,23 +25,30 @@ public class Pessoas {
 	@GeneratedValue(strategy = GenerationType.IDENTITY) 
 	private Long id;
 	
-	@Column(nullable = false, length = 2) 
+	
+	@Column(nullable = false) 
+	@Schema(description = "Nome completo", example = "Daniel Silva de Almeida")
 	private String nome;
 	
 	@Column(nullable = false) 
+	@Schema(description = "Endereço da pessoa", example = "Rua Um")
 	private String endereco;
 	
 	@Column(nullable = false) 
+	@Schema(description = "CEP do endereço", example = "01010-101")
 	private String cep;
 	
 	@Column(nullable = false) 
+	@Schema(description = "Cidade", example = "São Paulo")
 	private String cidade;
 	
 	@Column(nullable = false)
+	@Schema(description = "Unidade federativa (UF)", example = "SP")
 	private String uf;
 	
 	@OneToMany(mappedBy = "pessoa", cascade = CascadeType.ALL)
 	@JsonManagedReference
+	@Schema(hidden = true)
 	private List<Contatos> contato;
 	
 	// ----- ENTIDADES -----

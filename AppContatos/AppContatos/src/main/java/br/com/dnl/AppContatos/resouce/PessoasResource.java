@@ -20,6 +20,8 @@ import br.com.dnl.AppContatos.Dto.MalaDiretaDto;
 import br.com.dnl.AppContatos.model.Pessoas;
 import br.com.dnl.AppContatos.service.PessoasService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 
 @RestController
@@ -33,14 +35,17 @@ public class PessoasResource {
 	
 	@PostMapping //POST http://localhost:8080/api/pessoas
 	@Operation(summary = "Gravar uma nova pessoa")
+	@ApiResponses({
+	@ApiResponse(responseCode = "400", description = "Erro ao cadastrar a pessoa"),
+    @ApiResponse(responseCode = "201", description = "Pessoa cadastrada com sucesso")})
 	public ResponseEntity<Pessoas> save(@RequestBody Pessoas pessoa) {
 		Pessoas newPessoa = pessoaService.save(pessoa);
 		
 		if(newPessoa == null) {
-			return ResponseEntity.badRequest().build();
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 		}
 		else {
-			return ResponseEntity.ok(newPessoa); 
+			return ResponseEntity.status(HttpStatus.CREATED).body(newPessoa);
 		}
 	}
 	
@@ -48,12 +53,16 @@ public class PessoasResource {
 	
 	@GetMapping("/{id}") // GET http://localhost:8080/api/pessoas/{id}
 	@Operation(summary = "Encontrar uma pessoa por ID")
+    @ApiResponses({
+    @ApiResponse(responseCode = "404", description = "Pessoa não encontrada"),
+    @ApiResponse(responseCode = "200", description = "Pessoa encontrada")
+    })
 		public ResponseEntity<Optional<Pessoas>> findById(@PathVariable Long id){
 			Optional<Pessoas> pessoa = pessoaService.findById(id);
 			if(pessoa.isEmpty()) { 
-				return ResponseEntity.notFound().build(); 
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).build(); 
 			}else {
-				return ResponseEntity.ok(pessoa);
+				return ResponseEntity.status(HttpStatus.OK).body(pessoa);
 			}
 	}
 	
@@ -61,12 +70,16 @@ public class PessoasResource {
 	
 	@GetMapping //GET http://localhost:8080/api/pessoas
 	@Operation(summary = "Listar pessoas cadastradas")
+    @ApiResponses({
+    @ApiResponse(responseCode = "200", description = "Lista de pessoas retornada com sucesso"),
+    @ApiResponse(responseCode = "404", description = "Nenhuma pessoa encontrada")
+    })
 		public ResponseEntity<List<Pessoas>> findAll(){
 			List<Pessoas> pessoa = pessoaService.findAll();
 			if(pessoa == null)
-				return ResponseEntity.badRequest().build();
+				return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 			if(pessoa.size() == 0)
-				return ResponseEntity.notFound().build();
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 			return ResponseEntity.ok(pessoa);
 	}
 	
@@ -74,12 +87,16 @@ public class PessoasResource {
 	
 	@PutMapping("/{id}") //PUT http://localhost:8080/api/pessoas/{id}
 	@Operation(summary = "Atualizar atributo de uma pessoa")
+    @ApiResponses({
+    @ApiResponse(responseCode = "200", description = "Pessoa atualizada com sucesso"),
+    @ApiResponse(responseCode = "404", description = "Pessoa não encontrada")
+    })
 		public ResponseEntity<Pessoas> update(@PathVariable Long id, @RequestBody Pessoas pessoa){
 			Pessoas updPessoa = pessoaService.update(id, pessoa);
 			if(updPessoa == null) {
-				return ResponseEntity.badRequest().build();
+				return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 			}else {
-				return ResponseEntity.ok(updPessoa); 
+				return ResponseEntity.status(HttpStatus.OK).body(updPessoa);
 			}
 	}
 	
@@ -87,21 +104,55 @@ public class PessoasResource {
 	
 	@DeleteMapping("/{id}") //DELETE http://localhost:8080/api/pessoas/{id}
 	@Operation(summary = "Deletar uma pessoa por ID")
-		public ResponseEntity<?> delete(@PathVariable Long id){
-			pessoaService.delete(id);
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	@ApiResponses({
+    @ApiResponse(responseCode = "404", description = "Pessoa não encontrada"),
+    @ApiResponse(responseCode = "204", description = "Pessoa deletada com sucesso")
+	})
+	public ResponseEntity<?> delete(@PathVariable Long id) {
+	    Optional<Pessoas> pessoa = pessoaService.findById(id);
+	    
+	    if (pessoa == null) {
+	        return new ResponseEntity<>(HttpStatus.NOT_FOUND); 
+	    }
+	    
+	    pessoaService.delete(id);
+	    return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 	
 	// ----- MALA DIRETA ----- 
-    @GetMapping("/maladireta/{id}")
-    public ResponseEntity<MalaDiretaDto> buscarMalaDireta(@PathVariable Long id) {
-        return ResponseEntity.ok(pessoaService.buscarPorId(id));
-    }
-    
+	
+	@GetMapping("/maladireta/{id}")
+	@Operation(summary = "Mala Direta por pessoa")
+    @ApiResponses({
+    @ApiResponse(responseCode = "404", description = "Pessoa não encontrada"),
+    @ApiResponse(responseCode = "200", description = "Pessoa encontrada")
+    })	
+	public ResponseEntity<MalaDiretaDto> MalaDiretaId(@PathVariable Long id) {
+	    MalaDiretaDto malaDireta = pessoaService.buscarPorId(id);
+
+	    if (malaDireta == null) {
+	        return ResponseEntity.status(HttpStatus.NOT_FOUND).build(); 
+	    } else {
+	        return ResponseEntity.ok(malaDireta); 
+	    }
+	}
+		
+	   
     // ----- LISTAGEM MALA DIRETA -----
     @GetMapping("/maladireta")
+    @Operation(summary = "Listar todas informações de Mala direta")
+    @ApiResponses({
+    @ApiResponse(responseCode = "204", description = "Sem conteúdo"),
+    @ApiResponse(responseCode = "200", description = "Mala Direta encontrada")
+    })	
     public ResponseEntity<List<MalaDiretaDto>> listarMalaDireta() {
-        return ResponseEntity.ok(pessoaService.listarTodos());
+        List<MalaDiretaDto> malaDiretaList = pessoaService.listarTodos();
+
+        if (malaDiretaList == null || malaDiretaList.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT); 
+        } else {
+            return new ResponseEntity<>(malaDiretaList, HttpStatus.OK); 
+        }
     }
     
 }

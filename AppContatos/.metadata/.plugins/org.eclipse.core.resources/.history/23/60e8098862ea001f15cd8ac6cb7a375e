@@ -1,0 +1,5 @@
+package br.com.dnl.AppContatos.Dto;
+
+public class EntityDto {
+
+}
