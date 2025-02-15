@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.dnl.AppContatos.model.Contatos;
 import br.com.dnl.AppContatos.service.ContatosService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 
 @RestController
@@ -31,68 +33,113 @@ public class ContatosResource {
 	
 	@PostMapping //POST http://localhost:8080/api/contatos
 	@Operation(summary = "Salvar um contato de uma pessoa")
-	public ResponseEntity<Contatos> save(@RequestBody Contatos contato){
+	@ApiResponses({
+		@ApiResponse(responseCode = "400", description = "Erro ao cadastrar Contato"),
+		@ApiResponse(responseCode = "201", description = "Contato cadastrado com sucesso")
+	})
+
+	public ResponseEntity<Contatos> save(@RequestBody Contatos contato) {
 		Contatos newContato = contatoService.save(contato);
-		if(newContato == null)
-			return ResponseEntity.badRequest().build(); //400
-		return ResponseEntity.ok(newContato);
-	}
+    
+		if (newContato == null) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build(); 
+		}
+    
+		return ResponseEntity.status(HttpStatus.CREATED).body(newContato); 
+		}
+
 	
 	// ----- ENCONTRAR POR ID -----
 	
 	@GetMapping("/{id}") // GET http://localhost:8080/api/contatos/1
 	@Operation(summary = "Encontrar contato por ID")
-	public ResponseEntity<Optional<Contatos>> findById(@PathVariable Long id){
+	@ApiResponses({
+		@ApiResponse(responseCode = "404", description = "Contato não encontrada"),
+		@ApiResponse(responseCode = "200", description = "Contato encontrado")
+    	})
+	public ResponseEntity<Optional<Contatos>> findById(@PathVariable Long id) {
 		Optional<Contatos> findContato = contatoService.findById(id);
-		if(findContato == null)
-			return ResponseEntity.badRequest().build();
-		return ResponseEntity.ok(findContato);
-	}
+    
+		if (findContato.isEmpty()) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build(); // 404
+			}
+
+			return ResponseEntity.status(HttpStatus.OK).body(findContato); // 200
+			}
 	
 	
 	// ----- LISTAGEM -----
 	
 	@GetMapping // GET http://localhost:8080/api/contatos
 	@Operation(summary = "Listar contatos cadastrados")
-	public ResponseEntity<List<Contatos>> findAll(){
+	@ApiResponses({
+		@ApiResponse(responseCode = "404", description = "Contato não encontrado"),
+		@ApiResponse(responseCode = "200", description = "Contato deletado")
+    	})
+	public ResponseEntity<List<Contatos>> findAll() {
 		List<Contatos> findContato = contatoService.findAll();
-		if(findContato == null)
-			return ResponseEntity.badRequest().build(); //400
-		return ResponseEntity.ok(findContato); //200
-		}
+    
+		if (findContato.isEmpty()) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build(); 
+			}
+
+			return ResponseEntity.status(HttpStatus.OK).body(findContato); 
+			}
+
 	
 	// ------ CONTATOS POR PESSOA -----
 	
 	@GetMapping("/pessoas/{idPessoa}") // GET http://localhost:8080/api/contatos/pessoa/1
 	@Operation(summary = "Listar contatos de uma pessoa por ID")
-    public ResponseEntity<List<Contatos>> listarContatos(@PathVariable Long idPessoa) {
-        List<Contatos> contato = contatoService.listarContatosPorPessoa(idPessoa);
-        
-        if (contato.isEmpty()) {
-            return ResponseEntity.noContent().build();
-        }
+	@ApiResponses({
+		@ApiResponse(responseCode = "200", description = "Contato por pessoa encontrado"),
+		@ApiResponse(responseCode = "404", description = "Contato por pessoa não encontrada")
+		})
 
-        return ResponseEntity.ok(contato);
-    }
-	
-	// ----- ATUALIZAR -----
+	public ResponseEntity<List<Contatos>> listarContatos(@PathVariable Long idPessoa) {
+		List<Contatos> contato = contatoService.listarContatosPorPessoa(idPessoa);
+    
+		if (contato.isEmpty()) {
+			return ResponseEntity.status(HttpStatus.NO_CONTENT).build(); 
+			}
+    
+			return ResponseEntity.status(HttpStatus.OK).body(contato);
+			}
+	 
+	// ----- ATUALIZAR ----- // COLOCAR BAD REQUEST E NÃO ENCONTRADO
 	
 	@PutMapping("/{id}") // PUT http://localhost:8080/api/contatos/1
 	@Operation(summary = "Atualizar um contato existente")
-	public ResponseEntity<Contatos> update(@PathVariable Long id, @RequestBody Contatos contato){
-		Contatos updContato = contatoService.update(id, contato);
-		if(updContato == null)
-			return ResponseEntity.badRequest().build();
-		return ResponseEntity.ok(updContato);
+	@ApiResponses({
+		@ApiResponse(responseCode = "404", description = "Contato não encontrato"),
+		@ApiResponse(responseCode = "400", description = "Atualização não aceita"),
+		@ApiResponse(responseCode = "200", description = "Contato atualizado")
+    	})
+	public ResponseEntity<Contatos> update(@PathVariable Long id, @RequestBody Contatos contato) {
+		
+		Optional<Contatos> Contato = contatoService.findById(id);
+	    if (Contato == null) {
+	        return ResponseEntity.status(HttpStatus.NOT_FOUND).build(); 
+	    }
+    
+	    Contatos updContato = contatoService.update(id, contato);
+	    
+	    if (updContato == null) {
+	        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build(); 
+	    }
+
+	    return ResponseEntity.ok(updContato);
 	}
 	
 	// ----- DELETAR -----
 	
 	@DeleteMapping("/{id}") // DELETE http://localhost:8080/api/contatos/1
 	@Operation(summary = "Deletar um contato existente por ID")
+	@ApiResponse(responseCode = "204", description = "Contato deletado com sucesso")
+
 	public ResponseEntity<?> delete(@PathVariable Long id){
 		contatoService.delete(id);
-		return new ResponseEntity<>(HttpStatus.NO_CONTENT);//204
-	}
-	
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);	
+		}
+
 }

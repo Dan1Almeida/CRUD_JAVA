@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.dnl.AppContatos.Dto.MalaDiretaDto;
+
 import br.com.dnl.AppContatos.model.Pessoas;
 import br.com.dnl.AppContatos.service.PessoasService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -36,87 +37,85 @@ public class PessoasResource {
 	@PostMapping //POST http://localhost:8080/api/pessoas
 	@Operation(summary = "Gravar uma nova pessoa")
 	@ApiResponses({
-	@ApiResponse(responseCode = "400", description = "Erro ao cadastrar a pessoa"),
-    @ApiResponse(responseCode = "201", description = "Pessoa cadastrada com sucesso")})
+		@ApiResponse(responseCode = "400", description = "Erro ao cadastrar a pessoa"),
+		@ApiResponse(responseCode = "201", description = "Pessoa cadastrada com sucesso")
+		})
 	public ResponseEntity<Pessoas> save(@RequestBody Pessoas pessoa) {
 		Pessoas newPessoa = pessoaService.save(pessoa);
-		
+	
 		if(newPessoa == null) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-		}
-		else {
+			}
 			return ResponseEntity.status(HttpStatus.CREATED).body(newPessoa);
-		}
-	}
+			}
 	
 	// ----- ENCONTRAR POR ID -----
 	
 	@GetMapping("/{id}") // GET http://localhost:8080/api/pessoas/{id}
 	@Operation(summary = "Encontrar uma pessoa por ID")
-    @ApiResponses({
-    @ApiResponse(responseCode = "404", description = "Pessoa não encontrada"),
-    @ApiResponse(responseCode = "200", description = "Pessoa encontrada")
-    })
-		public ResponseEntity<Optional<Pessoas>> findById(@PathVariable Long id){
-			Optional<Pessoas> pessoa = pessoaService.findById(id);
-			if(pessoa.isEmpty()) { 
-				return ResponseEntity.status(HttpStatus.NOT_FOUND).build(); 
-			}else {
-				return ResponseEntity.status(HttpStatus.OK).body(pessoa);
-			}
-	}
+	@ApiResponses({
+		@ApiResponse(responseCode = "404", description = "Pessoa não encontrada"),
+		@ApiResponse(responseCode = "200", description = "Pessoa encontrada")
+		})
+	public ResponseEntity<Optional<Pessoas>> findById(@PathVariable Long id){
+		Optional<Pessoas> pessoa = pessoaService.findById(id);
+		if(pessoa.isEmpty()) { 
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build(); 
+		}
+			return ResponseEntity.status(HttpStatus.OK).body(pessoa);
+		}
+
 	
 	// ----- LISTAGEM -----
 	
-	@GetMapping //GET http://localhost:8080/api/pessoas
+	@GetMapping // GET http://localhost:8080/api/pessoas
 	@Operation(summary = "Listar pessoas cadastradas")
-    @ApiResponses({
-    @ApiResponse(responseCode = "200", description = "Lista de pessoas retornada com sucesso"),
-    @ApiResponse(responseCode = "404", description = "Nenhuma pessoa encontrada")
-    })
-		public ResponseEntity<List<Pessoas>> findAll(){
-			List<Pessoas> pessoa = pessoaService.findAll();
-			if(pessoa == null)
-				return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-			if(pessoa.size() == 0)
-				return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-			return ResponseEntity.ok(pessoa);
+	@ApiResponses({
+	    @ApiResponse(responseCode = "404", description = "Nenhuma pessoa encontrada"),
+	    @ApiResponse(responseCode = "200", description = "Lista de pessoas retornada com sucesso")
+	})
+	public ResponseEntity<List<Pessoas>> findAll() {
+	    List<Pessoas> findpessoas = pessoaService.findAll();
+	    
+	    if (findpessoas.isEmpty()) { 
+	        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+	    }
+
+	    return ResponseEntity.status(HttpStatus.OK).body(findpessoas);  
 	}
 	
-	// ----- ATUALIZAR -----
+	
+	// ----- ATUALIZAR ----- // COLOCAR BAD REQUEST E NÃO ENCONTRADO
 	
 	@PutMapping("/{id}") //PUT http://localhost:8080/api/pessoas/{id}
 	@Operation(summary = "Atualizar atributo de uma pessoa")
-    @ApiResponses({
-    @ApiResponse(responseCode = "200", description = "Pessoa atualizada com sucesso"),
-    @ApiResponse(responseCode = "404", description = "Pessoa não encontrada")
-    })
-		public ResponseEntity<Pessoas> update(@PathVariable Long id, @RequestBody Pessoas pessoa){
-			Pessoas updPessoa = pessoaService.update(id, pessoa);
-			if(updPessoa == null) {
-				return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-			}else {
-				return ResponseEntity.status(HttpStatus.OK).body(updPessoa);
-			}
-	}
+	@ApiResponses({
+	@ApiResponse(responseCode = "404", description = "Pessoa não encontrato"),
+		@ApiResponse(responseCode = "400", description = "Atualização não aceita"),
+		@ApiResponse(responseCode = "200", description = "Pessoa atualizada")
+		})
+	public ResponseEntity<Pessoas> update(@PathVariable Long id, @RequestBody Pessoas pessoa){
 	
+		Optional<Pessoas> pessoas = pessoaService.findById(id);
+		if (pessoas == null) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build(); 
+		}
+			Pessoas updPessoa = pessoaService.update(id, pessoa);
+		if(updPessoa == null) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+		}
+			return ResponseEntity.status(HttpStatus.OK).body(updPessoa);
+		
+		}
+
 	// ----- DELETAR -----
 	
 	@DeleteMapping("/{id}") //DELETE http://localhost:8080/api/pessoas/{id}
 	@Operation(summary = "Deletar uma pessoa por ID")
-	@ApiResponses({
-    @ApiResponse(responseCode = "404", description = "Pessoa não encontrada"),
-    @ApiResponse(responseCode = "204", description = "Pessoa deletada com sucesso")
-	})
+	@ApiResponse(responseCode = "204", description = "Pessoa deletado com sucesso")
 	public ResponseEntity<?> delete(@PathVariable Long id) {
-	    Optional<Pessoas> pessoa = pessoaService.findById(id);
-	    
-	    if (pessoa == null) {
-	        return new ResponseEntity<>(HttpStatus.NOT_FOUND); 
-	    }
-	    
 	    pessoaService.delete(id);
-	    return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 	
 	// ----- MALA DIRETA ----- 

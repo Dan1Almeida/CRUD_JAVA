@@ -15,6 +15,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
+
 @Entity
 @Table(name = "tb_pessoas")
 public class Pessoas {
@@ -128,19 +129,5 @@ public class Pessoas {
 	public void setContato(List<Contatos> contato) {
 		this.contato = contato;
 	}	
-	
-	
-	// ----- toString -----
-
-	
-	@Override
-	public String toString() {
-		String override = "[" +
-						"Nome:" + 		this.nome + 		"," +
-						"Endereço:" + 	this.endereco + 	"," +
-						"CEP:" + 		this.cep + 			"," +
-						"Cidade:" + 	this.cidade + 		"," +
-						"UF:" + 		this.uf + 			"]" ;
-		return override;
-	}	
+		
 }

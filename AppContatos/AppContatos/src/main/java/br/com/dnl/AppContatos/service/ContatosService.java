@@ -27,14 +27,19 @@ public class ContatosService {
 			
 			Optional<Pessoas> findPessoa = pessoaRepository.findById(contato.getPessoa().getId());
 			if(findPessoa.isEmpty()) {
-				System.out.println("Pessoa não encontrado");
+				System.out.println("Pessoa não encontrada");
 				return null;
-			}else {
+			}		
+			
+			else {
 				contato.setPessoa(findPessoa.get());
+				System.out.println("[" +
+						" Nome:" + 		contato.getOrderTipo()	+	 "," +
+						" Endereço:" + 	contato.getContato() 	+ 	"]" );
 				return contatoRepository.save(contato);
 			}			
-		}else {
-			System.out.println("Pessoa nula");
+			}else {
+			System.out.println("Contato inserido de forma incorreta.");
 			return null;
 		}		
 	}

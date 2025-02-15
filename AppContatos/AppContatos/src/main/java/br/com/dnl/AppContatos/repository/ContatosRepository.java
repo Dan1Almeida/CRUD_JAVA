@@ -13,4 +13,5 @@ public interface ContatosRepository extends JpaRepository<Contatos, Long> {
 	
 	// ----- BUSCAR PERSONALIZADA -----
 	List<Contatos> findByPessoaId(Long idPessoa);
+	
 }

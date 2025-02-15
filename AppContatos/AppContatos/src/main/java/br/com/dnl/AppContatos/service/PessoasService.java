@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import br.com.dnl.AppContatos.Dto.MalaDiretaDto;
 import br.com.dnl.AppContatos.model.Pessoas;
 import br.com.dnl.AppContatos.repository.PessoasRepository;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
 @Service
 public class PessoasService {
@@ -20,35 +19,50 @@ public class PessoasService {
 	
 	// ----- SALVAR -----
 	
-	@ApiResponse()
+
 	public Pessoas save(Pessoas pessoa) {
-		if(pessoa.getNome() == null || pessoa.getNome().length() >= 100) {
-			System.out.println("Nome inserido de forma incorreta");
+		if(pessoa.getNome() == null // Não Nulo
+				|| pessoa.getNome().length() >= 150 // Tamanho Total
+				|| pessoa.getNome().matches(".*\\d.*") // Não pode Numeros
+				|| pessoa.getNome().split("\\s+").length < 2) // Tamanho mínimo de duas palavras
+		{
+			System.out.println("Nome inserido de forma incorreta.");
 			return null;
 		}
-		if(pessoa.getEndereco() == null) {
-			System.out.println("Endereço está vazio.");
+		
+		if(pessoa.getEndereco() == null 
+				|| pessoa.getEndereco().length() >= 100 
+				|| pessoa.getEndereco().matches(".*\\d.*")) {
+			System.out.println("Endereço inserido de forma incorreta.");
 			return null;
 		}
-		if(pessoa.getCep() == null) {
-			System.out.println("CEP está vazio.");
+		
+		if(pessoa.getCep() == null 
+				|| !pessoa.getCep().matches("\\d{5}-\\d{3}")) {
+			System.out.println("CEP inserido de forma incorreta.");
 			return null;
 		}
-		if(pessoa.getCidade() == null) {
-			System.out.println("Cidade está vazio.");
+		
+		if(pessoa.getCidade() == null 
+				|| pessoa.getCidade().length() >= 100 
+				|| pessoa.getCidade().matches(".*\\d.*")) {
+			System.out.println("Cidade inserido de forma incorreta.");
 			return null;
 		}
+		
 		if(pessoa.getUf() == null) {
-			System.out.println("Estado está vazio.");
+			System.out.println("Estado inserido de forma incorreta.");
 			return null;
 		}
-		try {
+
+		System.out.println("[" +
+				"Nome:" + 		pessoa.getNome() + 		"," +
+				" Endereço:" + 	pessoa.getEndereco() + 	"," +
+				" CEP:" + 		pessoa.getCep() + 		"," +
+				" Cidade:" + 	pessoa.getCidade() + 	"," +
+				" UF:" + 		pessoa.getUf() + 		"]");
 			return pessoaRepository.save(pessoa);
-		} catch (Exception e) {
-			System.out.println("Erro ao inserir pessoa " + 
-                    pessoa.toString() + ": " + e.getMessage());
-					return null;
-		}	
+	
 	}
 	
 	// ----- ENCONTRAR POR ID -----
@@ -57,8 +71,8 @@ public class PessoasService {
 	}
 	
 	// ----- LISTAGEM -----
-	public List<Pessoas> findAll(){
-		return pessoaRepository.findAll();
+	public List<Pessoas> findAll() {
+	    return pessoaRepository.findAll();
 	}
 	    
     
