@@ -7,7 +7,7 @@ public record MalaDiretaDto(Long id, String nome, String malaDireta ) {
     public MalaDiretaDto(Pessoas pessoa) {
     	this(	pessoa.getId(),
                 pessoa.getNome(),
-                pessoa.getEndereco() + ", Nº: " + pessoa.getNumero() + " – CEP: " + pessoa.getCep() + " – " + pessoa.getCidade() + "/" + pessoa.getOrderUf()
+                pessoa.getOrderLogradouro() + " " + pessoa.getEndereco() + ", Nº: " + pessoa.getNumero() + " – CEP: " + pessoa.getCep() + " – " + pessoa.getCidade() + " / " + pessoa.getOrderUf()
             );
     }
 

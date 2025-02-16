@@ -1,0 +1,86 @@
+package br.com.dnl.AppContatos.Dto;
+
+import io.swagger.v3.oas.annotations.media.Schema;
+
+public class PessoasDto {
+
+	@Schema(description = "Nome completo", example = "Daniel Silva de Almeida")
+    private String nome;
+    
+    @Schema(description = "Endereço da pessoa", example = "Rua Um")
+    private String endereco;
+    
+    @Schema(description = "Número da casa", example = "1")
+    private Integer numero;
+    
+    @Schema(description = "CEP do endereço", example = "01010-101")
+    private String cep;
+    
+    @Schema(description = "Cidade", example = "Osasco")
+    private String cidade;
+    
+    @Schema(description = "Unidade federativa (UF)", example = "SP")
+    private String uf;
+    
+    public PessoasDto() {}
+    
+    public PessoasDto(String nome, String endereco, Integer numero, String cep, String cidade, String uf) {
+        this.nome = nome;
+        this.endereco = endereco;
+        this.numero = numero;
+        this.cep = cep;
+        this.cidade = cidade;
+        this.uf = uf;
+    }
+    
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+
+    public Integer getNumero() {
+        return numero;
+    }
+
+    public void setNumero(Integer numero) {
+        this.numero = numero;
+    }
+
+    public String getCep() {
+        return cep;
+    }
+
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
+
+    public String getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
+    public String getUf() {
+        return uf;
+    }
+
+    public void setUf(String uf) {
+        this.uf = uf;
+    }
+
+    
+
+}

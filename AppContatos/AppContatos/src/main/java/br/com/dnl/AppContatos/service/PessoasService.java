@@ -27,6 +27,12 @@ public class PessoasService {
 			System.out.println("Nome inserido de forma inválida.");
 			return null;
 		}
+		
+		if(pessoa.getOrderLogradouro() == null ) // Caso não listado em ENUM - Logradouro = NULL
+		{
+			System.out.println("Tipo de Logradouro inserido de forma inválida.");
+			return null;
+		}
 
 		if(pessoa.getEndereco() == null // Não Nulo
 				|| pessoa.getEndereco().length() >= 100 // Tamanho máximo
@@ -64,12 +70,13 @@ public class PessoasService {
 		}
 		
 		System.out.println("[" +
-				"Nome:" + 		pessoa.getNome() + 		"," +
-				" Endereço:" + 	pessoa.getEndereco() + 	"," +
-				" Número:" + 	pessoa.getNumero() + 	"," +
-				" CEP:" + 		pessoa.getCep() + 		"," +
-				" Cidade:" + 	pessoa.getCidade() + 	"," +
-				" UF:" + 		pessoa.getOrderUf() + 	"]");
+				"Nome:" + 			pessoa.getNome() + 				"," +
+				" Tipo de Log:" + 	pessoa.getOrderLogradouro() + 	"," +
+				" Endereço:" + 		pessoa.getEndereco() + 			"," +
+				" Número:" + 		pessoa.getNumero() + 			"," +
+				" CEP:" + 			pessoa.getCep() + 				"," +
+				" Cidade:" + 		pessoa.getCidade() + 			"," +
+				" UF:" + 			pessoa.getOrderUf() + 			"]");
 		return pessoaRepository.save(pessoa);
 
 	}

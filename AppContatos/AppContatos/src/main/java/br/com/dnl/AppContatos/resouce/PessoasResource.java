@@ -141,7 +141,7 @@ public class PessoasResource {
     @GetMapping("/maladireta")
     @Operation(summary = "Listar todas informações de Mala direta")
     @ApiResponses({
-    @ApiResponse(responseCode = "204", description = "Sem conteúdo"),
+    @ApiResponse(responseCode = "404", description = "Sem conteúdo"),
     @ApiResponse(responseCode = "200", description = "Mala Direta encontrada")
     })	
     public ResponseEntity<List<MalaDiretaDto>> listarMalaDireta() {

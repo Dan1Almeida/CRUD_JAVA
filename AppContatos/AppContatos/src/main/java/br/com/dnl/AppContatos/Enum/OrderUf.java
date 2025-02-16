@@ -26,7 +26,7 @@ public enum OrderUf {
                 }
             }
         }
-        throw new IllegalArgumentException("UF inválida: " + uf);
+        throw new IllegalArgumentException();
     }
 
 

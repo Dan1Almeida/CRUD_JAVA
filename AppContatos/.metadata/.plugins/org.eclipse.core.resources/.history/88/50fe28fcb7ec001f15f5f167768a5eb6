@@ -1,0 +1,31 @@
+package br.com.dnl.AppContatos.Enum;
+
+public enum OrderLogradouro {
+	
+	RUA("RUA"),
+	AVENIDA("AVENIDA"),
+	ESTRADA("ESTRADA"),
+	TRAVESSA("TRAVESSA");
+	
+	private String TipoLog;
+
+	public String getTipoLog() {
+		return TipoLog;
+	}
+
+	public void setTipoLog(String tipoLog) {
+		TipoLog = tipoLog;
+	}
+	
+    public static OrderLogradouro fromString(String TipoLog) {
+        if (TipoLog != null) {
+            for (OrderUf Logradouro : OrderUf.values()) {
+                if (Logradouro.TipoLog.equalsIgnoreCase(TipoLog)) { 
+                    return Logradouro;
+                }
+            }
+        }
+        throw new IllegalArgumentException();
+    }
+	
+}

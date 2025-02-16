@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import br.com.dnl.AppContatos.Enum.OrderLogradouro;
 import br.com.dnl.AppContatos.Enum.OrderUf;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.CascadeType;
@@ -20,6 +21,7 @@ import jakarta.persistence.Table;
 
 
 @Entity
+
 @Table(name = "tb_pessoas")
 public class Pessoas {
 	
@@ -33,6 +35,11 @@ public class Pessoas {
 	@Column(nullable = false)  // Não Nulo 
 	@Schema(description = "Nome completo", example = "Daniel Silva de Almeida")
 	private String nome;
+	
+	@Column(nullable = false)
+	@Enumerated(EnumType.STRING)
+	@Schema(description = "Tipo de Logradouro", example = "RUA")
+	private OrderLogradouro orderLogradouro;
 	
 	@Column(nullable = false) 
 	@Schema(description = "Endereço da pessoa", example = "Rua Um")
@@ -64,9 +71,10 @@ public class Pessoas {
 	
 	public Pessoas() { }
 	
-	public Pessoas(Long id, String nome, String endereco,int numero, String cep, String cidade, OrderUf orderUf, List<Contatos> contato ) {
+	public Pessoas(Long id, String nome, OrderLogradouro orderLogradouro, String endereco,int numero, String cep, String cidade, OrderUf orderUf, List<Contatos> contato ) {
 		this.id = id;
 		this.nome = nome;
+		this.orderLogradouro = orderLogradouro;
 		this.endereco = endereco;
 		this.numero = numero;
 		this.cep = cep;
@@ -93,6 +101,8 @@ public class Pessoas {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+	
+
 	
 
 	public String getEndereco() {
@@ -144,6 +154,22 @@ public class Pessoas {
 	    } else {
 	        this.orderUf = null;
 	    }
+	}
+	
+	public String getOrderLogradouro() {
+		return (orderLogradouro != null) ? orderLogradouro.getTipoLog() : null;
+	}
+	
+	public void setOrderLogradouro(String TipoLog) {
+		if (TipoLog != null) {
+			try {
+				this.orderLogradouro = OrderLogradouro.valueOf(TipoLog.toUpperCase());
+			} catch (IllegalArgumentException e) {
+				this.orderLogradouro = null;
+			}
+		} else {
+			this.orderLogradouro = null;
+		}
 	}
 	
 	public List<Contatos> getContato() {
