@@ -57,9 +57,11 @@ public class PessoasService {
 			return null;
 		}
 		
-		
-		// ESTADO EM ESTRUTURA DE ENUM
-		
+		if(pessoa.getOrderUf() == null ) // Caso não listado em ENUM - uf = NULL
+		{
+			System.out.println("Estado inserido de forma inválida.");
+			return null;
+		}
 		
 		System.out.println("[" +
 				"Nome:" + 		pessoa.getNome() + 		"," +
@@ -74,7 +76,7 @@ public class PessoasService {
 	
 	// ----- ENCONTRAR POR ID -----
 	public Optional<Pessoas> findById(Long id){
-		System.out.println("Id " + "[" + id +"]"+ " Encontrado com sucesso");
+		System.out.println("Id: " + "[" + id +"]"+ " Encontrado com sucesso");
 		return pessoaRepository.findById(id); 
 	}
 	
@@ -94,6 +96,7 @@ public class PessoasService {
 	                || pessoa.getNome().length() >= 150 
 	                || pessoa.getNome().matches(".*\\d.*") 
 	                || pessoa.getNome().split("\\s+").length < 2) {
+	        	System.out.println("Nome inserido de forma inválida.");
 	            return null;
 	        }
 	        updPessoa.setNome(pessoa.getNome());
@@ -101,18 +104,21 @@ public class PessoasService {
 	        if (pessoa.getEndereco() == null 
 	                || pessoa.getEndereco().length() >= 100 
 	                || pessoa.getEndereco().matches(".*\\d.*")) {
+	        	System.out.println("Endereço inserido de forma inválida.");
 	            return null;
 	        }
 	        updPessoa.setEndereco(pessoa.getEndereco());
 	        
 			if(pessoa.getNumero() == null 
 					|| pessoa.getNumero() < 0) {
+				System.out.println("Numero inserido de forma inválida.");
 				return null;
 			}
 			updPessoa.setNumero(pessoa.getNumero());
 	        
 	        if (pessoa.getCep() == null 
 	                || !pessoa.getCep().matches("\\d{5}-\\d{3}")) {
+	        	System.out.println("CEP inserido de forma inválida.");
 	            return null;
 	        }
 	        updPessoa.setCep(pessoa.getCep());
@@ -120,6 +126,7 @@ public class PessoasService {
 	        if (pessoa.getCidade() == null 
 	                || pessoa.getCidade().length() >= 35 
 	                || pessoa.getCidade().matches(".*\\d.*")) {
+	        	System.out.println("Cidade inserido de forma inválida.");
 	            return null;
 	        }
 	        updPessoa.setCidade(pessoa.getCidade());
@@ -130,11 +137,11 @@ public class PessoasService {
 	        }
 	        updPessoa.setOrderUf(pessoa.getOrderUf());
 
-	        System.out.println("Id " + "[" + id + "]" + " Atualizado com sucesso");
+	        System.out.println("Id: " + "[" + id + "]" + " Atualizado com sucesso");
 	        return pessoaRepository.save(updPessoa); 
 	    }
 
-	    System.out.println("Pessoa com ID " + "[" + id + "]" + " não encontrada. Criando uma nova pessoa.");
+	    System.out.println("Id: " + "[" + id + "]" + " não encontrada. Criando uma nova pessoa.");
 	    return pessoaRepository.save(pessoa);         
 	}
 	

@@ -17,8 +17,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
 
 
 @Entity
@@ -33,8 +31,6 @@ public class Pessoas {
 	
 	
 	@Column(nullable = false)  // Não Nulo 
-	@Size(max = 150) // Tamanho máximo
-	@Pattern(regexp = "^(?=[A-Za-zÀ-ÿ\\s]+$).*(\\s).*$") // Apenas Letras e pelo menos 2 palavras
 	@Schema(description = "Nome completo", example = "Daniel Silva de Almeida")
 	private String nome;
 	
@@ -51,7 +47,7 @@ public class Pessoas {
 	private String cep;
 	
 	@Column(nullable = false) 
-	@Schema(description = "Cidade", example = "São Paulo")
+	@Schema(description = "Cidade", example = "Osasco")
 	private String cidade;
 	
 	@Column(nullable = false)
@@ -60,11 +56,11 @@ public class Pessoas {
     private OrderUf orderUf;
 	
 	@OneToMany(mappedBy = "pessoa", cascade = CascadeType.ALL)
-	@JsonManagedReference
+	@JsonManagedReference // Interromper Serialização
 	@Schema(hidden = true)
 	private List<Contatos> contato;
 	
-	// ----- ENTIDADES -----
+	// ----- CONSTRUTOR  -----
 	
 	public Pessoas() { }
 	
@@ -134,13 +130,21 @@ public class Pessoas {
 	}
 	
 
-    public OrderUf getOrderUf() {
-        return orderUf;
-    }
+	public String getOrderUf() {
+	    return (orderUf != null) ? orderUf.getUf() : null;
+	}
 
-    public void setOrderUf(OrderUf orderUf) {
-        this.orderUf = orderUf;
-    }
+	public void setOrderUf(String uf) {
+	    if (uf != null) {
+	        try {
+	            this.orderUf = OrderUf.valueOf(uf.toUpperCase()); 
+	        } catch (IllegalArgumentException e) {
+	            this.orderUf = null; 
+	        }
+	    } else {
+	        this.orderUf = null;
+	    }
+	}
 	
 	public List<Contatos> getContato() {
 		return contato;

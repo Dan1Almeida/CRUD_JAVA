@@ -35,7 +35,7 @@ public class Contatos {
 	
 	@ManyToOne
 	@JoinColumn(name = "pessoa_id", referencedColumnName = "id")
-	@JsonBackReference
+	@JsonBackReference // Interromper Serialização
 	private Pessoas pessoa;
 
 

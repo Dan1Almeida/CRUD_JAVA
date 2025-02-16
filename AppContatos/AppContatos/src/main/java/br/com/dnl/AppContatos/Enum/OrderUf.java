@@ -18,15 +18,19 @@ public enum OrderUf {
         return uf;
     }
     
-    public static boolean ispresent(String uf) {
-        uf = uf.toUpperCase();  
-        for (OrderUf estado : OrderUf.values()) {
-            if (estado.getUf().equals(uf)) {  
-                return true;  
+    public static OrderUf fromString(String uf) {
+        if (uf != null) {
+            for (OrderUf estado : OrderUf.values()) {
+                if (estado.uf.equalsIgnoreCase(uf)) { 
+                    return estado;
+                }
             }
         }
-        return false;      
+        throw new IllegalArgumentException("UF inválida: " + uf);
     }
+
+
+
    
 }
 
