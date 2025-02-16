@@ -5,10 +5,9 @@ import br.com.dnl.AppContatos.model.Pessoas;
 public record MalaDiretaDto(Long id, String nome, String malaDireta ) {
 	
     public MalaDiretaDto(Pessoas pessoa) {
-    	this(
-                pessoa.getId(),
+    	this(	pessoa.getId(),
                 pessoa.getNome(),
-                pessoa.getEndereco() + " – CEP: " + pessoa.getCep() + " – " + pessoa.getCidade() + "/" + pessoa.getUf()
+                pessoa.getEndereco() + "," + pessoa.getNumero() + " – CEP: " + pessoa.getCep() + " – " + pessoa.getCidade() + "/" + pessoa.getOrderUf()
             );
     }
 

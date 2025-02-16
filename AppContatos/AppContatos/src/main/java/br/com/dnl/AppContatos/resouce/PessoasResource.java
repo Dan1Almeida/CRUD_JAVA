@@ -85,7 +85,7 @@ public class PessoasResource {
 	}
 	
 	
-	// ----- ATUALIZAR ----- // COLOCAR BAD REQUEST E NÃO ENCONTRADO
+	// ----- ATUALIZAR ----- 
 	
 	@PutMapping("/{id}") //PUT http://localhost:8080/api/pessoas/{id}
 	@Operation(summary = "Atualizar atributo de uma pessoa")

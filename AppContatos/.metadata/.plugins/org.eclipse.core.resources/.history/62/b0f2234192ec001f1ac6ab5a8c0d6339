@@ -1,0 +1,20 @@
+package br.com.dnl.AppContatosValidator;
+
+private boolean TipoValidator(Integer orderTipo, String contato) {
+	if (orderTipo == null || contato == null) {
+        return false;
+    }
+
+    switch (orderTipo) {
+        case 1: // Validação para número de celular (formato brasileiro)
+            return contato.matches("\\(\\d{2}\\) \\d{5}-\\d{4}");
+        
+        case 2: // Validação para e-mail
+            return contato.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$");
+
+        default:
+            return false; // Tipo não reconhecido
+    }
+}
+
+}

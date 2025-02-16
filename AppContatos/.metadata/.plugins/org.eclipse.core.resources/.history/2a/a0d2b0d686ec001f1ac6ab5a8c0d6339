@@ -1,0 +1,33 @@
+package br.com.dnl.AppContatos.Enum;
+
+
+public enum OrderUf {
+    
+    AC("AC"), AL("AL"), AP("AP"), AM("AM"), BA("BA"), CE("CE"), DF("DF"), ES("ES"), GO("GO"), MA("MA"), 
+    MT("MT"), MS("MS"), MG("MG"), PA("PA"), PB("PB"), PR("PR"), PE("PE"), PI("PI"), RJ("RJ"), RN("RN"), 
+    RS("RS"), RO("RO"), RR("RR"), SC("SC"), SP("SP"), SE("SE"), TO("TO");
+
+    private  String uf,
+    UF = uf.toUpperCase(); 
+
+       
+    OrderUf(String uf) {
+        this.UF = uf;
+    }
+
+    public String getUf() {
+        return UF;
+    }
+    
+    public static boolean ispresent(String UF) {
+        for (OrderUf estado : OrderUf.values()) {
+            if (estado.getUf().equals(UF)) {  
+                return true;  
+            }
+        }
+        return false;      
+    }
+   
+}
+
+   

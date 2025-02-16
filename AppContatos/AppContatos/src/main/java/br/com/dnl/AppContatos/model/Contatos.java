@@ -39,7 +39,7 @@ public class Contatos {
 	private Pessoas pessoa;
 
 
-	// ----- ENTIDADE -----
+	// ----- CONSTRUTOR -----
 	
 	public Contatos() {}
 	
@@ -49,7 +49,6 @@ public class Contatos {
 		this.contato = contato;
 		this.pessoa = pessoa;
 	}
-	
 	
 	// ----- GET e SET -----
 
@@ -66,7 +65,9 @@ public class Contatos {
 	}
 
 	public void setOrderTipo(OrderTipo orderTipo) {
-		this.orderTipo = orderTipo.getTipo();
+		if (orderTipo != null) {
+			this.orderTipo = orderTipo.getTipo();
+		}
 	}
 
 	public String getContato() {

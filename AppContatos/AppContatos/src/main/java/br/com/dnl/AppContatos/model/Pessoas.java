@@ -5,15 +5,20 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import br.com.dnl.AppContatos.Enum.OrderUf;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 
 @Entity
@@ -27,13 +32,19 @@ public class Pessoas {
 	private Long id;
 	
 	
-	@Column(nullable = false) 
+	@Column(nullable = false)  // Não Nulo 
+	@Size(max = 150) // Tamanho máximo
+	@Pattern(regexp = "^(?=[A-Za-zÀ-ÿ\\s]+$).*(\\s).*$") // Apenas Letras e pelo menos 2 palavras
 	@Schema(description = "Nome completo", example = "Daniel Silva de Almeida")
 	private String nome;
 	
 	@Column(nullable = false) 
 	@Schema(description = "Endereço da pessoa", example = "Rua Um")
 	private String endereco;
+	
+	@Column(nullable = false) 
+	@Schema(description = "Número da casa", example = "1")
+	private Integer numero;
 	
 	@Column(nullable = false) 
 	@Schema(description = "CEP do endereço", example = "01010-101")
@@ -44,8 +55,9 @@ public class Pessoas {
 	private String cidade;
 	
 	@Column(nullable = false)
+	@Enumerated(EnumType.STRING)
 	@Schema(description = "Unidade federativa (UF)", example = "SP")
-	private String uf;
+    private OrderUf orderUf;
 	
 	@OneToMany(mappedBy = "pessoa", cascade = CascadeType.ALL)
 	@JsonManagedReference
@@ -56,13 +68,14 @@ public class Pessoas {
 	
 	public Pessoas() { }
 	
-	public Pessoas(Long id, String nome, String endereco, String cep, String cidade, String uf, List<Contatos> contato ) {
+	public Pessoas(Long id, String nome, String endereco,int numero, String cep, String cidade, OrderUf orderUf, List<Contatos> contato ) {
 		this.id = id;
 		this.nome = nome;
 		this.endereco = endereco;
+		this.numero = numero;
 		this.cep = cep;
 		this.cidade = cidade;
-		this.uf = uf;
+		this.orderUf = orderUf;
 		this.contato = contato;
 	}
 	
@@ -93,7 +106,15 @@ public class Pessoas {
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
 	}
-	
+		
+
+	public Integer getNumero() {
+		return numero;
+	}
+
+	public void setNumero(Integer numero) {
+		this.numero = numero;
+	}
 
 	public String getCep() {
 		return cep;
@@ -113,14 +134,13 @@ public class Pessoas {
 	}
 	
 
-	public String getUf() {
-		return uf;
-	}
+    public OrderUf getOrderUf() {
+        return orderUf;
+    }
 
-	public void setUf(String uf) {
-		this.uf = uf;
-	}
-	
+    public void setOrderUf(OrderUf orderUf) {
+        this.orderUf = orderUf;
+    }
 	
 	public List<Contatos> getContato() {
 		return contato;
@@ -128,6 +148,6 @@ public class Pessoas {
 
 	public void setContato(List<Contatos> contato) {
 		this.contato = contato;
-	}	
-		
+	}
+
 }

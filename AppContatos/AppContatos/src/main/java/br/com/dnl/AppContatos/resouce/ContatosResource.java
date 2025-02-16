@@ -28,26 +28,26 @@ public class ContatosResource {
 	
 	@Autowired
 	private ContatosService contatoService;
-	
+		
 	// ----- SALVAR CONTATO -----
 	
 	@PostMapping //POST http://localhost:8080/api/contatos
-	@Operation(summary = "Salvar um contato de uma pessoa")
+	@Operation(summary = "Gravar um contato de uma pessoa")
 	@ApiResponses({
+		@ApiResponse(responseCode = "404", description = "Pessoa não encontrada"),
 		@ApiResponse(responseCode = "400", description = "Erro ao cadastrar Contato"),
 		@ApiResponse(responseCode = "201", description = "Contato cadastrado com sucesso")
 	})
-
 	public ResponseEntity<Contatos> save(@RequestBody Contatos contato) {
+		if (contato.getPessoa() == null ) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+		}	
 		Contatos newContato = contatoService.save(contato);
-    
 		if (newContato == null) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build(); 
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 		}
-    
-		return ResponseEntity.status(HttpStatus.CREATED).body(newContato); 
-		}
-
+		return ResponseEntity.status(HttpStatus.CREATED).body(newContato);
+	}
 	
 	// ----- ENCONTRAR POR ID -----
 	
@@ -56,17 +56,16 @@ public class ContatosResource {
 	@ApiResponses({
 		@ApiResponse(responseCode = "404", description = "Contato não encontrada"),
 		@ApiResponse(responseCode = "200", description = "Contato encontrado")
-    	})
+	})
 	public ResponseEntity<Optional<Contatos>> findById(@PathVariable Long id) {
 		Optional<Contatos> findContato = contatoService.findById(id);
-    
+
 		if (findContato.isEmpty()) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build(); // 404
-			}
+		}
 
-			return ResponseEntity.status(HttpStatus.OK).body(findContato); // 200
-			}
-	
+		return ResponseEntity.status(HttpStatus.OK).body(findContato); // 200
+	}
 	
 	// ----- LISTAGEM -----
 	
@@ -75,16 +74,16 @@ public class ContatosResource {
 	@ApiResponses({
 		@ApiResponse(responseCode = "404", description = "Contato não encontrado"),
 		@ApiResponse(responseCode = "200", description = "Contato deletado")
-    	})
+	})
 	public ResponseEntity<List<Contatos>> findAll() {
 		List<Contatos> findContato = contatoService.findAll();
-    
+
 		if (findContato.isEmpty()) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build(); 
-			}
+		}
 
-			return ResponseEntity.status(HttpStatus.OK).body(findContato); 
-			}
+		return ResponseEntity.status(HttpStatus.OK).body(findContato); 
+	}
 
 	
 	// ------ CONTATOS POR PESSOA -----
@@ -92,43 +91,43 @@ public class ContatosResource {
 	@GetMapping("/pessoas/{idPessoa}") // GET http://localhost:8080/api/contatos/pessoa/1
 	@Operation(summary = "Listar contatos de uma pessoa por ID")
 	@ApiResponses({
-		@ApiResponse(responseCode = "200", description = "Contato por pessoa encontrado"),
-		@ApiResponse(responseCode = "404", description = "Contato por pessoa não encontrada")
-		})
+		@ApiResponse(responseCode = "200", description = "Pessoa encontrado"),
+		@ApiResponse(responseCode = "404", description = "Pessoa não encontrada")
+	})
 
 	public ResponseEntity<List<Contatos>> listarContatos(@PathVariable Long idPessoa) {
 		List<Contatos> contato = contatoService.listarContatosPorPessoa(idPessoa);
-    
+
 		if (contato.isEmpty()) {
 			return ResponseEntity.status(HttpStatus.NO_CONTENT).build(); 
-			}
-    
-			return ResponseEntity.status(HttpStatus.OK).body(contato);
-			}
+		}
+
+		return ResponseEntity.status(HttpStatus.OK).body(contato);
+	}
 	 
-	// ----- ATUALIZAR ----- // COLOCAR BAD REQUEST E NÃO ENCONTRADO
+	// ----- ATUALIZAR ----- // 
 	
 	@PutMapping("/{id}") // PUT http://localhost:8080/api/contatos/1
 	@Operation(summary = "Atualizar um contato existente")
 	@ApiResponses({
-		@ApiResponse(responseCode = "404", description = "Contato não encontrato"),
-		@ApiResponse(responseCode = "400", description = "Atualização não aceita"),
-		@ApiResponse(responseCode = "200", description = "Contato atualizado")
-    	})
+	    @ApiResponse(responseCode = "404", description = "Contato não encontrado"),
+	    @ApiResponse(responseCode = "400", description = "Atualização não aceita"),
+	    @ApiResponse(responseCode = "200", description = "Contato atualizado")
+	})
 	public ResponseEntity<Contatos> update(@PathVariable Long id, @RequestBody Contatos contato) {
-		
-		Optional<Contatos> Contato = contatoService.findById(id);
-	    if (Contato == null) {
-	        return ResponseEntity.status(HttpStatus.NOT_FOUND).build(); 
-	    }
-    
-	    Contatos updContato = contatoService.update(id, contato);
-	    
-	    if (updContato == null) {
-	        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build(); 
+
+	    Optional<Contatos> contatoExistente = contatoService.findById(id);
+	    if (contatoExistente.isEmpty()) {
+	        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 	    }
 
-	    return ResponseEntity.ok(updContato);
+	    Contatos updContato = contatoService.update(id, contato);
+
+	    if (updContato == null) {
+	        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+	    }
+
+	    return ResponseEntity.status(HttpStatus.OK).body(updContato);
 	}
 	
 	// ----- DELETAR -----
@@ -140,6 +139,6 @@ public class ContatosResource {
 	public ResponseEntity<?> delete(@PathVariable Long id){
 		contatoService.delete(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);	
-		}
+	}
 
 }

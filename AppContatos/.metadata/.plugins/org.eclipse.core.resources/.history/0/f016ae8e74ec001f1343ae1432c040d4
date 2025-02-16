@@ -1,0 +1,33 @@
+package br.com.dnl.AppContatos.Enum;
+
+
+public enum OrderUf {
+	
+    AC("AC"), AL("AL"), AP("AP"), AM("AM"), BA("BA"), CE("CE"), DF("DF"), ES("ES"), GO("GO"), MA("MA"), 
+    MT("MT"), MS("MS"), MG("MG"), PA("PA"), PB("PB"), PR("PR"), PE("PE"), PI("PI"), RJ("RJ"), RN("RN"), 
+    RS("RS"), RO("RO"), RR("RR"), SC("SC"), SP("SP"), SE("SE"), TO("TO");
+
+    private final String uf;
+
+    OrderUf(String uf) {
+        this.uf = uf;
+    }
+
+    public String getUf() {
+        return uf;
+    }
+
+    // Método para validar se o UF está na lista de valores do enum
+    public static void validarUf(String uf) {
+        boolean isValid = false;
+
+        // Verifica se o valor fornecido está presente no enum
+        for (OrderUf orderUf : OrderUf.values()) {
+            if (orderUf.getUf().equalsIgnoreCase(uf)) {
+                isValid = true;
+                break;
+            }
+        }
+
+    }
+   }

@@ -1,5 +1,0 @@
-package br.com.dnl.AppContatos.Enum;
-
-public enum OrderUf {
-
-}

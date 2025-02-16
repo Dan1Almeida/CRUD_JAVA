@@ -1,0 +1,26 @@
+spring.application.name=AppContatos
+
+spring.h2.console.enabled=true
+spring.h2.console.path=/h2-console
+spring.jpa.database-plataform=org.hibernate.dialect.H2Dialect
+spring.jpa.show-sql=true
+spring.jpa.hibernate.ddl-auto=update
+spring.datasource.url=jdbc:h2:mem:pessoas
+spring.datasource.username=sa
+spring.datasource.password=
+
+
+# Para desativar as saídas de SQL no console
+spring.h2.console.enabled=true
+logging.level.org.h2.Driver=OFF
+
+
+# Para desabilitar o log de SQL do Hibernate no H2
+spring.jpa.show-sql=false
+spring.jpa.properties.hibernate.format_sql=false
+logging.level.org.hibernate.SQL=OFF
+logging.level.org.hibernate.type.descriptor.sql=OFF
+
+logging.level.org.h2.Driver=OFF
+logging.level.org.hibernate.SQL=OFF
+logging.level.org.hibernate.type.descriptor.sql=OFF
