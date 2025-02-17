@@ -73,7 +73,7 @@ public class ContatosService {
 			}
 
 			contato.setPessoa(findPessoa.get());
-			System.out.println("[" +
+			System.out.println("Contato Criado com sucesso [" +
 					"Tipo:" + 		contato.getOrderTipo() 	+ "," +
 					" Contato:" + 	contato.getContato() 	+ "]");
 
@@ -87,7 +87,6 @@ public class ContatosService {
 
 	// ----- ENCONTRAR POR ID -----
 	public Optional<Contatos> findById(Long id){
-		System.out.println("Id " + "[" + id +"]"+ " Encontrado com sucesso");
 		return contatoRepository.findById(id);
 	}
 	
@@ -98,7 +97,6 @@ public class ContatosService {
 	
 	// ------ CONTATOS POR PESSOA -----
     public List<Contatos> listarContatosPorPessoa(Long idPessoa) {
-    	System.out.println("Id " + "[" + idPessoa +"]"+ " Encontrado com sucesso");
         return contatoRepository.findByPessoaId(idPessoa);
     }
 	
@@ -164,11 +162,10 @@ public class ContatosService {
 
         updContato.setContato(contato.getContato());
         updContato.setOrderTipo(contato.getOrderTipo());
-        System.out.println("[" +
+        System.out.println("Contato atualizado com sucesso [" +
                 "Tipo:" + 		contato.getOrderTipo() 	+ "," +
                 " Contato:" + 	contato.getContato() 	+ "]");
 
-		System.out.println("Id: " + "[" + id + "]" + " Atualizado com sucesso");
         return contatoRepository.save(updContato);
     }
 	

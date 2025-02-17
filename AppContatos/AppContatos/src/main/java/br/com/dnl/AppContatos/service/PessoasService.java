@@ -69,7 +69,7 @@ public class PessoasService {
 			return null;
 		}
 		
-		System.out.println("[" +
+		System.out.println("Pessoa gravada com sucesso [" +
 				"Nome:" + 			pessoa.getNome() + 				"," +
 				" Tipo de Log:" + 	pessoa.getOrderLogradouro() + 	"," +
 				" Endereço:" + 		pessoa.getEndereco() + 			"," +
@@ -83,7 +83,6 @@ public class PessoasService {
 	
 	// ----- ENCONTRAR POR ID -----
 	public Optional<Pessoas> findById(Long id){
-		System.out.println("Id: " + "[" + id +"]"+ " Encontrado com sucesso");
 		return pessoaRepository.findById(id); 
 	}
 	
@@ -107,6 +106,14 @@ public class PessoasService {
 	            return null;
 	        }
 	        updPessoa.setNome(pessoa.getNome());
+	        
+			if(pessoa.getOrderLogradouro() == null ) // Caso não listado em ENUM - Logradouro = NULL
+			{
+				System.out.println("Tipo de Logradouro inserido de forma inválida.");
+				return null;
+			}
+			updPessoa.setOrderLogradouro(pessoa.getOrderLogradouro());
+
 
 	        if (pessoa.getEndereco() == null 
 	                || pessoa.getEndereco().length() >= 100 
@@ -143,12 +150,24 @@ public class PessoasService {
 	        	return null;
 	        }
 	        updPessoa.setOrderUf(pessoa.getOrderUf());
-
-	        System.out.println("Id: " + "[" + id + "]" + " Atualizado com sucesso");
+			System.out.println("Pessoa atualizada com sucesso [" +
+					"Nome:" + 			pessoa.getNome() + 				"," +
+					" Tipo de Log:" + 	pessoa.getOrderLogradouro() + 	"," +
+					" Endereço:" + 		pessoa.getEndereco() + 			"," +
+					" Número:" + 		pessoa.getNumero() + 			"," +
+					" CEP:" + 			pessoa.getCep() + 				"," +
+					" Cidade:" + 		pessoa.getCidade() + 			"," +
+					" UF:" + 			pessoa.getOrderUf() + 			"]");
 	        return pessoaRepository.save(updPessoa); 
 	    }
-
-	    System.out.println("Id: " + "[" + id + "]" + " não encontrada. Criando uma nova pessoa.");
+		System.out.println("ID não encontrado, Pessoa gravada com sucesso [" +
+				"Nome:" + 			pessoa.getNome() + 				"," +
+				" Tipo de Log:" + 	pessoa.getOrderLogradouro() + 	"," +
+				" Endereço:" + 		pessoa.getEndereco() + 			"," +
+				" Número:" + 		pessoa.getNumero() + 			"," +
+				" CEP:" + 			pessoa.getCep() + 				"," +
+				" Cidade:" + 		pessoa.getCidade() + 			"," +
+				" UF:" + 			pessoa.getOrderUf() + 			"]");
 	    return pessoaRepository.save(pessoa);         
 	}
 	

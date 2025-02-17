@@ -1,0 +1,179 @@
+package br.com.dnl.AppContatos.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import br.com.dnl.AppContatos.model.Contatos;
+import br.com.dnl.AppContatos.model.Pessoas;
+import br.com.dnl.AppContatos.repository.ContatosRepository;
+import br.com.dnl.AppContatos.repository.PessoasRepository;
+
+@Service
+public class ContatosService {
+	
+	@Autowired
+	private ContatosRepository contatoRepository;	
+
+	@Autowired
+	private PessoasRepository pessoaRepository;
+	
+	// ----- SALVAR CONTATO -----
+	public Contatos save(Contatos contato) {		
+	    
+		if (contato.getPessoa().getId() != null) {
+    
+			Optional<Pessoas> findPessoa = pessoaRepository.findById(contato.getPessoa().getId());
+			if (findPessoa.isEmpty()) {
+				System.out.println("Pessoa não encontrada");
+				return null;
+			}
+
+			switch (contato.getOrderTipo()) {
+				case Residencial:
+				case celular:
+				case whatsapp:
+					if (!contato.getContato().matches("\\(\\d{2}\\) \\d{5}-\\d{4}")) // (00) 00000-0000
+					{
+						System.out.println("Número inserido de forma inválida.");
+						return null;
+					}
+					break;
+        
+				case email_pessoal:
+				case email_profissional:
+					if (!contato.getContato().matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.com$"))  // daniel.dnlsilva@hotmail.com
+					{
+						System.out.println("E-mail inserido de forma inválida.");
+						return null;
+					}
+					break;
+    
+				case linkedin:
+					if (!contato.getContato().matches("^(https?:\\/\\/)?(www\\.)?linkedin\\.com\\/.*$")) // https://www.linkedin.com/in/daniel-silva-almeida/
+					{
+						System.out.println("Linkedin inserido de forma inválida.");
+						return null;
+					}
+					break;
+    
+				case XboxLive:
+				case PSN:
+					if (!contato.getContato().matches("^[A-Za-z0-9_ ]{3,15}$")) // Gamer1234
+					{
+						System.out.println("Gamertag/ID inserido de forma inválida");
+						return null;
+					}
+					break;    
+
+				default:
+					return null;
+			}
+
+			contato.setPessoa(findPessoa.get());
+			System.out.println("Contato Criado com sucesso [" +
+					" Tipo:" + 		contato.getOrderTipo() 	+ "," +
+					" Contato:" + 	contato.getContato() 	+ "]");
+
+
+			return contatoRepository.save(contato);
+    
+		} else {
+			return null;
+		}		
+	}
+
+	// ----- ENCONTRAR POR ID -----
+	public Optional<Contatos> findById(Long id){
+		return contatoRepository.findById(id);
+	}
+	
+	// ----- LISTAGEM -----
+	public List<Contatos> findAll(){
+		return contatoRepository.findAll();
+	}
+	
+	// ------ CONTATOS POR PESSOA -----
+    public List<Contatos> listarContatosPorPessoa(Long idPessoa) {
+        return contatoRepository.findByPessoaId(idPessoa);
+    }
+	
+	
+	// ----- ATUALIZAR ----- 
+    public Contatos update(Long id, Contatos contato) {
+
+        Optional<Contatos> findContato = contatoRepository.findById(id);
+
+        if (findContato.isEmpty()) {
+            System.out.println("Contato não encontrado.");
+            return null;
+        }
+
+        Contatos updContato = findContato.get();
+
+        if (contato.getPessoa() != null && contato.getPessoa().getId() != null) {
+            Optional<Pessoas> findPessoa = pessoaRepository.findById(contato.getPessoa().getId());
+
+            if (findPessoa.isEmpty()) {
+                System.out.println("Pessoa não encontrada.");
+                return null;
+            }
+            updContato.setPessoa(findPessoa.get());
+        }
+
+        switch (contato.getOrderTipo()) {
+            case Residencial:
+            case celular:
+            case whatsapp:
+                if (!contato.getContato().matches("\\(\\d{2}\\) \\d{5}-\\d{4}")) {
+                    System.out.println("Número inserido de forma inválida.");
+                    return null;
+                }
+                break;
+
+            case email_pessoal:
+            case email_profissional:
+                if (!contato.getContato().matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.com$")) {
+                    System.out.println("E-mail inserido de forma inválida.");
+                    return null;
+                }
+                break;
+
+            case linkedin:
+                if (!contato.getContato().matches("^(https?:\\/\\/)?(www\\.)?linkedin\\.com\\/.*$")) {
+                    System.out.println("Linkedin inserido de forma inválida.");
+                    return null;
+                }
+                break;
+
+            case XboxLive:
+            case PSN:
+                if (!contato.getContato().matches("^[A-Za-z0-9_ ]{3,15}$")) {
+                    System.out.println("Gamertag/ID inserido de forma inválida.");
+                    return null;
+                }
+                break;
+
+            default:
+                return null;
+        }
+
+        updContato.setContato(contato.getContato());
+        updContato.setOrderTipo(contato.getOrderTipo());
+        System.out.println("Contato atualizaod com sucesso [" +
+                "Tipo:" + 		contato.getOrderTipo() 	+ "," +
+                " Contato:" + 	contato.getContato() 	+ "]");
+
+        return contatoRepository.save(updContato);
+    }
+	
+	// ----- DELETAR -----
+	
+	public void delete(Long id) {
+		System.out.println("Id: " + "[" + id +"]"+ " Deletado com sucesso");
+		contatoRepository.deleteById(id);
+	}
+	
+}
