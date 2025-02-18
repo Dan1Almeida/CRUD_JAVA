@@ -101,7 +101,7 @@ spring.jpa.hibernate.ddl-auto=update
 ### 4.1 Pessoas :bust_in_silhouette:
 :new: **POST pessoa - save**  `<http://localhost:8080/api/pessoas>` 
 
-**--> Gravar** uma nova pessoa.
+**--> Grava** uma nova pessoa.
 
 ```java
 	{
