@@ -13,7 +13,7 @@
 5. [Métodos de validação de atributos](#métodos-de-validação-de-atributos)
 6. [Listas ENUM](#listas-enum)
 
-## 1. Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
 Projeto Maven gerado em Start.spring.io
 
@@ -47,7 +47,7 @@ https://start.spring.io/
 	</dependency>
 ```
 
-##  2. Métodos de aplicação 
+## Métodos de aplicação
 
 - Porta utilizada para a inicialização do projeto
 ```
@@ -69,14 +69,14 @@ http://localhost:8080/h2-console
   
 - Utilizado o método para atualizar automaticamente o esquema do banco de dados com a seguinte linha `<spring.jpa.hibernate.ddl-auto=update>`
 
-## 3. Métodos de utilização de projeto
+## Métodos de utilização de projeto
   > Durante o desenvolvimento do projeto, foram utilizados dois métodos para testes de funcionamento de projeto e nos métodos endpoints requeridos.
   
 **3.1 Swagger:** Presente com todos os endpoints do projeto, devendo alterar alguns padrões de métodos de entradas em POST e PUT.
   
 **3.2 Postman:** Na pasta raiz com o nome "PostAppContatos" se encontra o arquivo para utilizar no programa, nele já está presente todos os endpoints com todos os exemplos de entradas de dados.
 
-## 4. Endpoints e métodos de entradas
+## Endpoints e métodos de entradas
 
 ### 4.1 Pessoas
 :new: **POST pessoa - save**  `<http://localhost:8080/api/pessoas>` 
@@ -179,7 +179,7 @@ http://localhost:8080/h2-console
 
 **--> Lista** todos contatos de uma **Pessoa.**
 
-## 5. Métodos de validação de atributos
+## Métodos de validação de atributos
 
 > Para garantir o melhor controle no tratamento de dados que o projeto recebe, foram implantadas validações em todos os atributos para que, assim, os dados que serão alocados no banco de dados seja apenas o correspondente com sua finalidade.
 
@@ -232,7 +232,7 @@ http://localhost:8080/h2-console
    		> Exemplos: Gamer1234 | 1234Gamer
 
 
-## 6. Listas ENUM
+## Listas ENUM
   > Para controle de dados inseridos em campos com um número definido de escolhas, foram feitas lista de Enum, segue abaixo os campos.
 
 ### 6.1 Tipo de Logradouro (OrderLogradouro): 
