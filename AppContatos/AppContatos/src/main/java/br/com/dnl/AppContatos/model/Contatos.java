@@ -16,6 +16,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
+@Schema(description = "Entidade que representa o contato de uma pessoa")
 @Table (name = "tb_contatos")
 public class Contatos {
 	
@@ -23,14 +24,16 @@ public class Contatos {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Schema(description = "Identificador da contato dentro do sistema")
 	private Long id;
 	
 	@Column(nullable = false)
-	@Schema(description = "Tipo do contato (Ex: telefone_residencial, celular, etc.)", example = "1")
+	@Schema(description = "1-Residencial | 2-Celular | 3-Tel-Profissional | 4-E-mail "
+						+ "| 5-E-mail Profissional | 6-Linkedin | 6-Xbox Live | 6-PSN ", example = "1")
 	private Integer orderTipo;
 		
 	@Column(nullable = false, unique = true)
-    @Schema(description = "Contato", example = "(11) 99999-9999")
+    @Schema(description = "Residencial", example = "(11) 1010-1010")
 	private String contato;
 	
 	
@@ -38,6 +41,7 @@ public class Contatos {
 	@JoinColumn(name = "pessoa_id", referencedColumnName = "id")
 	@JsonIgnoreProperties("contatos")
 	@JsonBackReference 
+	@Schema(description = "Pessoa que está associado ao contato")
 	private Pessoas pessoa;
 
 
@@ -61,6 +65,8 @@ public class Contatos {
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
+	// -------------------------------	
 
 	public OrderTipo getOrderTipo() {
 		return OrderTipo.valueOf(orderTipo);
@@ -71,6 +77,8 @@ public class Contatos {
 			this.orderTipo = orderTipo.getTipo();
 		}
 	}
+	
+	// -------------------------------	
 
 	public String getContato() {
 		return contato;
@@ -79,6 +87,8 @@ public class Contatos {
 	public void setContato(String contato) {
 		this.contato = contato;
 	}
+	
+	// -------------------------------	
 
 	public Pessoas getPessoa() {
 		return pessoa;

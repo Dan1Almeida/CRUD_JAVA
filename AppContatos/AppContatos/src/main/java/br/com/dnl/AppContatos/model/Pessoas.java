@@ -20,17 +20,18 @@ import jakarta.persistence.Table;
 
 
 @Entity
-
+@Schema(description = "Entidade que representa uma pessoa e seus atributos")
 @Table(name = "tb_pessoas")
 public class Pessoas {
 	
 	// ----- ATRIBUTOS -----
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY) 
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Schema(description = "Identificador da pessoa dentro do sistema")
 	private Long id;
 	
-	@Schema(description = "Nome completo", example = "Daniel Silva de Almeida")
+	@Schema(description = "Nome completo", example = "Daniel Almeida")
 	private String nome;
 	
 	@Column(nullable = false, unique = true)
@@ -43,7 +44,7 @@ public class Pessoas {
 	private OrderLogradouro orderLogradouro;
 	
 	@Column(nullable = false) 
-	@Schema(description = "Endereço da pessoa", example = "Rua Um")
+	@Schema(description = "Endereço da pessoa", example = "Vincent Van Gogh")
 	private String endereco;
 	
 	@Column(nullable = false) 
@@ -63,9 +64,9 @@ public class Pessoas {
 	@Schema(description = "Unidade federativa (UF)", example = "SP")
     private OrderUf orderUf;
 	
-	@OneToMany(mappedBy = "pessoa", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "pessoa", cascade = CascadeType.ALL)
 	@JsonManagedReference
-	@Schema(hidden = true)
+	@Schema(description = "Contatos associados a uma pessoa", hidden = true)
 	private List<Contatos> contato;
 	
 	// ----- CONSTRUTOR  -----

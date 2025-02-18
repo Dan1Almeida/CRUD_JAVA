@@ -35,22 +35,34 @@ public class ContatosService {
 			switch (contato.getOrderTipo()) {
 			
 				case Residencial:
-				case celular:
-				case Tel_Profissional:
-					if (!contato.getContato().matches("\\(\\d{2}\\) \\d{5}-\\d{4}")) // (00) 00000-0000
+					if (!contato.getContato().matches("\\(\\d{2}\\) \\d{4}-\\d{4}")) // (00) 0000-0000
 					{
-						System.out.println("Número inserido de forma inválida.");
+						System.out.println("Número Residencial inserido de forma inválida.");
 						return null;
 					}
 					if(contatoRepository.existsByContato(contato.getContato())){
-						System.out.println("Número já cadastrada no sistema.");
+						System.out.println("Número Residencial já cadastrada no sistema.");
+						return null;
+					}
+					break;
+		//---------------------------------------------------------------------------------------------	
+					
+				case Celular:
+				case Telefone_Profissional:
+					if (!contato.getContato().matches("\\(\\d{2}\\) \\d{5}-\\d{4}")) // (00) 00000-0000
+					{
+						System.out.println("Número de contato inserido de forma inválida.");
+						return null;
+					}
+					if(contatoRepository.existsByContato(contato.getContato())){
+						System.out.println("Número de contato já cadastrada no sistema.");
 						return null;
 					}
 					break;
 		//---------------------------------------------------------------------------------------------
         
-				case email_pessoal:
-				case email_profissional:
+				case Email_pessoal:
+				case Email_profissional:
 					if (!contato.getContato().matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.(com|com\\.br|org\\.br)$"))  // daniel.dnlsilva@hotmail.com
 					{
 						System.out.println("E-mail inserido de forma inválida.");
@@ -109,16 +121,19 @@ public class ContatosService {
 
 	// ----- ENCONTRAR POR ID -----
 	public Optional<Contatos> findById(Long id){
+		System.out.println("ID: [" + id + "] Encontrado com sucesso");
 		return contatoRepository.findById(id);
 	}
 	
 	// ----- LISTAGEM -----
 	public List<Contatos> findAll(){
+		System.out.println("Lista retornada com sucesso");
 		return contatoRepository.findAll();
 	}
 	
 	// ------ CONTATOS POR PESSOA -----
     public List<Contatos> listarContatosPorPessoa(Long idPessoa) {
+		System.out.println("ID: [" + idPessoa + "] Encontrado com sucesso");
         return contatoRepository.findByPessoaId(idPessoa);
     }
 	
@@ -147,22 +162,35 @@ public class ContatosService {
         }
 
         switch (contato.getOrderTipo()) {
-            case Residencial:
-            case celular:
-            case Tel_Profissional:
+		
+        	case Residencial:
+        		if (!contato.getContato().matches("\\(\\d{2}\\) \\d{4}-\\d{4}")) // (00) 0000-0000
+        		{
+        			System.out.println("Número Residencial inserido de forma inválida.");
+        			return null;
+        		}
+        		if(contatoRepository.existsByContato(contato.getContato())){
+					System.out.println("Número Residencial já cadastrada no sistema.");
+					return null;
+        		}
+        		break;
+		//---------------------------------------------------------------------------------------------
+			
+            case Celular:
+            case Telefone_Profissional:
                 if (!contato.getContato().matches("\\(\\d{2}\\) \\d{5}-\\d{4}")) {
-                    System.out.println("Número inserido de forma inválida.");
+                    System.out.println("Número de contato inserido de forma inválida.");
                     return null;
                 }
 				if(contatoRepository.existsByContato(contato.getContato())){
-					System.out.println("Número já cadastrada no sistema.");
+					System.out.println("Número de contato já cadastrada no sistema.");
 					return null;
 				}
                 break;
 		//---------------------------------------------------------------------------------------------
 
-            case email_pessoal:
-            case email_profissional:
+            case Email_pessoal:
+            case Email_profissional:
             	if (!contato.getContato().matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.(com|com\\.br|org\\.br)$")) {
                     System.out.println("E-mail inserido de forma inválida.");
                     return null;
@@ -202,9 +230,10 @@ public class ContatosService {
             default:
                 return null;
         }
-
-        updContato.setContato(contato.getContato());
+        
         updContato.setOrderTipo(contato.getOrderTipo());
+        updContato.setContato(contato.getContato());
+
         
         System.out.println("Contato atualizado com sucesso [" +
                 "Tipo:" + 		contato.getOrderTipo() 	+ "," +

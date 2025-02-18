@@ -3,10 +3,10 @@ package br.com.dnl.AppContatos.Enum;
 public enum OrderTipo {
 	
 	Residencial(0),
-    celular(1),
-    Tel_Profissional(2),
-    email_pessoal(3),
-    email_profissional(4),
+    Celular(1),
+    Telefone_Profissional(2),
+    Email_pessoal(3),
+    Email_profissional(4),
     linkedin(5),
     XboxLive(6),
     PSN(7);

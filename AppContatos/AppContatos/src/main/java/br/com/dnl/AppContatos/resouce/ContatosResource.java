@@ -29,10 +29,10 @@ public class ContatosResource {
 	@Autowired
 	private ContatosService contatoService;
 		
-	// ----- SALVAR CONTATO -----
+	// ----- SALVAR CONTATO -------------------------------------------------------------
 	
 	@PostMapping //POST http://localhost:8080/api/contatos
-	@Operation(summary = "Gravar um contato de uma pessoa")
+	@Operation(summary = " Grava um contato e liga a uma pessoa.")
 	@ApiResponses({
 		@ApiResponse(responseCode = "404", description = "Pessoa não encontrada"),
 		@ApiResponse(responseCode = "400", description = "Erro ao cadastrar Contato"),
@@ -49,10 +49,47 @@ public class ContatosResource {
 		return ResponseEntity.status(HttpStatus.CREATED).body(newContato);
 	}
 	
-	// ----- ENCONTRAR POR ID -----
+	// ----- ATUALIZAR ------------------------------------------------------------- 
+	
+		@PutMapping("/{id}") // PUT http://localhost:8080/api/contatos/1
+		@Operation(summary = "Atualiza um contato com o {ID} requisitado.")
+		@ApiResponses({
+		    @ApiResponse(responseCode = "404", description = "Contato não encontrado"),
+		    @ApiResponse(responseCode = "400", description = "Atualização não aceita"),
+		    @ApiResponse(responseCode = "200", description = "Contato atualizado")
+		})
+		public ResponseEntity<Contatos> update(@PathVariable Long id, @RequestBody Contatos contato) {
+
+		    Optional<Contatos> contatoExistente = contatoService.findById(id);
+		    if (contatoExistente.isEmpty()) {
+		        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+		    }
+
+		    Contatos updContato = contatoService.update(id, contato);
+
+		    if (updContato == null) {
+		        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+		    }
+
+		    return ResponseEntity.status(HttpStatus.OK).body(updContato);
+		}
+		
+		// ----- DELETAR -------------------------------------------------------------
+		
+		@DeleteMapping("/{id}") // DELETE http://localhost:8080/api/contatos/1
+		@Operation(summary = "Deleta um contato com o {ID} requisitado.")
+		@ApiResponse(responseCode = "204", description = "Contato deletado com sucesso")
+
+		public ResponseEntity<?> delete(@PathVariable Long id){
+			contatoService.delete(id);
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);	
+		}
+
+	
+	// ----- ENCONTRAR POR ID -------------------------------------------------------------
 	
 	@GetMapping("/{id}") // GET http://localhost:8080/api/contatos/1
-	@Operation(summary = "Encontrar contato por ID")
+	@Operation(summary = "Encontra um contato com o {ID} requisitado.")
 	@ApiResponses({
 		@ApiResponse(responseCode = "404", description = "Contato não encontrada"),
 		@ApiResponse(responseCode = "200", description = "Contato encontrado")
@@ -67,10 +104,10 @@ public class ContatosResource {
 		return ResponseEntity.status(HttpStatus.OK).body(findContato); // 200
 	}
 	
-	// ----- LISTAGEM -----
+	// ----- LISTAGEM -------------------------------------------------------------
 	
 	@GetMapping // GET http://localhost:8080/api/contatos
-	@Operation(summary = "Listar contatos cadastrados")
+	@Operation(summary = "Lista todos contatos cadastrados.")
 	@ApiResponses({
 		@ApiResponse(responseCode = "404", description = "Contato não encontrado"),
 		@ApiResponse(responseCode = "200", description = "Contato deletado")
@@ -86,10 +123,10 @@ public class ContatosResource {
 	}
 
 	
-	// ------ CONTATOS POR PESSOA -----
+	// ------ CONTATOS POR PESSOA -------------------------------------------------------------
 	
 	@GetMapping("/pessoas/{idPessoa}") // GET http://localhost:8080/api/contatos/pessoa/1
-	@Operation(summary = "Listar contatos de uma pessoa por ID")
+	@Operation(summary = "Lista todos contatos de uma Pessoa.")
 	@ApiResponses({
 		@ApiResponse(responseCode = "200", description = "Pessoa encontrado"),
 		@ApiResponse(responseCode = "404", description = "Pessoa não encontrada")
@@ -103,42 +140,6 @@ public class ContatosResource {
 		}
 
 		return ResponseEntity.status(HttpStatus.OK).body(contato);
-	}
-	 
-	// ----- ATUALIZAR ----- // 
-	
-	@PutMapping("/{id}") // PUT http://localhost:8080/api/contatos/1
-	@Operation(summary = "Atualizar um contato existente")
-	@ApiResponses({
-	    @ApiResponse(responseCode = "404", description = "Contato não encontrado"),
-	    @ApiResponse(responseCode = "400", description = "Atualização não aceita"),
-	    @ApiResponse(responseCode = "200", description = "Contato atualizado")
-	})
-	public ResponseEntity<Contatos> update(@PathVariable Long id, @RequestBody Contatos contato) {
-
-	    Optional<Contatos> contatoExistente = contatoService.findById(id);
-	    if (contatoExistente.isEmpty()) {
-	        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-	    }
-
-	    Contatos updContato = contatoService.update(id, contato);
-
-	    if (updContato == null) {
-	        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-	    }
-
-	    return ResponseEntity.status(HttpStatus.OK).body(updContato);
-	}
-	
-	// ----- DELETAR -----
-	
-	@DeleteMapping("/{id}") // DELETE http://localhost:8080/api/contatos/1
-	@Operation(summary = "Deletar um contato existente por ID")
-	@ApiResponse(responseCode = "204", description = "Contato deletado com sucesso")
-
-	public ResponseEntity<?> delete(@PathVariable Long id){
-		contatoService.delete(id);
-		return new ResponseEntity<>(HttpStatus.NO_CONTENT);	
 	}
 
 }

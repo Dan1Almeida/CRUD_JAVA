@@ -32,10 +32,10 @@ public class PessoasResource {
 	@Autowired
 	PessoasService pessoaService;
 	
-	// ----- SALVAR -----
+	// ----- SALVAR -------------------------------------------------------------
 	
 	@PostMapping //POST http://localhost:8080/api/pessoas
-	@Operation(summary = "Gravar uma nova pessoa")
+	@Operation(summary = "Grava uma nova pessoa.")
 	@ApiResponses({
 		@ApiResponse(responseCode = "400", description = "Erro ao cadastrar a pessoa"),
 		@ApiResponse(responseCode = "201", description = "Pessoa cadastrada com sucesso")
@@ -49,10 +49,10 @@ public class PessoasResource {
 			return ResponseEntity.status(HttpStatus.CREATED).body(newPessoa);
 			}
 	
-	// ----- ENCONTRAR POR ID -----
+	// ----- ENCONTRAR POR ID -------------------------------------------------------------
 	
 	@GetMapping("/{id}") // GET http://localhost:8080/api/pessoas/{id}
-	@Operation(summary = "Encontrar uma pessoa por ID")
+	@Operation(summary = "Encontra uma pessoa com o {ID} requisitado.")
 	@ApiResponses({
 		@ApiResponse(responseCode = "404", description = "Pessoa não encontrada"),
 		@ApiResponse(responseCode = "200", description = "Pessoa encontrada")
@@ -66,10 +66,10 @@ public class PessoasResource {
 		}
 
 	
-	// ----- LISTAGEM -----
+	// ----- LISTAGEM -------------------------------------------------------------
 	
 	@GetMapping // GET http://localhost:8080/api/pessoas
-	@Operation(summary = "Listar pessoas cadastradas")
+	@Operation(summary = "Lista todas pessoas cadastradas.")
 	@ApiResponses({
 	    @ApiResponse(responseCode = "404", description = "Nenhuma pessoa encontrada"),
 	    @ApiResponse(responseCode = "200", description = "Lista de pessoas retornada com sucesso")
@@ -85,10 +85,10 @@ public class PessoasResource {
 	}
 	
 	
-	// ----- ATUALIZAR ----- 
+	// ----- ATUALIZAR -------------------------------------------------------------
 	
 	@PutMapping("/{id}") //PUT http://localhost:8080/api/pessoas/{id}
-	@Operation(summary = "Atualizar atributo de uma pessoa")
+	@Operation(summary = "Atualiza uma pessoa com o {ID} requisitado, caso não haja é criado uma nova.")
 	@ApiResponses({
 	@ApiResponse(responseCode = "404", description = "Pessoa não encontrato"),
 		@ApiResponse(responseCode = "400", description = "Atualização não aceita"),
@@ -108,20 +108,20 @@ public class PessoasResource {
 		
 		}
 
-	// ----- DELETAR -----
+	// ----- DELETAR -------------------------------------------------------------
 	
 	@DeleteMapping("/{id}") //DELETE http://localhost:8080/api/pessoas/{id}
-	@Operation(summary = "Deletar uma pessoa por ID")
+	@Operation(summary = "Deleta uma pessoa com o {ID} requisitado.")
 	@ApiResponse(responseCode = "204", description = "Pessoa deletado com sucesso")
 	public ResponseEntity<?> delete(@PathVariable Long id) {
 	    pessoaService.delete(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 	
-	// ----- MALA DIRETA ----- 
+	// ----- MALA DIRETA ------------------------------------------------------------- 
 	
 	@GetMapping("/maladireta/{id}")
-	@Operation(summary = "Mala Direta por pessoa")
+	@Operation(summary = "Encontra uma pessoa com o {ID} requisitado em versão Mala Direta.")
     @ApiResponses({
     @ApiResponse(responseCode = "404", description = "Pessoa não encontrada"),
     @ApiResponse(responseCode = "200", description = "Pessoa encontrada")
@@ -137,9 +137,9 @@ public class PessoasResource {
 	}
 		
 	   
-    // ----- LISTAGEM MALA DIRETA -----
+    // ----- LISTAGEM MALA DIRETA -------------------------------------------------------------
     @GetMapping("/maladireta")
-    @Operation(summary = "Listar todas informações de Mala direta")
+    @Operation(summary = "Lista em versão Mala Direta todas pessoas cadastradas.")
     @ApiResponses({
     @ApiResponse(responseCode = "404", description = "Sem conteúdo"),
     @ApiResponse(responseCode = "200", description = "Mala Direta encontrada")

@@ -103,11 +103,13 @@ public class PessoasService {
 	
 	// ----- ENCONTRAR POR ID -----
 	public Optional<Pessoas> findById(Long id){
+		System.out.println("ID: [" + id + "] Encontrado com sucesso");
 		return pessoaRepository.findById(id); 
 	}
 	
 	// ----- LISTAGEM -----
 	public List<Pessoas> findAll() {
+		System.out.println("Lista retornada com sucesso");
 		return pessoaRepository.findAll();
 	}
 	    
@@ -226,13 +228,16 @@ public class PessoasService {
 	public MalaDiretaDto buscarPorId(Long id) {
 		Optional<Pessoas> pessoa = pessoaRepository.findById(id);
 		if (pessoa.isEmpty()) {
+			System.out.println("Não encontrado pessoa no ID: ["+ id +"]");
 			return null; 
 		}
+		System.out.println("Mala direta retornada com sucesso");
 		return new MalaDiretaDto(pessoa.get());
 	}
     
     // ----- LISTAGEM MALA DIRETA -----
 	public List<MalaDiretaDto> listarTodos() {
+		System.out.println("Listagem de Mala direta retornada com sucesso");
 		return pessoaRepository.findAll().stream().map(MalaDiretaDto::new).toList();
 	}
 		
