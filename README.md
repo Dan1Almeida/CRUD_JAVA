@@ -5,7 +5,7 @@
 ---
 ## 1. Tecnologias Utilizadas
 
-Gerado projeto Maven em Start.spring.io
+Projeto Maven gerado em Start.spring.io
 
 ```
 https://start.spring.io/
