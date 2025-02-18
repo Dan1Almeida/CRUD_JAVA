@@ -3,6 +3,7 @@
 > Este projeto CRUD tem como principal objetivo cadastrar pessoas com seus atributos pertinentes e assim podendo cadastrar vários contatos ligados a esta pessoa. Podendo manipular os dados de diversas maneiras possíveis e servir como uma agenda de contatos.
 
 ---
+
 ## 1. Tecnologias Utilizadas
 
 Projeto Maven gerado em Start.spring.io
@@ -12,13 +13,16 @@ https://start.spring.io/
 ```
 
 - **Tecnologias:**
-Project: Maven | Language: Java | Spring Boot: 3.4.2 | Packaging: Jar | Java: 21
+ 
+	Project: Maven | Language: Java | Spring Boot: 3.4.2 | Packaging: Jar | Java: 21
 
 - **Metadada:**
-Group: br.com.dnl | Artifact e Name: AppContatos | Package name: br.com.dnl.AppContatos
+  
+	Group: br.com.dnl | Artifact e Name: AppContatos | Package name: br.com.dnl.AppContatos
 
 - **Dependências iniciais:**
-Spring Web | Spring Data JPA | H2 Database 
+  
+	Spring Web | Spring Data JPA | H2 Database 
 
 - 	**Outras dependências:**
 ```java
@@ -50,7 +54,7 @@ https://localhost:8080:/swagger-ui.html
 http://localhost:8080/h2-console
 ```
 
-- Acesso ao banco de dados H2: `<spring.datasource.url=jdbc:h2:mem:pessoas spring.datasource.username=sa>`
+- Acesso ao banco de dados H2: `<spring.datasource.url=jdbc:h2:mem:pessoas>` e `<spring.datasource.username=sa>`
   
 - Visando ter a melhor localização de LOG personalizado no console, foi desabilitada a função de mostrar o SQL com a seguinte linha: `<spring.jpa.show-sql=false>`
   
@@ -68,7 +72,7 @@ http://localhost:8080/h2-console
 ### 4.1 Pessoas
 :new: **POST pessoa - save**  `<http://localhost:8080/api/pessoas>` 
 
-**--> Gravar** uma pessoa.
+**--> Gravar** uma nova pessoa.
 
 ```java
 	{
@@ -216,7 +220,7 @@ http://localhost:8080/h2-console
    		> Exemplos: https://www.linkedin.com/in/daniel-silva-almeida/
 
 	- **Escolha 6 - 7:** Deve ter entre 3 e 15 caracteres e não pode ter caracteres especiais.
-   		> Gamer1234 | 1234Gamer
+   		> Exemplos: Gamer1234 | 1234Gamer
 
 
 ## 6. Listas ENUM
@@ -269,3 +273,8 @@ public enum OrderTipo {
 }
 ```
 
+## Resultados esperados
+
+- [x] #740
+- [ ] https://github.com/octo-org/octo-repo/issues/740
+- [ ] Add delight to the experience when all tasks are complete :tada:
