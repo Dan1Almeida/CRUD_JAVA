@@ -146,21 +146,21 @@ http://localhost:8080/h2-console
 > Para garantir o melhor controle no tratamento de dados que o projeto recebe, foram implantadas validações em todos os atributos para que, assim, os dados que serão alocados no banco de dados seja apenas o correspondente com sua finalidade.
 
 ### Pessoas
-- **Nome:** Não pode ser nulo | Deve ter mais de uma palavra | Não pode possuir números | Deve ter no máximo 150 caracteres.
+1. **Nome:** Não pode ser nulo | Deve ter mais de uma palavra | Não pode possuir números | Deve ter no máximo 150 caracteres.
   
-- **CPF:** Não pode ser nulo | Aceita apenas padrão de CPF (010.101.010-10) | Atributo com valor único.
+2. **CPF:** Não pode ser nulo | Aceita apenas padrão de CPF (010.101.010-10) | Atributo com valor único.
  
-- **Tipo Logradouro:** Não pode ser nulo | Deve ser um tipo válido de logradouro, listado em ENUM.
+3. **Tipo Logradouro:** Não pode ser nulo | Deve ser um tipo válido de logradouro, listado em ENUM.
   
-- **Endereço:** Não pode ser nulo | Não pode possuir número | Deve ter no máximo 100 caracteres.
+4. **Endereço:** Não pode ser nulo | Não pode possuir número | Deve ter no máximo 100 caracteres.
   
-- **Numero:** Não pode ser nulo | Deve ser um número inteiro entre 1 e 9999.
+5. **Numero:** Não pode ser nulo | Deve ser um número inteiro entre 1 e 9999.
   
-- **CEP:** Não pode ser nulo | Aceita apenas padrão de CEP (01010-101).
+6. **CEP:** Não pode ser nulo | Aceita apenas padrão de CEP (01010-101).
   
-- **Cidade:** Não pode ser nulo | Deve ter no máximo 35 caracteres | Não pode possuir número.
+7. **Cidade:** Não pode ser nulo | Deve ter no máximo 35 caracteres | Não pode possuir número.
   
-- **Unidade Federativa (UF):** Não pode ser nulo | Deve ser um tipo válido de UF, listado em ENUM.
+8. **Unidade Federativa (UF):** Não pode ser nulo | Deve ser um tipo válido de UF, listado em ENUM.
 
 ### Contatos
 1. **Tipo de Contato:** Não pode ser nulo | Deve ser um tipo válido entre 0 - 7, listado em ENUM.
