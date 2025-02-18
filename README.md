@@ -380,5 +380,16 @@ public enum OrderTipo {
 
 ### Observações gerais
 
-	
+- Projeto inicado em **9 de Fevereiro de 2025** sendo a última modificação em **18 de Fevereiro de 2025**
+- O projeto possui a capacidade de escalonar em alguns pontos, como mais tipos de contatos, mais entidades que possa relacionar a uma pessoa, etc ...
+- Utilizado como referência iniacial o projeto **AppProdutos:** 
+- Centralizado dentro do diretório **"Service"** todas as validações de ambas entidades.
+- Centralizado dentro do diretório **"Resource"** todas as possíveis respostas **HttpStatus**.
+- O atributo **CPF** está presente no projeto visando criar uma pessoa **"única"** dentro do sistema assim como utilizado em **Contato.**
+- Foi criado e mantido no projeto os **LOGs** personalizados afim de melhorar a compreensão das respostas e ajudar no desenvolvimento.
+
+   	  
+
+ 
+
   	      
