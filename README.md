@@ -2,7 +2,8 @@
 
 > Este projeto CRUD tem como principal objetivo cadastrar pessoas com seus atributos pertinentes e assim podendo cadastrar vários contatos ligados a esta pessoa. Podendo manipular os dados de diversas maneiras possíveis e servir como uma agenda de contatos.
 
-## 1.Tecnologias Utilizadas
+---
+## 1. Tecnologias Utilizadas
 
 Gerado projeto Maven em Start.spring.io
 
@@ -33,7 +34,8 @@ Spring Web | Spring Data JPA | H2 Database
 	</dependency>
 ```
 
-##  2.Métodos de aplicação 
+---
+##  2. Métodos de aplicação 
 
 - Porta utilizada para a inicialização do projeto
 ```
@@ -55,16 +57,19 @@ http://localhost:8080/h2-console
   
 - Utilizado o método para atualizar automaticamente o esquema do banco de dados com a seguinte linha `<spring.jpa.hibernate.ddl-auto=update>`
 
-## 3.Métodos de utilização de projeto
+---
+## 3. Métodos de utilização de projeto
   > Durante o desenvolvimento do projeto, foram utilizados dois métodos para testes de funcionamento de projeto e nos métodos endpoints requeridos.
   
-- **Swagger:** Presente com todos os endpoints do projeto, devendo alterar alguns padrões de métodos de entradas em POST e PUT.
-- **Postman:** Na pasta raiz com o nome "PostAppContatos" se encontra o arquivo para utilizar no programa, nele já está presente todos os endpoints com todos os exemplos de entradas de dados.
+3.1 **Swagger:** Presente com todos os endpoints do projeto, devendo alterar alguns padrões de métodos de entradas em POST e PUT.
+  
+3.2 **Postman:** Na pasta raiz com o nome "PostAppContatos" se encontra o arquivo para utilizar no programa, nele já está presente todos os endpoints com todos os exemplos de entradas de dados.
 
-## 4.Endpoints e métodos de entradas
+---
+## 4. Endpoints e métodos de entradas
 
-  ### Pessoas
-**POST pessoa - save**  `<http://localhost:8080/api/pessoas>` --> criar uma pessoa.
+  ### 4.1 Pessoas
+:new: **POST pessoa - save**  `<http://localhost:8080/api/pessoas>` --> criar uma pessoa.
 
 ```java
 	{
@@ -79,7 +84,7 @@ http://localhost:8080/h2-console
 	}
 ```
  
-**PUT pessoa - update** `<http://localhost:8080/api/pessoas/{id}>` --> Atualiza uma pessoa com o {ID} requisitado, caso não haja é criado uma nova.
+:arrows_counterclockwise: **PUT pessoa - update** `<http://localhost:8080/api/pessoas/{id}>` --> Atualiza uma pessoa com o {ID} requisitado, caso não haja é criado uma nova.
 
 ```java
 	{
@@ -94,19 +99,19 @@ http://localhost:8080/h2-console
 	}
 ```
  
-**DELETE pessoa - delete** `<http://localhost:8080/api/pessoas/{ID}>` --> Deleta uma pessoa com o {ID} requisitado.
+:x: **DELETE pessoa - delete** `<http://localhost:8080/api/pessoas/{ID}>` --> Deleta uma pessoa com o {ID} requisitado.
 	
-**GET pessoa - FindByid** `<http://localhost:8080/api/pessoas/{ID}>` --> Encontra uma pessoa com o {ID} requisitado.
+:mag_right: **GET pessoa - FindByid** `<http://localhost:8080/api/pessoas/{ID}>` --> Encontra uma pessoa com o {ID} requisitado.
 	
-**GET pessoa - FindAll** `<http://localhost:8080/api/pessoas>` --> Lista todas pessoas cadastradas.
+:mag_right: **GET pessoa - FindAll** `<http://localhost:8080/api/pessoas>` --> Lista todas pessoas cadastradas.
 	
-**GET pessoa - MalaDireta** `<http://localhost:8080/api/pessoas/maladireta/{ID}>` --> Encontra uma pessoa com o {ID} requisitado em versão mala direta.
+:mag_right: **GET pessoa - MalaDireta** `<http://localhost:8080/api/pessoas/maladireta/{ID}>` --> Encontra uma pessoa com o {ID} requisitado em versão mala direta.
 	
-**GET pessoa - MalaDiretaFindAll**  `<http://localhost:8080/api/pessoas/maladireta>` --> Lista em versão Mala Direta todas pessoas cadastradas.
+:mag_right: **GET pessoa - MalaDiretaFindAll**  `<http://localhost:8080/api/pessoas/maladireta>` --> Lista em versão Mala Direta todas pessoas cadastradas.
 	
-### Contatos
+### 4.2 Contatos
 	
-**POST contato - save** `<http://localhost:8080/api/contatos>` --> cria um contato e liga a uma pessoa.
+:new: **POST contato - save** `<http://localhost:8080/api/contatos>` --> cria um contato e liga a uma pessoa.
  
 ```java
 	{
@@ -118,7 +123,7 @@ http://localhost:8080/h2-console
 	}
 ```
  
-**PUT contato - update** `<http://localhost:8080/api/contatos/{ID}>`--> Atualiza um contato com o {ID} requisitado.
+:arrows_counterclockwise: **PUT contato - update** `<http://localhost:8080/api/contatos/{ID}>`--> Atualiza um contato com o {ID} requisitado.
 	
 ```java
 	{
@@ -128,13 +133,13 @@ http://localhost:8080/h2-console
 
 ```
 
-**DELETE contato - delete** `<http://localhost:8080/api/contatos/{ID}>` --> Deleta um contato com o {ID} requisitado.
+:x: **DELETE contato - delete** `<http://localhost:8080/api/contatos/{ID}>` --> Deleta um contato com o {ID} requisitado.
 	
-**GET contato - findById** `<http://localhost:8080/api/contatos/{ID}>` --> Encontra um contato com o {ID} requisitado.
+:mag_right: **GET contato - findById** `<http://localhost:8080/api/contatos/{ID}>` --> Encontra um contato com o {ID} requisitado.
 	
-**GET contato - findAll** `<http://localhost:8080/api/contatos>` --> Lista todos contatos cadastrados.
+:mag_right: **GET contato - findAll** `<http://localhost:8080/api/contatos>` --> Lista todos contatos cadastrados.
 
-**GET contato - findbyPessoa** `<http://localhost:8080/api/contatos/pessoas/{ID}>` --> Lista todos contatos de uma pessoa.
+:mag_right: **GET contato - findbyPessoa** `<http://localhost:8080/api/contatos/pessoas/{ID}>` --> Lista todos contatos de uma pessoa.
 
 ## 4.Métodos de validação de atributos
 
@@ -169,14 +174,12 @@ http://localhost:8080/h2-console
 	>  **Escolha 5 :** Aceita apenas URL do padrão do LinkedIn |
 
 	> **Escolha 6 - 7:** Deve ter entre 3 e 15 caracteres e não pode ter caracteres especiais. |
-   
-  
-   
 
-## Listas ENUM
+---
+## 5. Listas ENUM
   > Para controle de dados inseridos em campos com um número definido de escolhas, foram feitas lista de Enum, segue abaixo os campos.
 
-1. Tipo de Logradouro: Método de entrada String, onde compara a palavra que foi inserido com cada item da lista.
+5.1 **Tipo de Logradouro:** Método de entrada String, onde compara a palavra que foi inserido com cada item da lista.
 
 ```java
 public enum OrderLogradouro {
@@ -189,7 +192,7 @@ public enum OrderLogradouro {
 }
 ```
 
-2. Unidade Federativa (UF):  Método de entrada String, onde compara a sigla que foi inserido com cada item da lista.
+5.2 **Unidade Federativa (UF):**  Método de entrada String, onde compara a sigla que foi inserido com cada item da lista.
    
 ```java
 public enum OrderUf {
@@ -200,7 +203,7 @@ public enum OrderUf {
 }
 ```
 
-3. Tipo de contato:  Método de entrada sendo Integer, onde cada número representa um tipo de contato e retorna ao usuário.
+5.3 **Tipo de contato:**  Método de entrada sendo Integer, onde cada número representa um tipo de contato e retorna ao usuário.
 
 ```java
 public enum OrderTipo {
