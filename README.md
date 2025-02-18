@@ -147,33 +147,49 @@ http://localhost:8080/h2-console
 
 ### 5.1 Pessoas
 - **Nome:** Não pode ser nulo | Deve ter mais de uma palavra | Não pode possuir números | Deve ter no máximo 150 caracteres.
+  > Exemplos: Daniel Silva | João pessoa neto | Arthur Conan Doyle
   
-- **CPF:** Não pode ser nulo | Aceita apenas padrão de CPF (010.101.010-10) | Atributo com valor único.
+- **CPF:** Não pode ser nulo | Aceita apenas padrão de CPF com ponto e traço | Atributo com valor único.
+  > Exemplos: 010.101.010-10 | 101.010.101-01
  
 - **Tipo Logradouro:** Não pode ser nulo | Deve ser um tipo válido de logradouro, listado em ENUM.
+  > Exemplos: Rua | RUA | Avenida | AvEnIdA
   
 - **Endereço:** Não pode ser nulo | Não pode possuir número | Deve ter no máximo 100 caracteres.
+  > Exemplos: Vincent Van Gogh | Agatha Christie
   
 - **Numero:** Não pode ser nulo | Deve ser um número inteiro entre 1 e 9999.
+  > Exemplos: 1997 | 2025
   
-- **CEP:** Não pode ser nulo | Aceita apenas padrão de CEP (01010-101).
+- **CEP:** Não pode ser nulo | Aceita apenas padrão de CEP com traço.
+  > Exemplos: 01010-101 | 10101-010
   
 - **Cidade:** Não pode ser nulo | Deve ter no máximo 35 caracteres | Não pode possuir número.
+  > Exemplos: São Paulo | Vila Bela da Santíssima Trindade
   
 - **Unidade Federativa (UF):** Não pode ser nulo | Deve ser um tipo válido de UF, listado em ENUM.
+  > Exemplos: sp | SP | rJ | RJ
 
 ### 5.2 Contatos
 - **Tipo de Contato:** Não pode ser nulo | Deve ser um tipo válido entre 0 - 7, listado em ENUM.
+  > Exemplos: 1 | 7
   
 - **Contato:** Neste atributo existem vários tipos de validações conforme o tipo de contato, como listado abaixo | Atributo com valor unico.
    
-	> **Escolha 0 - 2:** Aceita apenas no padrão contato de telefone com DD e colchetes. | (11) 90000-0000
+	- **Escolha 0:** Aceita apenas no padrão contato de telefone residencial com DD e colchetes.
+		> Exemplos: (11) 1010-1010 | (10) 0101-0101
+  
+   	- **Escolha 0 - 2:** Aceita apenas no padrão contato de telefone com DD e colchetes.
+		> Exemplos: (11) 91010-1010 | (10) 90101-0101
 
-	> **Escolha 3 - 4:** Aceita apenas no padrão e-mail, podendo ser @dominio.com, @dominio.com.br e @dominio.org.br |
+	- **Escolha 3 - 4:** Aceita apenas no padrão e-mail, podendo ser @dominio.com, @dominio.com.br e @dominio.org.br 
+   		> Exemplos: teste@teste.com | teste@teste.com.br | teste@teste.org.br
 
-	>  **Escolha 5 :** Aceita apenas URL do padrão do LinkedIn |
+	-  **Escolha 5 :** Aceita apenas URL do padrão do LinkedIn |
+   		> Exemplos: https://www.linkedin.com/in/daniel-silva-almeida/
 
-	> **Escolha 6 - 7:** Deve ter entre 3 e 15 caracteres e não pode ter caracteres especiais. |
+	- **Escolha 6 - 7:** Deve ter entre 3 e 15 caracteres e não pode ter caracteres especiais.
+   		> Gamer1234 | 1234Gamer
 
 ---
 ## 6. Listas ENUM
