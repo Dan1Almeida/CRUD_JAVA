@@ -12,6 +12,7 @@
 4. [Endpoints e métodos de entradas](#endpoints-e-métodos-de-entradas)
 5. [Métodos de validação de atributos](#métodos-de-validação-de-atributos)
 6. [Listas ENUM](#listas-enum)
+7. [Resultados e Observações gerais](#resultados-e-observações-gerais)
 
 ## Tecnologias Utilizadas
 
@@ -63,20 +64,32 @@ https://localhost:8080:/swagger-ui.html
 http://localhost:8080/h2-console
 ```
 
-- Acesso ao banco de dados H2: `<spring.datasource.url=jdbc:h2:mem:pessoas>` e `<spring.datasource.username=sa>`
+- Acesso ao banco de dados H2:
   
-- Visando ter a melhor localização de LOG personalizado no console, foi desabilitada a função de mostrar o SQL com a seguinte linha: `<spring.jpa.show-sql=false>`
+```java
+spring.datasource.url=jdbc:h2:mem:pessoas
+spring.datasource.username=sa
+```
   
-- Utilizado o método para atualizar automaticamente o esquema do banco de dados com a seguinte linha `<spring.jpa.hibernate.ddl-auto=update>`
+- Visando ter a melhor localização de LOG personalizado no console, foi desabilitada a função de mostrar o SQL com a seguinte linha:
+```java
+spring.jpa.show-sql=false
+```
+
+- Utilizado o método para atualizar automaticamente o esquema do banco de dados com a seguinte linha:
+```java
+spring.jpa.hibernate.ddl-auto=update
+```
 
 ## Métodos de utilização de projeto
   > Durante o desenvolvimento do projeto, foram utilizados dois métodos para testes de funcionamento de projeto e nos métodos endpoints requeridos.
   
-**3.1 Swagger:** Presente com todos os endpoints do projeto, devendo alterar alguns padrões de métodos de entradas em POST e PUT.
+**Swagger:** Presente com todos os endpoints do projeto, devendo alterar alguns padrões de métodos de entradas em POST e PUT.
   
-**3.2 Postman:** Na pasta raiz com o nome "PostAppContatos" se encontra o arquivo para utilizar no programa, nele já está presente todos os endpoints com todos os exemplos de entradas de dados.
+**Postman:** Na pasta raiz com o nome "PostAppContatos" se encontra o arquivo para utilizar no programa, nele já está presente todos os endpoints com todos os exemplos de entradas de dados.
 
 ## Endpoints e métodos de entradas
+> Ao todo, o projeto apresenta [13] EndPoints, [2] POST de criação de entidade, [2] PUT de atualização de entidade, [2] DELETE para exclusão de entidade e [7] GET para buscar informações, isto tudo divido em [2] entidades, sendo elas PESSOAS e CONTATOS.
 
 ### 4.1 Pessoas
 :new: **POST pessoa - save**  `<http://localhost:8080/api/pessoas>` 
@@ -190,7 +203,7 @@ http://localhost:8080/h2-console
 - **CPF:** Não pode ser nulo | Aceita apenas padrão de CPF com ponto e traço | Atributo com valor único.
   > Exemplos: 010.101.010-10 | 101.010.101-01
  
-- **Tipo Logradouro:** Não pode ser nulo | Deve ser um tipo válido de logradouro, listado em ENUM.
+- **Tipo Logradouro:** Não pode ser nulo | Deve ser um tipo válido de logradouro, listado em ENUM. (Consulte as opções em --> [Listas ENUM](#listas-enum))
   > Exemplos: Rua | RUA | Avenida | AvEnIdA
   
 - **Endereço:** Não pode ser nulo | Não pode possuir número | Deve ter no máximo 100 caracteres.
@@ -205,16 +218,16 @@ http://localhost:8080/h2-console
 - **Cidade:** Não pode ser nulo | Deve ter no máximo 35 caracteres | Não pode possuir número.
   > Exemplos: São Paulo | Vila Bela da Santíssima Trindade
   
-- **Unidade Federativa (UF):** Não pode ser nulo | Deve ser um tipo válido de UF, listado em ENUM.
-  > Exemplos: sp | SP | rJ | RJ
+- **Unidade Federativa (UF):** Não pode ser nulo | Deve ser um tipo válido de UF, listado em ENUM. (Consulte as opções em --> [Listas ENUM](#listas-enum))
+  > Exemplos: sp | SP | rJ | RJ 
 
 ---
 
 ### 5.2 Contatos
-- **Tipo de Contato:** Não pode ser nulo | Deve ser um tipo válido entre 0 - 7, listado em ENUM.
+- **Tipo de Contato:** Não pode ser nulo | Deve ser um tipo válido entre 0 - 7, listado em ENUM. (Consulte as opções em --> [Listas ENUM](#listas-enum))
   > Exemplos: 0 | 7
   
-- **Contato:** Neste atributo existem vários tipos de validações conforme o tipo de contato, como listado abaixo | Atributo com valor unico.
+- **Contato:** Neste atributo existem vários tipos de validações conforme o tipo de contato, como listado abaixo | Atributo com valor único.
    
 	- **Escolha 0:** Aceita apenas no padrão contato de telefone residencial com DD e colchetes.
 		> Exemplos: (11) 1010-1010 | (10) 0101-0101
@@ -225,15 +238,15 @@ http://localhost:8080/h2-console
 	- **Escolha 3 - 4:** Aceita apenas no padrão e-mail, podendo ser @dominio.com, @dominio.com.br e @dominio.org.br 
    		> Exemplos: teste@teste.com | teste@teste.com.br | teste@teste.org.br
 
-	-  **Escolha 5 :** Aceita apenas URL do padrão do LinkedIn |
+	-  **Escolha 5 :** Aceita apenas URL do padrão do LinkedIn
    		> Exemplos: https://www.linkedin.com/in/daniel-silva-almeida/
 
-	- **Escolha 6 - 7:** Deve ter entre 3 e 15 caracteres e não pode ter caracteres especiais.
+	- **Escolha 6 - 7:** Deve ter entre 3 e 15 caracteres | pode ter caracteres especiais.
    		> Exemplos: Gamer1234 | 1234Gamer
 
 
 ## Listas ENUM
-  > Para controle de dados inseridos em campos com um número definido de escolhas, foram feitas lista de Enum, segue abaixo os campos.
+  > Para controle de dados inseridos em campos com um número definido de escolhas, foram feitas listas de Enum, segue abaixo os campos.
 
 ### 6.1 Tipo de Logradouro (OrderLogradouro): 
 Método de entrada String, onde compara a palavra que foi inserido com cada item da lista.
@@ -282,8 +295,58 @@ public enum OrderTipo {
 }
 ```
 
-## Resultados esperados
+## Resultados e Observações gerais
+> Este projeto tem como principal objetivo testar conhecimentos em java utilizando um CRUD e seu funcionamento como parâmetro. Após horas de desenvolvimento, pesquisas em documentos, sites e vídeos, o projeto se encontra com as seguintes funcionalidades:
 
-- [x] #740
-- [ ] https://github.com/octo-org/octo-repo/issues/740
-- [ ] Add delight to the experience when all tasks are complete :tada:
+---
+
+### Objetivos Primários  
+
+- [x] API documentada utilizando a biblioteca OpenAPI (Swagger)
+- [x] Criação com Java com Spring Boot(Versão 3.4.2)
+- [x] Utilizar banco de dados (MySQL, MariaDB, PostgreSQL ou H2)
+- [x] Implantação de validações necessárias
+      
+- [x] CRUD de **Pessoas**
+	- [x] Criar Pessoa 
+	- [x] Atualizar pessoa por ID
+	- [x] Deletar pessoa por ID
+	- [x] Obter pesso por ID | Obter pessoa por ID para mala direta | Listar todas pessoas
+  	      
+- [x] CRUD de **Contatos**
+	- [x] Adicionar um contato a uma pessoa
+	- [x] Obter contatos por ID | Listar todos contatos de uma pessoa
+  	- [x] Atualizar Contato por ID
+  	- [x] Deletar Contato por ID
+  	      
+- [x] Criação da Entidade **Pessoas**
+	- [x] ID | Nome | Endereço | CEP | Cidade | UF
+     
+- [x] Criação da Entidade **Contatos**
+	- [x] ID | Tipo de contato | Contato | Relacionamento com a entidade pessoa
+
+---
+
+### Objetivos Extras
+
+- [x] Atributos Extras na entidade **Pessoas**
+	- [x] CPF | Tipo Logradouro | Número
+       
+- [x] Endpoint extra CRUD de **Pessoas**
+	- [x] Obter lista de pessoas para mala direta
+       
+- [x] Endpoint extra CRUD de **Contatos**
+	- [x] Lista todos contatos cadastrados 
+
+- [x] Validação personalizada para cada tipo de contato
+- [x] Atributos com valores únicos no banco de dados (CPF e Contato)
+- [x] Controle extras de entradas de dados com ENUM (Tipo logradouro e Unidade Federal)
+- [x] LOGs personalizados no console para melhor compreensão.
+- [x] Http Status em resource para futura comunicação com Front-end
+
+---
+
+### Observações gerais
+
+	
+  	      
