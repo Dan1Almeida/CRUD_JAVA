@@ -141,7 +141,7 @@ http://localhost:8080/h2-console
 
 :mag_right: **GET contato - findbyPessoa** `<http://localhost:8080/api/contatos/pessoas/{ID}>` --> Lista todos contatos de uma pessoa.
 
-## 4.Métodos de validação de atributos
+## 5. Métodos de validação de atributos
 
 > Para garantir o melhor controle no tratamento de dados que o projeto recebe, foram implantadas validações em todos os atributos para que, assim, os dados que serão alocados no banco de dados seja apenas o correspondente com sua finalidade.
 
@@ -176,7 +176,7 @@ http://localhost:8080/h2-console
 	> **Escolha 6 - 7:** Deve ter entre 3 e 15 caracteres e não pode ter caracteres especiais. |
 
 ---
-## 5. Listas ENUM
+## 6. Listas ENUM
   > Para controle de dados inseridos em campos com um número definido de escolhas, foram feitas lista de Enum, segue abaixo os campos.
 
 **5.1 Tipo de Logradouro:** Método de entrada String, onde compara a palavra que foi inserido com cada item da lista.
