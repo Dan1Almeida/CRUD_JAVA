@@ -145,27 +145,27 @@ http://localhost:8080/h2-console
 
 > Para garantir o melhor controle no tratamento de dados que o projeto recebe, foram implantadas validações em todos os atributos para que, assim, os dados que serão alocados no banco de dados seja apenas o correspondente com sua finalidade.
 
-### Pessoas
-1. **Nome:** Não pode ser nulo | Deve ter mais de uma palavra | Não pode possuir números | Deve ter no máximo 150 caracteres.
+### 5.1 Pessoas
+- **Nome:** Não pode ser nulo | Deve ter mais de uma palavra | Não pode possuir números | Deve ter no máximo 150 caracteres.
   
-2. **CPF:** Não pode ser nulo | Aceita apenas padrão de CPF (010.101.010-10) | Atributo com valor único.
+- **CPF:** Não pode ser nulo | Aceita apenas padrão de CPF (010.101.010-10) | Atributo com valor único.
  
-3. **Tipo Logradouro:** Não pode ser nulo | Deve ser um tipo válido de logradouro, listado em ENUM.
+- **Tipo Logradouro:** Não pode ser nulo | Deve ser um tipo válido de logradouro, listado em ENUM.
   
-4. **Endereço:** Não pode ser nulo | Não pode possuir número | Deve ter no máximo 100 caracteres.
+- **Endereço:** Não pode ser nulo | Não pode possuir número | Deve ter no máximo 100 caracteres.
   
-5. **Numero:** Não pode ser nulo | Deve ser um número inteiro entre 1 e 9999.
+- **Numero:** Não pode ser nulo | Deve ser um número inteiro entre 1 e 9999.
   
-6. **CEP:** Não pode ser nulo | Aceita apenas padrão de CEP (01010-101).
+- **CEP:** Não pode ser nulo | Aceita apenas padrão de CEP (01010-101).
   
-7. **Cidade:** Não pode ser nulo | Deve ter no máximo 35 caracteres | Não pode possuir número.
+- **Cidade:** Não pode ser nulo | Deve ter no máximo 35 caracteres | Não pode possuir número.
   
-8. **Unidade Federativa (UF):** Não pode ser nulo | Deve ser um tipo válido de UF, listado em ENUM.
+- **Unidade Federativa (UF):** Não pode ser nulo | Deve ser um tipo válido de UF, listado em ENUM.
 
-### Contatos
-1. **Tipo de Contato:** Não pode ser nulo | Deve ser um tipo válido entre 0 - 7, listado em ENUM.
+### 5.2 Contatos
+- **Tipo de Contato:** Não pode ser nulo | Deve ser um tipo válido entre 0 - 7, listado em ENUM.
   
-2. **Contato:** Neste atributo existem vários tipos de validações conforme o tipo de contato, como listado abaixo | Atributo com valor unico.
+- **Contato:** Neste atributo existem vários tipos de validações conforme o tipo de contato, como listado abaixo | Atributo com valor unico.
    
 	> **Escolha 0 - 2:** Aceita apenas no padrão contato de telefone com DD e colchetes. | (11) 90000-0000
 
@@ -179,7 +179,7 @@ http://localhost:8080/h2-console
 ## 6. Listas ENUM
   > Para controle de dados inseridos em campos com um número definido de escolhas, foram feitas lista de Enum, segue abaixo os campos.
 
-**5.1 Tipo de Logradouro:** Método de entrada String, onde compara a palavra que foi inserido com cada item da lista.
+**6.1 Tipo de Logradouro:** Método de entrada String, onde compara a palavra que foi inserido com cada item da lista.
 
 ```java
 public enum OrderLogradouro {
@@ -192,7 +192,7 @@ public enum OrderLogradouro {
 }
 ```
 
-**5.2 Unidade Federativa (UF):**  Método de entrada String, onde compara a sigla que foi inserido com cada item da lista.
+**6.2 Unidade Federativa (UF):**  Método de entrada String, onde compara a sigla que foi inserido com cada item da lista.
    
 ```java
 public enum OrderUf {
@@ -203,7 +203,7 @@ public enum OrderUf {
 }
 ```
 
-**5.3 Tipo de contato**:  Método de entrada sendo Integer, onde cada número representa um tipo de contato e retorna ao usuário.
+**6.3 Tipo de contato**:  Método de entrada sendo Integer, onde cada número representa um tipo de contato e retorna ao usuário.
 
 ```java
 public enum OrderTipo {
