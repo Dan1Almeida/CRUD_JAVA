@@ -28,7 +28,7 @@ public class Contatos {
 	@Schema(description = "Tipo do contato (Ex: telefone_residencial, celular, etc.)", example = "1")
 	private Integer orderTipo;
 		
-	@Column(nullable = false)
+	@Column(nullable = false, unique = true)
     @Schema(description = "Contato", example = "(11) 99999-9999")
 	private String contato;
 	

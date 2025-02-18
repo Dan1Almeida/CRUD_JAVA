@@ -19,6 +19,7 @@ public class PessoasService {
 	// ----- SALVAR -----
 	
 	public Pessoas save(Pessoas pessoa) {
+		
 		if(pessoa.getNome() == null // Não Nulo
 				|| pessoa.getNome().length() >= 150 // Tamanho máximo
 				|| pessoa.getNome().matches(".*\\d.*") // Nagação de números
@@ -27,12 +28,26 @@ public class PessoasService {
 			System.out.println("Nome inserido de forma inválida.");
 			return null;
 		}
+		//-------------------------------------------------------------------------------------------
+				
+		if(pessoa.getCpf() == null 
+				||  !pessoa.getCpf().matches("\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}")) {
+			System.out.println("CPF inserido de forma inválida.");
+			return null;
+		}
+		
+		if(pessoaRepository.existsByCpf(pessoa.getCpf())){
+			System.out.println("Pessoa já cadastrada no sistema.");
+			return null;
+		}
+		//-------------------------------------------------------------------------------------------
 		
 		if(pessoa.getOrderLogradouro() == null ) // Caso não listado em ENUM - Logradouro = NULL
 		{
 			System.out.println("Tipo de Logradouro inserido de forma inválida.");
 			return null;
 		}
+		//-------------------------------------------------------------------------------------------
 
 		if(pessoa.getEndereco() == null // Não Nulo
 				|| pessoa.getEndereco().length() >= 100 // Tamanho máximo
@@ -41,6 +56,7 @@ public class PessoasService {
 			System.out.println("Endereço inserido de forma inválida.");
 			return null;
 		}
+		//-------------------------------------------------------------------------------------------
 		
 		if(pessoa.getNumero() == null 
 				|| pessoa.getNumero() < 0) 
@@ -48,13 +64,14 @@ public class PessoasService {
 			System.out.println("Número inserido de forma inválida.");
 			return null;
 		}
-
+		//-------------------------------------------------------------------------------------------
 		if(pessoa.getCep() == null 
 				|| !pessoa.getCep().matches("\\d{5}-\\d{3}"))  // Aceita Apenas padrão CEP 
 		{
 			System.out.println("CEP inserido de forma inválida.");
 			return null;
 		}
+		//-------------------------------------------------------------------------------------------
 
 		if(pessoa.getCidade() == null 
 				|| pessoa.getCidade().length() >= 35 // Tamanho máximo em referência a cidade com maior nome - Vila Bela da Santíssima Trindade 
@@ -62,15 +79,18 @@ public class PessoasService {
 			System.out.println("Cidade inserido de forma inválida.");
 			return null;
 		}
+		//-------------------------------------------------------------------------------------------
 		
 		if(pessoa.getOrderUf() == null ) // Caso não listado em ENUM - uf = NULL
 		{
 			System.out.println("Estado inserido de forma inválida.");
 			return null;
 		}
+		//-------------------------------------------------------------------------------------------
 		
 		System.out.println("Pessoa gravada com sucesso [" +
 				"Nome:" + 			pessoa.getNome() + 				"," +
+				" CPF:" + 			pessoa.getCpf() + 				"," +
 				" Tipo de Log:" + 	pessoa.getOrderLogradouro() + 	"," +
 				" Endereço:" + 		pessoa.getEndereco() + 			"," +
 				" Número:" + 		pessoa.getNumero() + 			"," +
@@ -106,6 +126,20 @@ public class PessoasService {
 	            return null;
 	        }
 	        updPessoa.setNome(pessoa.getNome());
+	      //-------------------------------------------------------------------------------------------
+	        	        
+			if(pessoa.getCpf() == null 
+					||  !pessoa.getCpf().matches("\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}")) {
+				System.out.println("CPF inserido de forma inválida.");
+				return null;
+			}
+			
+			if(pessoaRepository.existsByCpf(pessoa.getCpf())){
+				System.out.println("Pessoa já cadastrada no sistema.");
+				return null;
+			}
+			updPessoa.setCpf(pessoa.getCpf());
+			//-------------------------------------------------------------------------------------------
 	        
 			if(pessoa.getOrderLogradouro() == null ) // Caso não listado em ENUM - Logradouro = NULL
 			{
@@ -113,7 +147,7 @@ public class PessoasService {
 				return null;
 			}
 			updPessoa.setOrderLogradouro(pessoa.getOrderLogradouro());
-
+			//-------------------------------------------------------------------------------------------
 
 	        if (pessoa.getEndereco() == null 
 	                || pessoa.getEndereco().length() >= 100 
@@ -122,6 +156,7 @@ public class PessoasService {
 	            return null;
 	        }
 	        updPessoa.setEndereco(pessoa.getEndereco());
+	      //-------------------------------------------------------------------------------------------
 	        
 			if(pessoa.getNumero() == null 
 					|| pessoa.getNumero() < 0) {
@@ -129,14 +164,16 @@ public class PessoasService {
 				return null;
 			}
 			updPessoa.setNumero(pessoa.getNumero());
-	        
+			//-------------------------------------------------------------------------------------------
+			
 	        if (pessoa.getCep() == null 
 	                || !pessoa.getCep().matches("\\d{5}-\\d{3}")) {
 	        	System.out.println("CEP inserido de forma inválida.");
 	            return null;
 	        }
 	        updPessoa.setCep(pessoa.getCep());
-
+	      //-------------------------------------------------------------------------------------------
+	        
 	        if (pessoa.getCidade() == null 
 	                || pessoa.getCidade().length() >= 35 
 	                || pessoa.getCidade().matches(".*\\d.*")) {
@@ -144,14 +181,17 @@ public class PessoasService {
 	            return null;
 	        }
 	        updPessoa.setCidade(pessoa.getCidade());
-	        
+	      //-------------------------------------------------------------------------------------------
 	        
 	        if (pessoa.getOrderUf() == null) {
 	        	return null;
 	        }
 	        updPessoa.setOrderUf(pessoa.getOrderUf());
+	      //-------------------------------------------------------------------------------------------
+	        
 			System.out.println("Pessoa atualizada com sucesso [" +
 					"Nome:" + 			pessoa.getNome() + 				"," +
+					" CPF:" + 			pessoa.getCpf() + 				"," +
 					" Tipo de Log:" + 	pessoa.getOrderLogradouro() + 	"," +
 					" Endereço:" + 		pessoa.getEndereco() + 			"," +
 					" Número:" + 		pessoa.getNumero() + 			"," +
@@ -160,8 +200,12 @@ public class PessoasService {
 					" UF:" + 			pessoa.getOrderUf() + 			"]");
 	        return pessoaRepository.save(updPessoa); 
 	    }
+	    //-------------------------------------------------------------------------------------------
+
+
 		System.out.println("ID não encontrado, Pessoa gravada com sucesso [" +
 				"Nome:" + 			pessoa.getNome() + 				"," +
+				"CPF:" + 			pessoa.getCpf() + 				"," +
 				" Tipo de Log:" + 	pessoa.getOrderLogradouro() + 	"," +
 				" Endereço:" + 		pessoa.getEndereco() + 			"," +
 				" Número:" + 		pessoa.getNumero() + 			"," +

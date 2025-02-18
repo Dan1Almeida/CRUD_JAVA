@@ -10,7 +10,7 @@ import br.com.dnl.AppContatos.model.Pessoas;
 @Repository
 public interface PessoasRepository extends JpaRepository<Pessoas, Long> {
 	
-	// ----- BUSCAR PERSONALIZADA -----
+	boolean existsByCpf(String cpf);
 
 	
 }

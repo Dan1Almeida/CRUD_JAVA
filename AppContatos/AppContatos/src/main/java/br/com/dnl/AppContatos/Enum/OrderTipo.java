@@ -4,7 +4,7 @@ public enum OrderTipo {
 	
 	Residencial(0),
     celular(1),
-    whatsapp(2),
+    Tel_Profissional(2),
     email_pessoal(3),
     email_profissional(4),
     linkedin(5),

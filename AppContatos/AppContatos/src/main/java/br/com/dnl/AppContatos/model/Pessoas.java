@@ -31,10 +31,12 @@ public class Pessoas {
 	@GeneratedValue(strategy = GenerationType.IDENTITY) 
 	private Long id;
 	
-	
-	@Column(nullable = false)  // Não Nulo 
 	@Schema(description = "Nome completo", example = "Daniel Silva de Almeida")
 	private String nome;
+	
+	@Column(nullable = false, unique = true)
+	@Schema(description = "CPF", example = "010.101.010-10")
+	private String cpf;
 	
 	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
@@ -63,7 +65,7 @@ public class Pessoas {
     private OrderUf orderUf;
 	
 	@OneToMany(mappedBy = "pessoa", cascade = CascadeType.ALL)
-	@JsonManagedReference // Interromper Serialização
+	@JsonManagedReference
 	@Schema(hidden = true)
 	private List<Contatos> contato;
 	
@@ -71,9 +73,11 @@ public class Pessoas {
 	
 	public Pessoas() { }
 	
-	public Pessoas(Long id, String nome, OrderLogradouro orderLogradouro, String endereco,int numero, String cep, String cidade, OrderUf orderUf, List<Contatos> contato ) {
+	public Pessoas(Long id, String nome, String cpf, OrderLogradouro orderLogradouro, String endereco,int numero, 
+					String cep, String cidade, OrderUf orderUf, List<Contatos> contato ) {
 		this.id = id;
 		this.nome = nome;
+		this.cpf = cpf;
 		this.orderLogradouro = orderLogradouro;
 		this.endereco = endereco;
 		this.numero = numero;
@@ -92,7 +96,7 @@ public class Pessoas {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
+// -------------------------------
 
 	public String getNome() {
 		return nome;
@@ -101,10 +105,17 @@ public class Pessoas {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+// -------------------------------
 	
+	public String getCpf() {
+		return cpf;
+	}
 
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+// -------------------------------
 	
-
 	public String getEndereco() {
 		return endereco;
 	}
@@ -112,7 +123,7 @@ public class Pessoas {
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
 	}
-		
+// -------------------------------
 
 	public Integer getNumero() {
 		return numero;
@@ -121,7 +132,8 @@ public class Pessoas {
 	public void setNumero(Integer numero) {
 		this.numero = numero;
 	}
-
+// -------------------------------
+	
 	public String getCep() {
 		return cep;
 	}
@@ -129,7 +141,7 @@ public class Pessoas {
 	public void setCep(String cep) {
 		this.cep = cep;
 	}
-	
+// -------------------------------	
 
 	public String getCidade() {
 		return cidade;
@@ -138,7 +150,7 @@ public class Pessoas {
 	public void setCidade(String cidade) {
 		this.cidade = cidade;
 	}
-	
+// -------------------------------	
 
 	public String getOrderUf() {
 	    return (orderUf != null) ? orderUf.getUf() : null;
@@ -155,7 +167,7 @@ public class Pessoas {
 	        this.orderUf = null;
 	    }
 	}
-	
+// -------------------------------	
 	public String getOrderLogradouro() {
 		return (orderLogradouro != null) ? orderLogradouro.getTipoLog() : null;
 	}
@@ -171,6 +183,7 @@ public class Pessoas {
 			this.orderLogradouro = null;
 		}
 	}
+// -------------------------------	
 	
 	public List<Contatos> getContato() {
 		return contato;

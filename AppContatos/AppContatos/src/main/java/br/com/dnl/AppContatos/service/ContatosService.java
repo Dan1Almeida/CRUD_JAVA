@@ -30,26 +30,38 @@ public class ContatosService {
 				System.out.println("Pessoa não encontrada");
 				return null;
 			}
+		//---------------------------------------------------------------------------------------------
 
 			switch (contato.getOrderTipo()) {
+			
 				case Residencial:
 				case celular:
-				case whatsapp:
+				case Tel_Profissional:
 					if (!contato.getContato().matches("\\(\\d{2}\\) \\d{5}-\\d{4}")) // (00) 00000-0000
 					{
 						System.out.println("Número inserido de forma inválida.");
 						return null;
 					}
+					if(contatoRepository.existsByContato(contato.getContato())){
+						System.out.println("Número já cadastrada no sistema.");
+						return null;
+					}
 					break;
+		//---------------------------------------------------------------------------------------------
         
 				case email_pessoal:
 				case email_profissional:
-					if (!contato.getContato().matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.com$"))  // daniel.dnlsilva@hotmail.com
+					if (!contato.getContato().matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.(com|com\\.br|org\\.br)$"))  // daniel.dnlsilva@hotmail.com
 					{
 						System.out.println("E-mail inserido de forma inválida.");
 						return null;
 					}
+					if(contatoRepository.existsByContato(contato.getContato())){
+						System.out.println("E-mail já cadastrada no sistema.");
+						return null;
+					}
 					break;
+		//---------------------------------------------------------------------------------------------
     
 				case linkedin:
 					if (!contato.getContato().matches("^(https?:\\/\\/)?(www\\.)?linkedin\\.com\\/.*$")) // https://www.linkedin.com/in/daniel-silva-almeida/
@@ -57,7 +69,12 @@ public class ContatosService {
 						System.out.println("Linkedin inserido de forma inválida.");
 						return null;
 					}
+					if(contatoRepository.existsByContato(contato.getContato())){
+						System.out.println("Linkedin já cadastrada no sistema.");
+						return null;
+					}
 					break;
+		//---------------------------------------------------------------------------------------------
     
 				case XboxLive:
 				case PSN:
@@ -66,17 +83,22 @@ public class ContatosService {
 						System.out.println("Gamertag/ID inserido de forma inválida");
 						return null;
 					}
-					break;    
+					if(contatoRepository.existsByContato(contato.getContato())){
+						System.out.println("Gamertag/ID já cadastrada no sistema.");
+						return null;
+					}
+					break;
+		//---------------------------------------------------------------------------------------------
 
 				default:
 					return null;
 			}
 
 			contato.setPessoa(findPessoa.get());
+			
 			System.out.println("Contato Criado com sucesso [" +
 					"Tipo:" + 		contato.getOrderTipo() 	+ "," +
 					" Contato:" + 	contato.getContato() 	+ "]");
-
 
 			return contatoRepository.save(contato);
     
@@ -110,8 +132,8 @@ public class ContatosService {
             System.out.println("Contato não encontrado.");
             return null;
         }
-
         Contatos updContato = findContato.get();
+		//---------------------------------------------------------------------------------------------
 
         if (contato.getPessoa() != null && contato.getPessoa().getId() != null) {
             Optional<Pessoas> findPessoa = pessoaRepository.findById(contato.getPessoa().getId());
@@ -121,32 +143,48 @@ public class ContatosService {
                 return null;
             }
             updContato.setPessoa(findPessoa.get());
+		//---------------------------------------------------------------------------------------------
         }
 
         switch (contato.getOrderTipo()) {
             case Residencial:
             case celular:
-            case whatsapp:
+            case Tel_Profissional:
                 if (!contato.getContato().matches("\\(\\d{2}\\) \\d{5}-\\d{4}")) {
                     System.out.println("Número inserido de forma inválida.");
                     return null;
                 }
+				if(contatoRepository.existsByContato(contato.getContato())){
+					System.out.println("Número já cadastrada no sistema.");
+					return null;
+				}
                 break;
+		//---------------------------------------------------------------------------------------------
 
             case email_pessoal:
             case email_profissional:
-                if (!contato.getContato().matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.com$")) {
+            	if (!contato.getContato().matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.(com|com\\.br|org\\.br)$")) {
                     System.out.println("E-mail inserido de forma inválida.");
                     return null;
                 }
+				if(contatoRepository.existsByContato(contato.getContato())){
+					System.out.println("E-mail já cadastrada no sistema.");
+					return null;
+				}
                 break;
+		//---------------------------------------------------------------------------------------------
 
             case linkedin:
                 if (!contato.getContato().matches("^(https?:\\/\\/)?(www\\.)?linkedin\\.com\\/.*$")) {
                     System.out.println("Linkedin inserido de forma inválida.");
                     return null;
                 }
+				if(contatoRepository.existsByContato(contato.getContato())){
+					System.out.println("Linkedin já cadastrada no sistema.");
+					return null;
+				}
                 break;
+		//---------------------------------------------------------------------------------------------
 
             case XboxLive:
             case PSN:
@@ -154,7 +192,12 @@ public class ContatosService {
                     System.out.println("Gamertag/ID inserido de forma inválida.");
                     return null;
                 }
+				if(contatoRepository.existsByContato(contato.getContato())){
+					System.out.println("Gamertag/ID já cadastrada no sistema.");
+					return null;
+				}
                 break;
+		//---------------------------------------------------------------------------------------------
 
             default:
                 return null;
@@ -162,6 +205,7 @@ public class ContatosService {
 
         updContato.setContato(contato.getContato());
         updContato.setOrderTipo(contato.getOrderTipo());
+        
         System.out.println("Contato atualizado com sucesso [" +
                 "Tipo:" + 		contato.getOrderTipo() 	+ "," +
                 " Contato:" + 	contato.getContato() 	+ "]");
