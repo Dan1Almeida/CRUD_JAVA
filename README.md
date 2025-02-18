@@ -83,13 +83,17 @@ spring.jpa.hibernate.ddl-auto=update
 
 ## Métodos de utilização de projeto
   > Durante o desenvolvimento do projeto, foram utilizados dois métodos para testes de funcionamento do projeto e nos métodos endpoints requeridos.
+
+---
   
 **3.1 - Swagger:** Acessado através de navegador WEB, o Swagger já está com endpoints descritos e configurados, também documentado para melhor compreensão no momento de testes, devendo apenas alterar os padrões de métodos de entradas em POST e PUT. (Consulte como em [Endpoints e métodos de entradas](#endpoints-e-métodos-de-entradas))
   
-**3.2 - Postman:** Na pasta raiz com o nome "PostAppContatos" se encontra o arquivo para utilizar para importar no programa, nele já está presente todos os endpoints com todos os exemplos de entradas de dados. Devendo apenas retornar o HttpStatus das requisições. De modo a evitar tempo gasto, já está presente também todas as validações de contatos separadamente por tipo.
+**3.2 - Postman:** Na pasta raiz com o nome "PostAppContatos" se encontra o arquivo para importar ao programa, nele já está presente todos os endpoints com todos os exemplos de entradas de dados. Devendo apenas retornar o HttpStatus das requisições. De modo a evitar tempo gasto, já está presente também todas as validações de contatos separadamente por tipo.
 
 ## Endpoints e métodos de entradas
 > Ao todo, o projeto apresenta [13] EndPoints, [2] POST de criação de entidade, [2] PUT de atualização de entidade, [2] DELETE para exclusão de entidade e [7] GET para buscar informações, isto tudo divido em [2] entidades, sendo elas PESSOAS e CONTATOS.
+
+---
 
 ### 4.1 Pessoas
 :new: **POST pessoa - save**  `<http://localhost:8080/api/pessoas>` 
@@ -204,6 +208,8 @@ spring.jpa.hibernate.ddl-auto=update
 
 > Para garantir o melhor controle no tratamento de dados que o projeto recebe, foram implantadas validações em todos os atributos para que, assim, os dados que serão alocados no banco de dados seja apenas o correspondente com sua finalidade.
 
+---
+
 ### 5.1 Pessoas
 - **Nome:** Não pode ser nulo | Deve ter mais de uma palavra | Não pode possuir números | Deve ter no máximo 150 caracteres.
   > Exemplos: Daniel Silva | João pessoa neto | Arthur Conan Doyle
@@ -255,6 +261,8 @@ spring.jpa.hibernate.ddl-auto=update
 
 ## Listas ENUM
   > Para controle de dados inseridos em campos com um número definido de escolhas, foram feitas listas de Enum, segue abaixo os campos.
+
+---
 
 ### 6.1 Tipo de Logradouro (OrderLogradouro): 
 Método de entrada String, onde compara a palavra que foi inserido com cada item da lista.
