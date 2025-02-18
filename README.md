@@ -95,7 +95,7 @@ spring.jpa.hibernate.ddl-auto=update
 
 ---
 
-### 4.1 Pessoas
+### 4.1 Pessoas :bust_in_silhouette:
 :new: **POST pessoa - save**  `<http://localhost:8080/api/pessoas>` 
 
 **--> Gravar** uma nova pessoa.
@@ -156,7 +156,7 @@ spring.jpa.hibernate.ddl-auto=update
 
  ---
  
-### 4.2 Contatos
+### 4.2 Contatos :phone:
 	
 :new: **POST contato - save** `<http://localhost:8080/api/contatos>` 
 
@@ -210,7 +210,7 @@ spring.jpa.hibernate.ddl-auto=update
 
 ---
 
-### 5.1 Pessoas
+### 5.1 Pessoas :bust_in_silhouette:
 - **Nome:** Não pode ser nulo | Deve ter mais de uma palavra | Não pode possuir números | Deve ter no máximo 150 caracteres.
   > Exemplos: Daniel Silva | João pessoa neto | Arthur Conan Doyle
   
@@ -237,7 +237,7 @@ spring.jpa.hibernate.ddl-auto=update
 
 ---
 
-### 5.2 Contatos
+### 5.2 Contatos :phone:
 - **Tipo de Contato:** Não pode ser nulo | Deve ser um tipo válido entre 0 - 7, listado em ENUM. (Consulte as opções em [Listas ENUM](#listas-enum))
   > Exemplos: 0 | 7
   
@@ -370,7 +370,7 @@ public enum OrderTipo {
 
 :white_check_mark: Atributos com valores únicos no banco de dados (CPF e Contato)
 
-:white_check_mark: Controle extras de entradas de dados com ENUM (Tipo logradouro e Unidade Federal)
+:white_check_mark: Controle extras de entradas de dados com ENUM (Tipo logradouro e Unidade Federativa)
 
 :white_check_mark: LOGs personalizados no console para melhor compreensão.
 
