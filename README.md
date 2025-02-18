@@ -34,7 +34,6 @@ Spring Web | Spring Data JPA | H2 Database
 	</dependency>
 ```
 
----
 ##  2. Métodos de aplicação 
 
 - Porta utilizada para a inicialização do projeto
@@ -57,7 +56,6 @@ http://localhost:8080/h2-console
   
 - Utilizado o método para atualizar automaticamente o esquema do banco de dados com a seguinte linha `<spring.jpa.hibernate.ddl-auto=update>`
 
----
 ## 3. Métodos de utilização de projeto
   > Durante o desenvolvimento do projeto, foram utilizados dois métodos para testes de funcionamento de projeto e nos métodos endpoints requeridos.
   
@@ -65,7 +63,6 @@ http://localhost:8080/h2-console
   
 **3.2 Postman:** Na pasta raiz com o nome "PostAppContatos" se encontra o arquivo para utilizar no programa, nele já está presente todos os endpoints com todos os exemplos de entradas de dados.
 
----
 ## 4. Endpoints e métodos de entradas
 
 ### 4.1 Pessoas
@@ -122,7 +119,9 @@ http://localhost:8080/h2-console
 :mag_right: **GET pessoa - MalaDiretaFindAll**  `<http://localhost:8080/api/pessoas/maladireta>` 
 
 **--> Lista** em versão **Mala Direta** todas pessoas cadastradas.
-	
+
+ ---
+ 
 ### 4.2 Contatos
 	
 :new: **POST contato - save** `<http://localhost:8080/api/contatos>` 
@@ -196,6 +195,8 @@ http://localhost:8080/h2-console
 - **Unidade Federativa (UF):** Não pode ser nulo | Deve ser um tipo válido de UF, listado em ENUM.
   > Exemplos: sp | SP | rJ | RJ
 
+---
+
 ### 5.2 Contatos
 - **Tipo de Contato:** Não pode ser nulo | Deve ser um tipo válido entre 0 - 7, listado em ENUM.
   > Exemplos: 0 | 7
@@ -217,11 +218,11 @@ http://localhost:8080/h2-console
 	- **Escolha 6 - 7:** Deve ter entre 3 e 15 caracteres e não pode ter caracteres especiais.
    		> Gamer1234 | 1234Gamer
 
----
+
 ## 6. Listas ENUM
   > Para controle de dados inseridos em campos com um número definido de escolhas, foram feitas lista de Enum, segue abaixo os campos.
 
-### 6.1 Tipo de Logradouro: 
+### 6.1 Tipo de Logradouro (OrderLogradouro): 
 Método de entrada String, onde compara a palavra que foi inserido com cada item da lista.
 
 ```java
@@ -235,7 +236,9 @@ public enum OrderLogradouro {
 }
 ```
 
-### 6.2 Unidade Federativa (UF)
+---
+
+### 6.2 Unidade Federativa (OrderUf):
 Método de entrada String, onde compara a sigla que foi inserido com cada item da lista.
    
 ```java
@@ -247,7 +250,9 @@ public enum OrderUf {
 }
 ```
 
-### 6.3 Tipo de contato:
+---
+
+### 6.3 Tipo de contato (OrderTipo):
 Método de entrada sendo INT, onde cada número representa um tipo de contato e retorna ao usuário.
 
 ```java
