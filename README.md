@@ -82,11 +82,11 @@ spring.jpa.hibernate.ddl-auto=update
 ```
 
 ## Métodos de utilização de projeto
-  > Durante o desenvolvimento do projeto, foram utilizados dois métodos para testes de funcionamento de projeto e nos métodos endpoints requeridos.
+  > Durante o desenvolvimento do projeto, foram utilizados dois métodos para testes de funcionamento do projeto e nos métodos endpoints requeridos.
   
-**Swagger:** Presente com todos os endpoints do projeto, devendo alterar alguns padrões de métodos de entradas em POST e PUT.
+**3.1 - Swagger:** Acessado através de navegador WEB, o Swagger já está com endpoints descritos e configurados, também documentado para melhor compreensão no momento de testes, devendo apenas alterar os padrões de métodos de entradas em POST e PUT. (Consulte como em [Endpoints e métodos de entradas](#endpoints-e-métodos-de-entradas))
   
-**Postman:** Na pasta raiz com o nome "PostAppContatos" se encontra o arquivo para utilizar no programa, nele já está presente todos os endpoints com todos os exemplos de entradas de dados.
+**3.2 - Postman:** Na pasta raiz com o nome "PostAppContatos" se encontra o arquivo para utilizar para importar no programa, nele já está presente todos os endpoints com todos os exemplos de entradas de dados. Devendo apenas retornar o HttpStatus das requisições. De modo a evitar tempo gasto, já está presente também todas as validações de contatos separadamente por tipo.
 
 ## Endpoints e métodos de entradas
 > Ao todo, o projeto apresenta [13] EndPoints, [2] POST de criação de entidade, [2] PUT de atualização de entidade, [2] DELETE para exclusão de entidade e [7] GET para buscar informações, isto tudo divido em [2] entidades, sendo elas PESSOAS e CONTATOS.
