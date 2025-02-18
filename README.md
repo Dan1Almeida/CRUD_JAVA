@@ -24,17 +24,17 @@ https://start.spring.io/
 
 - **Tecnologias:**
  
-	Project: Maven | Language: Java | Spring Boot: 3.4.2 | Packaging: Jar | Java: 21
+	> Project: Maven | Language: Java | Spring Boot: 3.4.2 | Packaging: Jar | Java: 21
 
 - **Metadada:**
   
-	Group: br.com.dnl | Artifact e Name: AppContatos | Package name: br.com.dnl.AppContatos
+	> Group: br.com.dnl | Artifact e Name: AppContatos | Package name: br.com.dnl.AppContatos
 
 - **Dependências iniciais:**
   
-	Spring Web | Spring Data JPA | H2 Database 
+	> Spring Web | Spring Data JPA | H2 Database 
 
-- 	**Outras dependências:**
+- **Outras dependências:**
 ```java
 	<dependency>
 		<groupId>com.fasterxml.jackson.core</groupId>
@@ -47,6 +47,9 @@ https://start.spring.io/
 		<version>2.2.0</version>
 	</dependency>
 ```
+- **Ferramenta de desenvolvimento:**
+
+	> Eclipse IDE for Java Developers - 2024-09
 
 ## Métodos de aplicação
 
@@ -295,7 +298,7 @@ public enum OrderUf {
 ---
 
 ### 6.3 Tipo de contato (OrderTipo):
-Método de entrada sendo INT, onde cada número representa um tipo de contato e retorna ao usuário.
+Método de entrada sendo Integer, onde cada número representa um tipo de contato e retorna ao usuário.
 
 ```java
 public enum OrderTipo {
@@ -382,9 +385,13 @@ public enum OrderTipo {
 
 - Projeto iniciado em **9 de fevereiro de 2025** | última modificação em **18 de fevereiro de 2025**.
 
-- Projeto com escopo escalonável, como por exemplo, tipos de contatos e mais entidades ligadas à pessoa.
+- Utilizado como referência inicial o projeto **AppProdutos** desenvolvido em aula pelo professor Eduardo Henrique Marques Ferreira.
+  
+```
+https://github.com/eduardohen1/Java2025JP202502/tree/main/AppProdutos
+```  
 
-- Utilizado como referência inicial o projeto **AppProdutos**: 
+- Projeto com escopo escalonável, como por exemplo, tipos de contatos e mais entidades ligadas à pessoa.
 
 - Centralizado dentro do diretório **"Service"** todas as validações de ambas as entidades.
 
