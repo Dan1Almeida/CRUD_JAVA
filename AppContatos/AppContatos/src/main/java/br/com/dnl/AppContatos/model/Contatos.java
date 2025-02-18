@@ -1,6 +1,7 @@
 package br.com.dnl.AppContatos.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import br.com.dnl.AppContatos.Enum.OrderTipo;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -35,7 +36,8 @@ public class Contatos {
 	
 	@ManyToOne
 	@JoinColumn(name = "pessoa_id", referencedColumnName = "id")
-	@JsonBackReference // Interromper Serialização
+	@JsonIgnoreProperties("contatos")
+	@JsonBackReference 
 	private Pessoas pessoa;
 
 

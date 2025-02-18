@@ -2,7 +2,6 @@ package br.com.dnl.AppContatos.model;
 
 import java.util.List;
 
-
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import br.com.dnl.AppContatos.Enum.OrderLogradouro;
@@ -64,7 +63,7 @@ public class Pessoas {
 	@Schema(description = "Unidade federativa (UF)", example = "SP")
     private OrderUf orderUf;
 	
-	@OneToMany(mappedBy = "pessoa", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "pessoa", cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonManagedReference
 	@Schema(hidden = true)
 	private List<Contatos> contato;
