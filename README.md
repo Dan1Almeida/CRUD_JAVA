@@ -172,7 +172,7 @@ http://localhost:8080/h2-console
 
 ### 5.2 Contatos
 - **Tipo de Contato:** Não pode ser nulo | Deve ser um tipo válido entre 0 - 7, listado em ENUM.
-  > Exemplos: 1 | 7
+  > Exemplos: 0 | 7
   
 - **Contato:** Neste atributo existem vários tipos de validações conforme o tipo de contato, como listado abaixo | Atributo com valor unico.
    
@@ -219,7 +219,7 @@ public enum OrderUf {
 }
 ```
 
-**6.3 Tipo de contato**:  Método de entrada sendo Integer, onde cada número representa um tipo de contato e retorna ao usuário.
+**6.3 Tipo de contato**:  Método de entrada sendo INT, onde cada número representa um tipo de contato e retorna ao usuário.
 
 ```java
 public enum OrderTipo {
