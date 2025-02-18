@@ -61,9 +61,9 @@ http://localhost:8080/h2-console
 ## 3. Métodos de utilização de projeto
   > Durante o desenvolvimento do projeto, foram utilizados dois métodos para testes de funcionamento de projeto e nos métodos endpoints requeridos.
   
-3.1 **Swagger:** Presente com todos os endpoints do projeto, devendo alterar alguns padrões de métodos de entradas em POST e PUT.
+**3.1 Swagger:** Presente com todos os endpoints do projeto, devendo alterar alguns padrões de métodos de entradas em POST e PUT.
   
-3.2 **Postman:** Na pasta raiz com o nome "PostAppContatos" se encontra o arquivo para utilizar no programa, nele já está presente todos os endpoints com todos os exemplos de entradas de dados.
+**3.2 Postman:** Na pasta raiz com o nome "PostAppContatos" se encontra o arquivo para utilizar no programa, nele já está presente todos os endpoints com todos os exemplos de entradas de dados.
 
 ---
 ## 4. Endpoints e métodos de entradas
@@ -150,7 +150,7 @@ http://localhost:8080/h2-console
   
 - **CPF:** Não pode ser nulo | Aceita apenas padrão de CPF (010.101.010-10) | Atributo com valor único.
  
-- **Tipo Logradouro:** Não pode ser nulo | Deve ser um tipo válido de logradouro, listado em ENUM (Consulte o tópico 5.1).
+- **Tipo Logradouro:** Não pode ser nulo | Deve ser um tipo válido de logradouro, listado em ENUM.
   
 - **Endereço:** Não pode ser nulo | Não pode possuir número | Deve ter no máximo 100 caracteres.
   
@@ -160,10 +160,10 @@ http://localhost:8080/h2-console
   
 - **Cidade:** Não pode ser nulo | Deve ter no máximo 35 caracteres | Não pode possuir número.
   
-- **Unidade Federativa (UF):** Não pode ser nulo | Deve ser um tipo válido de UF, listado em ENUM (Consulte o tópico 5.2).
+- **Unidade Federativa (UF):** Não pode ser nulo | Deve ser um tipo válido de UF, listado em ENUM.
 
 ### Contatos
-1. **Tipo de Contato:** Não pode ser nulo | Deve ser um tipo válido entre 0 - 7, listado em ENUM (Consulte o tópico 5.3).
+1. **Tipo de Contato:** Não pode ser nulo | Deve ser um tipo válido entre 0 - 7, listado em ENUM.
   
 2. **Contato:** Neste atributo existem vários tipos de validações conforme o tipo de contato, como listado abaixo | Atributo com valor unico.
    
@@ -179,7 +179,7 @@ http://localhost:8080/h2-console
 ## 5. Listas ENUM
   > Para controle de dados inseridos em campos com um número definido de escolhas, foram feitas lista de Enum, segue abaixo os campos.
 
-5.1 **Tipo de Logradouro:** Método de entrada String, onde compara a palavra que foi inserido com cada item da lista.
+**5.1 Tipo de Logradouro:** Método de entrada String, onde compara a palavra que foi inserido com cada item da lista.
 
 ```java
 public enum OrderLogradouro {
@@ -192,7 +192,7 @@ public enum OrderLogradouro {
 }
 ```
 
-5.2 **Unidade Federativa (UF):**  Método de entrada String, onde compara a sigla que foi inserido com cada item da lista.
+**5.2 Unidade Federativa (UF):**  Método de entrada String, onde compara a sigla que foi inserido com cada item da lista.
    
 ```java
 public enum OrderUf {
@@ -203,7 +203,7 @@ public enum OrderUf {
 }
 ```
 
-5.3 **Tipo de contato:**  Método de entrada sendo Integer, onde cada número representa um tipo de contato e retorna ao usuário.
+**5.3 Tipo de contato**:  Método de entrada sendo Integer, onde cada número representa um tipo de contato e retorna ao usuário.
 
 ```java
 public enum OrderTipo {
