@@ -389,10 +389,12 @@ public enum OrderTipo {
 - Centralizado dentro do diretório **"Service"** todas as validações de ambas as entidades.
 
 - Centralizado dentro do diretório **"Resource"** todas as possíveis respostas HttpStatus.
-
+  
 - O atributo **CPF** está presente no projeto visando criar uma pessoa **"única"** dentro do sistema, assim como utilizado em **Contato**.
 
 - Foram criados e mantidos no projeto os **LOGs personalizados** a fim de melhorar a compreensão das respostas e ajudar no desenvolvimento.
+
+- Toda documentação da API com  **OpenAPI(Swagger)** está presente nas classes Model e Resource de cada entidade.
 
    	  
 
