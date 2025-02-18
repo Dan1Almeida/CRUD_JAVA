@@ -129,18 +129,22 @@ spring.jpa.hibernate.ddl-auto=update
 :x: **DELETE pessoa - delete** `<http://localhost:8080/api/pessoas/{ID}>`
 
 **--> Deleta** uma pessoa com o {ID} requisitado.
+
 	
 :mag_right: **GET pessoa - FindByid** `<http://localhost:8080/api/pessoas/{ID}>` 
 
 **--> Encontra** uma pessoa com o {ID} requisitado.
+
 	
 :mag_right: **GET pessoa - FindAll** `<http://localhost:8080/api/pessoas>`
 
 **--> Lista** todas pessoas cadastradas.
+
 	
 :mag_right: **GET pessoa - MalaDireta** `<http://localhost:8080/api/pessoas/maladireta/{ID}>` 
 
 **--> Encontra** uma pessoa com o {ID} requisitado em versão **Mala Direta.**
+
 	
 :mag_right: **GET pessoa - MalaDiretaFindAll**  `<http://localhost:8080/api/pessoas/maladireta>` 
 
@@ -179,18 +183,22 @@ spring.jpa.hibernate.ddl-auto=update
 :x: **DELETE contato - delete** `<http://localhost:8080/api/contatos/{ID}>` 
 
 **--> Deleta** um contato com o {ID} requisitado.
+
 	
 :mag_right: **GET contato - findById** `<http://localhost:8080/api/contatos/{ID}>` 
 
 **--> Encontra** um contato com o {ID} requisitado.
+
 	
 :mag_right: **GET contato - findAll** `<http://localhost:8080/api/contatos>` 
 
 **--> Lista** todos contatos cadastrados.
 
+
 :mag_right: **GET contato - findbyPessoa** `<http://localhost:8080/api/contatos/pessoas/{ID}>` 
 
 **--> Lista** todos contatos de uma **Pessoa.**
+
 
 ## Métodos de validação de atributos
 
@@ -203,7 +211,7 @@ spring.jpa.hibernate.ddl-auto=update
 - **CPF:** Não pode ser nulo | Aceita apenas padrão de CPF com ponto e traço | Atributo com valor único.
   > Exemplos: 010.101.010-10 | 101.010.101-01
  
-- **Tipo Logradouro:** Não pode ser nulo | Deve ser um tipo válido de logradouro, listado em ENUM. (Consulte as opções em --> [Listas ENUM](#listas-enum))
+- **Tipo Logradouro:** Não pode ser nulo | Deve ser um tipo válido de logradouro, listado em ENUM. (Consulte as opções em [Listas ENUM](#listas-enum))
   > Exemplos: Rua | RUA | Avenida | AvEnIdA
   
 - **Endereço:** Não pode ser nulo | Não pode possuir número | Deve ter no máximo 100 caracteres.
@@ -218,13 +226,13 @@ spring.jpa.hibernate.ddl-auto=update
 - **Cidade:** Não pode ser nulo | Deve ter no máximo 35 caracteres | Não pode possuir número.
   > Exemplos: São Paulo | Vila Bela da Santíssima Trindade
   
-- **Unidade Federativa (UF):** Não pode ser nulo | Deve ser um tipo válido de UF, listado em ENUM. (Consulte as opções em --> [Listas ENUM](#listas-enum))
+- **Unidade Federativa (UF):** Não pode ser nulo | Deve ser um tipo válido de UF, listado em ENUM. (Consulte as opções em [Listas ENUM](#listas-enum))
   > Exemplos: sp | SP | rJ | RJ 
 
 ---
 
 ### 5.2 Contatos
-- **Tipo de Contato:** Não pode ser nulo | Deve ser um tipo válido entre 0 - 7, listado em ENUM. (Consulte as opções em --> [Listas ENUM](#listas-enum))
+- **Tipo de Contato:** Não pode ser nulo | Deve ser um tipo válido entre 0 - 7, listado em ENUM. (Consulte as opções em [Listas ENUM](#listas-enum))
   > Exemplos: 0 | 7
   
 - **Contato:** Neste atributo existem vários tipos de validações conforme o tipo de contato, como listado abaixo | Atributo com valor único.
@@ -302,47 +310,63 @@ public enum OrderTipo {
 
 ### Objetivos Primários  
 
-- [x] API documentada utilizando a biblioteca OpenAPI (Swagger)
-- [x] Criação com Java com Spring Boot(Versão 3.4.2)
-- [x] Utilizar banco de dados (MySQL, MariaDB, PostgreSQL ou H2)
-- [x] Implantação de validações necessárias
+:white_check_mark: API documentada utilizando a biblioteca OpenAPI (Swagger)
+
+:white_check_mark: Criação com Java com Spring Boot(Versão 3.4.2)
+
+:white_check_mark: Utilizar banco de dados (MySQL, MariaDB, PostgreSQL ou H2)
+
+:white_check_mark: Implantação de validações necessárias
       
-- [x] CRUD de **Pessoas**
-	- [x] Criar Pessoa 
-	- [x] Atualizar pessoa por ID
-	- [x] Deletar pessoa por ID
-	- [x] Obter pesso por ID | Obter pessoa por ID para mala direta | Listar todas pessoas
+:white_check_mark: CRUD de **Pessoas**
+
+	- Criar Pessoa 
+	- Atualizar pessoa por ID
+	- Deletar pessoa por ID
+	- Obter pesso por ID | Obter pessoa por ID para mala direta | Listar todas pessoas
   	      
-- [x] CRUD de **Contatos**
-	- [x] Adicionar um contato a uma pessoa
-	- [x] Obter contatos por ID | Listar todos contatos de uma pessoa
-  	- [x] Atualizar Contato por ID
-  	- [x] Deletar Contato por ID
+:white_check_mark: CRUD de **Contatos**
+
+	-  Adicionar um contato a uma pessoa
+	-  Obter contatos por ID | Listar todos contatos de uma pessoa
+  	-  Atualizar Contato por ID
+  	-  Deletar Contato por ID
   	      
-- [x] Criação da Entidade **Pessoas**
-	- [x] ID | Nome | Endereço | CEP | Cidade | UF
+:white_check_mark: Criação da Entidade **Pessoas**
+
+	- ID | Nome | Endereço | CEP | Cidade | UF
      
-- [x] Criação da Entidade **Contatos**
-	- [x] ID | Tipo de contato | Contato | Relacionamento com a entidade pessoa
+:white_check_mark: Criação da Entidade **Contatos**
+
+	- ID | Tipo de contato | Contato | Relacionamento com a entidade pessoa
+
+ :white_check_mark: Criação de uma **Dto Mala Direta**
 
 ---
 
 ### Objetivos Extras
 
-- [x] Atributos Extras na entidade **Pessoas**
-	- [x] CPF | Tipo Logradouro | Número
-       
-- [x] Endpoint extra CRUD de **Pessoas**
-	- [x] Obter lista de pessoas para mala direta
-       
-- [x] Endpoint extra CRUD de **Contatos**
-	- [x] Lista todos contatos cadastrados 
+:white_check_mark: Atributos Extras na entidade **Pessoas**
 
-- [x] Validação personalizada para cada tipo de contato
-- [x] Atributos com valores únicos no banco de dados (CPF e Contato)
-- [x] Controle extras de entradas de dados com ENUM (Tipo logradouro e Unidade Federal)
-- [x] LOGs personalizados no console para melhor compreensão.
-- [x] Http Status em resource para futura comunicação com Front-end
+	- CPF | Tipo Logradouro | Número
+       
+:white_check_mark: Endpoint extra CRUD de **Pessoas**
+
+	- Obter lista de pessoas para mala direta
+       
+:white_check_mark: Endpoint extra CRUD de **Contatos**
+
+	- Lista todos contatos cadastrados 
+
+:white_check_mark: Validação personalizada para cada tipo de contato
+
+:white_check_mark: Atributos com valores únicos no banco de dados (CPF e Contato)
+
+:white_check_mark: Controle extras de entradas de dados com ENUM (Tipo logradouro e Unidade Federal)
+
+:white_check_mark: LOGs personalizados no console para melhor compreensão.
+
+:white_check_mark: Http Status em resource para futura comunicação com Front-end
 
 ---
 
