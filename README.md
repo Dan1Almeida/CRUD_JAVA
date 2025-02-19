@@ -315,7 +315,7 @@ public enum OrderTipo {
 ```
 
 ## Resultados e Observações gerais
-> Este projeto tem como principal objetivo testar conhecimentos em java utilizando um CRUD e seu funcionamento como parâmetro. Após horas de desenvolvimento, pesquisas em documentos, sites e vídeos, o projeto se encontra com as seguintes funcionalidades:
+> Este projeto tem como principal objetivo testar conhecimentos em java utilizando um CRUD e seu funcionamento como parâmetro. Após horas de desenvolvimento, pesquisas em documentos, sites e vídeos, o projeto se encontra com os seguintes _Status_:
 
 ---
 
@@ -325,7 +325,7 @@ public enum OrderTipo {
 
 :white_check_mark: Criação com Java com Spring Boot(Versão 3.4.2)
 
-:white_check_mark: Utilizar banco de dados (MySQL, MariaDB, PostgreSQL ou H2)
+:white_check_mark: Utilização banco de dados H2 - Banco de dados em memória
 
 :white_check_mark: Implantação de validações necessárias
       
@@ -393,7 +393,11 @@ https://github.com/eduardohen1/Java2025JP202502/tree/main/AppProdutos
 
 - Projeto com escopo escalonável, como por exemplo, tipos de contatos e mais entidades ligadas à pessoa.
 
-- Centralizado dentro do diretório **"Service"** todas as validações de ambas as entidades.
+- Centralizado dentro do diretório **"Service"** todas as validações de ambas as entidades. (Com exceções de)
+	- "Números" a validação de se o número é inteiro é feito no Model.
+	- "OrderTipo" a validação se encontra direto no raio dos cadastros na mémoria entre 0 e 7.
+   
+ - Contribuindo com persistência de dados, foi colocado validações como `<@Pattern>` | `<@Size>` | `<Min>` | `<Max>` 
 
 - Centralizado dentro do diretório **"Resource"** todas as possíveis respostas HttpStatus.
   
@@ -402,6 +406,8 @@ https://github.com/eduardohen1/Java2025JP202502/tree/main/AppProdutos
 - Foram criados e mantidos no projeto os **LOGs personalizados** a fim de melhorar a compreensão das respostas e ajudar no desenvolvimento.
 
 - Toda documentação da API com  **OpenAPI(Swagger)** está presente nas classes Model e Resource de cada entidade.
+  
+- Ao excluir uma pessoa que esteja ligada a vários contatos, todos os contatos é excluído em consequência.
 
    	  
 
