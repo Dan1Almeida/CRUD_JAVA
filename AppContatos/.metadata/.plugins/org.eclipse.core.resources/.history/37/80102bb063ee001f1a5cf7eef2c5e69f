@@ -131,7 +131,7 @@ public class PessoasService {
 	            return null;
 	        }
 	        updPessoa.setNome(pessoa.getNome());
-    //-------------------------------------------------------------------------------------------
+	      //-------------------------------------------------------------------------------------------
 	        	        
 			if(pessoa.getCpf() == null 
 					||  !pessoa.getCpf().matches("\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}")) {
@@ -144,7 +144,7 @@ public class PessoasService {
 				return null;
 			}
 			updPessoa.setCpf(pessoa.getCpf());
-	//-------------------------------------------------------------------------------------------
+			//-------------------------------------------------------------------------------------------
 	        
 			if(pessoa.getOrderLogradouro() == null ) // Caso não listado em ENUM - Logradouro = NULL
 			{
@@ -152,7 +152,7 @@ public class PessoasService {
 				return null;
 			}
 			updPessoa.setOrderLogradouro(pessoa.getOrderLogradouro());
-	//-------------------------------------------------------------------------------------------
+			//-------------------------------------------------------------------------------------------
 
 	        if (pessoa.getEndereco() == null 
 	                || pessoa.getEndereco().length() >= 100 
@@ -161,14 +161,14 @@ public class PessoasService {
 	            return null;
 	        }
 	        updPessoa.setEndereco(pessoa.getEndereco());
-    //-------------------------------------------------------------------------------------------
+	      //-------------------------------------------------------------------------------------------
 	        
 	        if (pessoa.getNumero() < 1 || pessoa.getNumero() > 9999) {
 				System.out.println("Numero inserido de forma inválida.");
 				return null;
 			}
 			updPessoa.setNumero(pessoa.getNumero());
-	//-------------------------------------------------------------------------------------------
+			//-------------------------------------------------------------------------------------------
 			
 	        if (pessoa.getCep() == null 
 	                || !pessoa.getCep().matches("\\d{5}-\\d{3}")) {
@@ -176,7 +176,7 @@ public class PessoasService {
 	            return null;
 	        }
 	        updPessoa.setCep(pessoa.getCep());
-    //-------------------------------------------------------------------------------------------
+	      //-------------------------------------------------------------------------------------------
 	        
 	        if (pessoa.getCidade() == null 
 	                || pessoa.getCidade().length() >= 35 
@@ -185,13 +185,13 @@ public class PessoasService {
 	            return null;
 	        }
 	        updPessoa.setCidade(pessoa.getCidade());
-    //-------------------------------------------------------------------------------------------
+	      //-------------------------------------------------------------------------------------------
 	        
 	        if (pessoa.getOrderUf() == null) {
 	        	return null;
 	        }
 	        updPessoa.setOrderUf(pessoa.getOrderUf());
-    //-------------------------------------------------------------------------------------------
+	      //-------------------------------------------------------------------------------------------
 	        
 			System.out.println("Pessoa atualizada com sucesso [" +
 					"Nome:" + 			pessoa.getNome() + 				"," +
@@ -204,7 +204,7 @@ public class PessoasService {
 					" UF:" + 			pessoa.getOrderUf() + 			"]");
 	        return pessoaRepository.save(updPessoa); 
 	    }
-    //-------------------------------------------------------------------------------------------
+	    //-------------------------------------------------------------------------------------------
 
 
 		System.out.println("ID não encontrado, Pessoa gravada com sucesso [" +

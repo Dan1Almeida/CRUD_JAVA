@@ -23,10 +23,10 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 
-@Entity
-@Schema(description = "Entidade que representa uma pessoa e seus atributos")
-@Table(name = "tb_pessoas")
-public class Pessoas {
+	@Entity
+	@Schema(description = "Entidade que representa uma pessoa e seus atributos")
+	@Table(name = "tb_pessoas")
+	public class Pessoas {
 	
 	// ----- ATRIBUTOS -----------------------------------------------------------
 
