@@ -27,6 +27,6 @@ public enum OrderTipo {
                 return value; 
             }
         }
-        throw new IllegalArgumentException("Invalid OrderStatus code");
+        throw new IllegalArgumentException();
     }
 }

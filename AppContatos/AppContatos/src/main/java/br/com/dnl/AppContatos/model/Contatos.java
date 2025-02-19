@@ -20,22 +20,27 @@ import jakarta.persistence.Table;
 @Table (name = "tb_contatos")
 public class Contatos {
 	
-	// ----- ATRIBUTOS -----
+	// ----- ATRIBUTOS -----------------------------------------------------------
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Schema(description = "Identificador da contato dentro do sistema")
 	private Long id;
 	
+	// -------------------------------------------------------------------------
+	
 	@Column(nullable = false)
 	@Schema(description = "1-Residencial | 2-Celular | 3-Tel-Profissional | 4-E-mail "
 						+ "| 5-E-mail Profissional | 6-Linkedin | 6-Xbox Live | 6-PSN ", example = "1")
 	private Integer orderTipo;
+	
+	// -------------------------------------------------------------------------
 		
 	@Column(nullable = false, unique = true)
     @Schema(description = "Residencial", example = "(11) 1010-1010")
 	private String contato;
-	
+
+	// -------------------------------------------------------------------------
 	
 	@ManyToOne
 	@JoinColumn(name = "pessoa_id", referencedColumnName = "id")
@@ -45,7 +50,7 @@ public class Contatos {
 	private Pessoas pessoa;
 
 
-	// ----- CONSTRUTOR -----
+	// ----- CONSTRUTOR -----------------------------------------------------------
 	
 	public Contatos() {}
 	
@@ -56,7 +61,7 @@ public class Contatos {
 		this.pessoa = pessoa;
 	}
 	
-	// ----- GET e SET -----
+	// ----- GET e SET -----------------------------------------------------------
 
 	public Long getId() {
 		return id;
@@ -66,7 +71,7 @@ public class Contatos {
 		this.id = id;
 	}
 	
-	// -------------------------------	
+	// -------------------------------------------------------------------------	
 
 	public OrderTipo getOrderTipo() {
 		return OrderTipo.valueOf(orderTipo);
@@ -78,7 +83,7 @@ public class Contatos {
 		}
 	}
 	
-	// -------------------------------	
+	// -------------------------------------------------------------------------
 
 	public String getContato() {
 		return contato;
@@ -88,7 +93,7 @@ public class Contatos {
 		this.contato = contato;
 	}
 	
-	// -------------------------------	
+	// -------------------------------------------------------------------------
 
 	public Pessoas getPessoa() {
 		return pessoa;

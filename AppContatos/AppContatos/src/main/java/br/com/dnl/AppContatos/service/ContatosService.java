@@ -20,7 +20,7 @@ public class ContatosService {
 	@Autowired
 	private PessoasRepository pessoaRepository;
 	
-	// ----- SALVAR CONTATO -----
+	// ----- SALVAR CONTATO -------------------------------------------------------------
 	public Contatos save(Contatos contato) {		
 	    
 		if (contato.getPessoa().getId() != null) {
@@ -30,12 +30,12 @@ public class ContatosService {
 				System.out.println("Pessoa não encontrada");
 				return null;
 			}
-		//---------------------------------------------------------------------------------------------
+	//---------------------------------------------------------------------------------------------
 
 			switch (contato.getOrderTipo()) {
 			
 				case Residencial:
-					if (!contato.getContato().matches("\\(\\d{2}\\) \\d{4}-\\d{4}")) // (00) 0000-0000
+					if (!contato.getContato().matches("\\(\\d{2}\\) \\d{4}-\\d{4}")) 
 					{
 						System.out.println("Número Residencial inserido de forma inválida.");
 						return null;
@@ -45,11 +45,11 @@ public class ContatosService {
 						return null;
 					}
 					break;
-		//---------------------------------------------------------------------------------------------	
+	//---------------------------------------------------------------------------------------------	
 					
 				case Celular:
 				case Telefone_Profissional:
-					if (!contato.getContato().matches("\\(\\d{2}\\) \\d{5}-\\d{4}")) // (00) 00000-0000
+					if (!contato.getContato().matches("\\(\\d{2}\\) \\d{5}-\\d{4}")) 
 					{
 						System.out.println("Número de contato inserido de forma inválida.");
 						return null;
@@ -59,11 +59,11 @@ public class ContatosService {
 						return null;
 					}
 					break;
-		//---------------------------------------------------------------------------------------------
+	//---------------------------------------------------------------------------------------------
         
 				case Email_pessoal:
 				case Email_profissional:
-					if (!contato.getContato().matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.(com|com\\.br|org\\.br)$"))  // daniel.dnlsilva@hotmail.com
+					if (!contato.getContato().matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.(com|com\\.br|org\\.br)$"))  
 					{
 						System.out.println("E-mail inserido de forma inválida.");
 						return null;
@@ -73,10 +73,10 @@ public class ContatosService {
 						return null;
 					}
 					break;
-		//---------------------------------------------------------------------------------------------
+	//---------------------------------------------------------------------------------------------
     
 				case linkedin:
-					if (!contato.getContato().matches("^(https?:\\/\\/)?(www\\.)?linkedin\\.com\\/.*$")) // https://www.linkedin.com/in/daniel-silva-almeida/
+					if (!contato.getContato().matches("^(https?:\\/\\/)?(www\\.)?linkedin\\.com\\/.*$")) 
 					{
 						System.out.println("Linkedin inserido de forma inválida.");
 						return null;
@@ -86,11 +86,11 @@ public class ContatosService {
 						return null;
 					}
 					break;
-		//---------------------------------------------------------------------------------------------
+	//---------------------------------------------------------------------------------------------
     
 				case XboxLive:
 				case PSN:
-					if (!contato.getContato().matches("^[A-Za-z0-9_ ]{3,15}$")) // Gamer1234
+					if (!contato.getContato().matches("^[A-Za-z0-9_ ]{3,15}$")) 
 					{
 						System.out.println("Gamertag/ID inserido de forma inválida");
 						return null;
@@ -100,7 +100,7 @@ public class ContatosService {
 						return null;
 					}
 					break;
-		//---------------------------------------------------------------------------------------------
+	//---------------------------------------------------------------------------------------------
 
 				default:
 					return null;
@@ -119,26 +119,25 @@ public class ContatosService {
 		}		
 	}
 
-	// ----- ENCONTRAR POR ID -----
+	// ----- ENCONTRAR POR ID -------------------------------------------------------------
 	public Optional<Contatos> findById(Long id){
-		System.out.println("ID: [" + id + "] Encontrado com sucesso");
 		return contatoRepository.findById(id);
 	}
 	
-	// ----- LISTAGEM -----
+	// ----- LISTAGEM -------------------------------------------------------------
 	public List<Contatos> findAll(){
 		System.out.println("Lista retornada com sucesso");
 		return contatoRepository.findAll();
 	}
 	
-	// ------ CONTATOS POR PESSOA -----
+	// ------ CONTATOS POR PESSOA -------------------------------------------------------------
     public List<Contatos> listarContatosPorPessoa(Long idPessoa) {
 		System.out.println("ID: [" + idPessoa + "] Encontrado com sucesso");
         return contatoRepository.findByPessoaId(idPessoa);
     }
 	
 	
-	// ----- ATUALIZAR ----- 
+	// ----- ATUALIZAR -------------------------------------------------------------
     public Contatos update(Long id, Contatos contato) {
 
         Optional<Contatos> findContato = contatoRepository.findById(id);
@@ -148,7 +147,7 @@ public class ContatosService {
             return null;
         }
         Contatos updContato = findContato.get();
-		//---------------------------------------------------------------------------------------------
+	//---------------------------------------------------------------------------------------------
 
         if (contato.getPessoa() != null && contato.getPessoa().getId() != null) {
             Optional<Pessoas> findPessoa = pessoaRepository.findById(contato.getPessoa().getId());
@@ -158,7 +157,7 @@ public class ContatosService {
                 return null;
             }
             updContato.setPessoa(findPessoa.get());
-		//---------------------------------------------------------------------------------------------
+	//---------------------------------------------------------------------------------------------
         }
 
         switch (contato.getOrderTipo()) {
@@ -174,7 +173,7 @@ public class ContatosService {
 					return null;
         		}
         		break;
-		//---------------------------------------------------------------------------------------------
+	//---------------------------------------------------------------------------------------------
 			
             case Celular:
             case Telefone_Profissional:
@@ -187,7 +186,7 @@ public class ContatosService {
 					return null;
 				}
                 break;
-		//---------------------------------------------------------------------------------------------
+	//---------------------------------------------------------------------------------------------
 
             case Email_pessoal:
             case Email_profissional:
@@ -200,7 +199,7 @@ public class ContatosService {
 					return null;
 				}
                 break;
-		//---------------------------------------------------------------------------------------------
+	//---------------------------------------------------------------------------------------------
 
             case linkedin:
                 if (!contato.getContato().matches("^(https?:\\/\\/)?(www\\.)?linkedin\\.com\\/.*$")) {
@@ -212,7 +211,7 @@ public class ContatosService {
 					return null;
 				}
                 break;
-		//---------------------------------------------------------------------------------------------
+	//---------------------------------------------------------------------------------------------
 
             case XboxLive:
             case PSN:
@@ -225,7 +224,7 @@ public class ContatosService {
 					return null;
 				}
                 break;
-		//---------------------------------------------------------------------------------------------
+	//---------------------------------------------------------------------------------------------
 
             default:
                 return null;
@@ -242,7 +241,7 @@ public class ContatosService {
         return contatoRepository.save(updContato);
     }
 	
-	// ----- DELETAR -----
+	// ----- DELETAR -------------------------------------------------------------
 	
 	public void delete(Long id) {
 		System.out.println("Id: " + "[" + id +"]"+ " Deletado com sucesso");

@@ -20,10 +20,10 @@ public class PessoasService {
 	
 	public Pessoas save(Pessoas pessoa) {
 		
-		if(pessoa.getNome() == null // Não Nulo
-				|| pessoa.getNome().length() >= 150 // Tamanho máximo
-				|| pessoa.getNome().matches(".*\\d.*") // Nagação de números
-				|| pessoa.getNome().split("\\s+").length < 2) // Tamanho mínimo de duas palavras
+		if(pessoa.getNome() == null
+				|| pessoa.getNome().length() >= 150 
+				|| pessoa.getNome().matches(".*\\d.*") 
+				|| pessoa.getNome().split("\\s+").length < 2)
 		{
 			System.out.println("Nome inserido de forma inválida.");
 			return null;
@@ -42,31 +42,29 @@ public class PessoasService {
 		}
 		//-------------------------------------------------------------------------------------------
 		
-		if(pessoa.getOrderLogradouro() == null ) // Caso não listado em ENUM - Logradouro = NULL
+		if(pessoa.getOrderLogradouro() == null ) 
 		{
 			System.out.println("Tipo de Logradouro inserido de forma inválida.");
 			return null;
 		}
 		//-------------------------------------------------------------------------------------------
 
-		if(pessoa.getEndereco() == null // Não Nulo
-				|| pessoa.getEndereco().length() >= 100 // Tamanho máximo
-				|| pessoa.getEndereco().matches(".*\\d.*")) // Nagação de números
+		if(pessoa.getEndereco() == null 
+				|| pessoa.getEndereco().length() >= 100 
+				|| pessoa.getEndereco().matches(".*\\d.*")) 
 		{
 			System.out.println("Endereço inserido de forma inválida.");
 			return null;
 		}
 		//-------------------------------------------------------------------------------------------
 		
-		if(pessoa.getNumero() == null 
-				|| pessoa.getNumero() < 0) 
-		{
+		if (pessoa.getNumero() < 1 || pessoa.getNumero() > 9999) {
 			System.out.println("Número inserido de forma inválida.");
 			return null;
 		}
 		//-------------------------------------------------------------------------------------------
 		if(pessoa.getCep() == null 
-				|| !pessoa.getCep().matches("\\d{5}-\\d{3}"))  // Aceita Apenas padrão CEP 
+				|| !pessoa.getCep().matches("\\d{5}-\\d{3}"))   
 		{
 			System.out.println("CEP inserido de forma inválida.");
 			return null;
@@ -74,14 +72,14 @@ public class PessoasService {
 		//-------------------------------------------------------------------------------------------
 
 		if(pessoa.getCidade() == null 
-				|| pessoa.getCidade().length() >= 35 // Tamanho máximo em referência a cidade com maior nome - Vila Bela da Santíssima Trindade 
+				|| pessoa.getCidade().length() >= 35  
 				|| pessoa.getCidade().matches(".*\\d.*")) {
 			System.out.println("Cidade inserido de forma inválida.");
 			return null;
 		}
 		//-------------------------------------------------------------------------------------------
 		
-		if(pessoa.getOrderUf() == null ) // Caso não listado em ENUM - uf = NULL
+		if(pessoa.getOrderUf() == null ) 
 		{
 			System.out.println("Estado inserido de forma inválida.");
 			return null;
@@ -101,19 +99,18 @@ public class PessoasService {
 
 	}
 	
-	// ----- ENCONTRAR POR ID -----
+	// ----- ENCONTRAR POR ID -------------------------------------------------------------
 	public Optional<Pessoas> findById(Long id){
-		System.out.println("ID: [" + id + "] Encontrado com sucesso");
 		return pessoaRepository.findById(id); 
 	}
 	
-	// ----- LISTAGEM -----
+	// ----- LISTAGEM -------------------------------------------------------------
 	public List<Pessoas> findAll() {
 		System.out.println("Lista retornada com sucesso");
 		return pessoaRepository.findAll();
 	}
 	    
-	// ----- ATUALIZAR -----
+	// ----- ATUALIZAR -------------------------------------------------------------
 	public Pessoas update(Long id, Pessoas pessoa) {
 	    Optional<Pessoas> findPessoa = pessoaRepository.findById(id);
 
@@ -160,8 +157,7 @@ public class PessoasService {
 	        updPessoa.setEndereco(pessoa.getEndereco());
 	      //-------------------------------------------------------------------------------------------
 	        
-			if(pessoa.getNumero() == null 
-					|| pessoa.getNumero() < 0) {
+	        if (pessoa.getNumero() < 1 || pessoa.getNumero() > 9999) {
 				System.out.println("Numero inserido de forma inválida.");
 				return null;
 			}
@@ -217,13 +213,13 @@ public class PessoasService {
 	    return pessoaRepository.save(pessoa);         
 	}
 	
-	// ----- DELETAR -----	
+	// ----- DELETAR -------------------------------------------------------------	
 	public void delete(Long id) {
 		System.out.println("Id " + "[" + id +"]"+ " Deletado com sucesso");
 		pessoaRepository.deleteById(id);
 	}
 	
-	// ----- MALA DIRETA -----
+	// ----- MALA DIRETA -------------------------------------------------------------
 	
 	public MalaDiretaDto buscarPorId(Long id) {
 		Optional<Pessoas> pessoa = pessoaRepository.findById(id);
@@ -235,7 +231,7 @@ public class PessoasService {
 		return new MalaDiretaDto(pessoa.get());
 	}
     
-    // ----- LISTAGEM MALA DIRETA -----
+    // ----- LISTAGEM MALA DIRETA -------------------------------------------------------------
 	public List<MalaDiretaDto> listarTodos() {
 		System.out.println("Listagem de Mala direta retornada com sucesso");
 		return pessoaRepository.findAll().stream().map(MalaDiretaDto::new).toList();

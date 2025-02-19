@@ -17,6 +17,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 
 @Entity
@@ -31,38 +35,67 @@ public class Pessoas {
 	@Schema(description = "Identificador da pessoa dentro do sistema")
 	private Long id;
 	
+	// -------------------------------------------------------------------------
+	
+	@Column(nullable = false)
+    @Size(max = 150)
+    @Pattern(regexp = "^[^\\d]*$")
 	@Schema(description = "Nome completo", example = "Daniel Almeida")
 	private String nome;
 	
+	// -------------------------------------------------------------------------
+	
 	@Column(nullable = false, unique = true)
+	@Pattern(regexp = "\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}")
 	@Schema(description = "CPF", example = "010.101.010-10")
 	private String cpf;
+	
+	// -------------------------------------------------------------------------
 	
 	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
 	@Schema(description = "Tipo de Logradouro", example = "RUA")
 	private OrderLogradouro orderLogradouro;
 	
+	// -------------------------------------------------------------------------
+	
 	@Column(nullable = false) 
+    @Size(max = 100)
+    @Pattern(regexp = "^[^0-9]*$")
 	@Schema(description = "Endereço da pessoa", example = "Vincent Van Gogh")
 	private String endereco;
 	
-	@Column(nullable = false) 
-	@Schema(description = "Número da casa", example = "1")
-	private Integer numero;
+	// -------------------------------------------------------------------------
 	
 	@Column(nullable = false) 
+	@Min(value = 1)
+    @Max(value = 9999)
+	@Schema(description = "Número da casa", example = "1")
+	private int numero;
+	
+	// -------------------------------------------------------------------------
+	
+	@Column(nullable = false) 
+    @Pattern(regexp = "\\d{5}-\\d{3}")
 	@Schema(description = "CEP do endereço", example = "01010-101")
 	private String cep;
 	
+	// -------------------------------------------------------------------------
+	
 	@Column(nullable = false) 
+    @Size(max = 35)
+    @Pattern(regexp = "^[A-Za-zÀ-ÿ\\s]+$")
 	@Schema(description = "Cidade", example = "Osasco")
 	private String cidade;
+	
+	// -------------------------------------------------------------------------
 	
 	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
 	@Schema(description = "Unidade federativa (UF)", example = "SP")
     private OrderUf orderUf;
+	
+	// -------------------------------------------------------------------------
 	
 	@OneToMany(mappedBy = "pessoa", cascade = CascadeType.ALL)
 	@JsonManagedReference
@@ -125,12 +158,17 @@ public class Pessoas {
 	}
 // -------------------------------
 
-	public Integer getNumero() {
+	public int getNumero() {
 		return numero;
 	}
 
-	public void setNumero(Integer numero) {
-		this.numero = numero;
+	public void setNumero(double numero) {
+
+	    if (numero % 1 != 0) {
+	    	System.out.println("Número inserido de forma inválida.");
+	        throw new IllegalArgumentException();
+	    }
+	    this.numero = (int) numero; 
 	}
 // -------------------------------
 	
